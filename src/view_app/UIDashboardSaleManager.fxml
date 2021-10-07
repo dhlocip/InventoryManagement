@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<BorderPane fx:id="homePane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardSaleManagerController">
+   <left>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="supMenuBox">
+               <children>
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#supMenuClicked" style="-fx-cursor: hand;">
+                     <children>
+                        <Label prefHeight="24.0" prefWidth="24.0">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/format-justify-fill-symbolic.symbolic.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label prefHeight="35.0" style="-fx-font-weight: bold; -fx-font-size: 16px;" stylesheets="@../css/app.css" text="SIMS">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="menuBox">
+               <children>
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#menuClicked" style="-fx-cursor: hand;">
+                     <children>
+                        <Label prefHeight="24.0" prefWidth="24.0">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/format-justify-fill-symbolic.symbolic.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label prefHeight="35.0" style="-fx-font-weight: bold; -fx-font-size: 16px;" stylesheets="@../css/app.css" text="SIMS">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage events">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#viewEventClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/folder-documents-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="View event info">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#createEventClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-new-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Create event">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#updateEventClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-edit-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Update event">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#deleteEventClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/edit-clear-all-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Delete event">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Line endX="100.0" startX="-100.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Requests">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#requestClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-send-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Request">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <HBox prefHeight="24.0" prefWidth="24.0" style="-fx-border-color: red; -fx-border-radius: 100px;">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="24.0" text="0" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="10.0" top="5.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#newRequestClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-send-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="New request">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <HBox prefHeight="24.0" prefWidth="24.0" style="-fx-border-color: red; -fx-border-radius: 100px;">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="24.0" text="0" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="10.0" top="5.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Line endX="100.0" startX="-100.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage personal info">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#editProfileClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-edit-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Edit profile">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#changePasswordClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-edit-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Change password">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Line endX="100.0" startX="-100.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Statistic and Report">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#byDateClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-save-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="By date">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#byCanceledBillClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-save-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="By canceled bill">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Line endX="100.0" startX="-100.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Setting">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" styleClass="app-hover" stylesheets="@../css/app.css">
+                     <children>
+                        <Label prefHeight="24.0" prefWidth="24.0">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/view-list-ordered-symbolic.symbolic.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <ComboBox prefHeight="30.0" promptText="English">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <Line endX="100.0" startX="-100.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#logoutClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                     <children>
+                        <Label prefHeight="24.0" prefWidth="24.0">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/system-log-out-symbolic.symbolic.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Log out">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </left>
+</BorderPane>

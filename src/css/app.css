@@ -1,0 +1,41 @@
+
+.app-font-size-default {
+    -fx-font-size: 14px;
+}
+
+.app-controls, app-button {
+    -fx-background-color: #58cc02;
+    -fx-cursor: hand;
+}
+
+.app-controls:hover, .app-hover:hover {
+    -fx-background-color: #d7ffb8;
+    -fx-cursor: hand;
+    /*-fx-text-fill: #58cc02;*/
+
+}
+
+.app-button {
+    /*-fx-text-fill: #fff;*/
+    -fx-font-weight: bold;
+    -fx-border-radius: 10px;
+}
+
+.app-border {
+    -fx-border-color: #58a700;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+
+}
+
+.message-err {
+    -fx-text-fill: red;
+}
+
+.search-text-field {
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: grey;
+    -fx-background-color: grey;
+
+}
