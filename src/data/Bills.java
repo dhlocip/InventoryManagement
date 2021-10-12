@@ -15,6 +15,17 @@ public class Bills {
     private String transactionDate;
     private String statusCancel;
     private String paymentName;
+    
+    public Bills(String billId, String userId, String transactionDate, String statusCancel, String paymentName) {
+        this.billId = billId;
+        this.userId = userId;
+        this.transactionDate = transactionDate;
+        this.statusCancel = statusCancel;
+        this.paymentName = paymentName;
+    }
+
+    public Bills() {
+    }
 
     public String getBillId() {
         return billId;
@@ -56,14 +67,5 @@ public class Bills {
         this.paymentName = paymentName;
     }
 
-    public Bills(String billId, String userId, String transactionDate, String statusCancel, String paymentName) {
-        this.billId = billId;
-        this.userId = userId;
-        this.transactionDate = transactionDate;
-        this.statusCancel = statusCancel;
-        this.paymentName = paymentName;
-    }
-
-    public Bills() {
-    }
+    
 }

@@ -15,6 +15,16 @@ public class Product {
     private String categoryId;
     private float price;
 
+      public Product(String productId, String productName, String categoryId, float price) {
+        this.productId = productId;
+        this.productName = productName;
+        this.categoryId = categoryId;
+        this.price = price;
+    }
+
+    public Product() {
+    }
+    
     public String getProductId() {
         return productId;
     }
@@ -47,13 +57,5 @@ public class Product {
         this.price = price;
     }
 
-    public Product(String productId, String productName, String categoryId, float price) {
-        this.productId = productId;
-        this.productName = productName;
-        this.categoryId = categoryId;
-        this.price = price;
-    }
-
-    public Product() {
-    }
+  
 }

@@ -14,6 +14,15 @@ public class NewRequestDetail {
     private String newProductName;
     private int quantity;
 
+     public NewRequestDetail(String newRequestId, String newProductName, int quantity) {
+        this.newRequestId = newRequestId;
+        this.newProductName = newProductName;
+        this.quantity = quantity;
+    }
+
+    public NewRequestDetail() {
+    }
+    
     public String getNewRequestId() {
         return newRequestId;
     }
@@ -38,12 +47,5 @@ public class NewRequestDetail {
         this.quantity = quantity;
     }
 
-    public NewRequestDetail(String newRequestId, String newProductName, int quantity) {
-        this.newRequestId = newRequestId;
-        this.newProductName = newProductName;
-        this.quantity = quantity;
-    }
-
-    public NewRequestDetail() {
-    }
+   
 }

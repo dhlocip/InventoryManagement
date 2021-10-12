@@ -15,6 +15,16 @@ public class NewRequest {
     private String startDate;
     private String statuVerify;
 
+    public NewRequest(String newRequestId, String userId, String startDate, String statuVerify) {
+        this.newRequestId = newRequestId;
+        this.userId = userId;
+        this.startDate = startDate;
+        this.statuVerify = statuVerify;
+    }
+
+    public NewRequest() {
+    }
+    
     public String getNewRequestId() {
         return newRequestId;
     }
@@ -47,13 +57,5 @@ public class NewRequest {
         this.statuVerify = statuVerify;
     }
 
-    public NewRequest(String newRequestId, String userId, String startDate, String statuVerify) {
-        this.newRequestId = newRequestId;
-        this.userId = userId;
-        this.startDate = startDate;
-        this.statuVerify = statuVerify;
-    }
-
-    public NewRequest() {
-    }
+    
 }   

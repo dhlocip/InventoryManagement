@@ -15,7 +15,10 @@ public class Person {
     private String address;
     private String gender;
     private String phone;
-
+    
+    
+    public Person() {
+    }
     public Person(String personId, String fullName, String address, String gender, String phone) {
         this.personId = personId;
         this.fullName = fullName;
@@ -64,8 +67,7 @@ public class Person {
         this.phone = phone;
     }
 
-    public Person() {
-    }
+    
     
     
     

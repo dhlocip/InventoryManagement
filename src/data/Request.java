@@ -15,6 +15,16 @@ public class Request {
     private String startDate;
     private String statusVerify;
 
+    public Request(String requestId, String userId, String startDate, String statusVerify) {
+        this.requestId = requestId;
+        this.userId = userId;
+        this.startDate = startDate;
+        this.statusVerify = statusVerify;
+    }
+
+    public Request() {
+    }
+    
     public String getRequestId() {
         return requestId;
     }
@@ -47,13 +57,5 @@ public class Request {
         this.statusVerify = statusVerify;
     }
 
-    public Request(String requestId, String userId, String startDate, String statusVerify) {
-        this.requestId = requestId;
-        this.userId = userId;
-        this.startDate = startDate;
-        this.statusVerify = statusVerify;
-    }
-
-    public Request() {
-    }
+    
 }

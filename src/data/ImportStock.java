@@ -14,6 +14,16 @@ public class ImportStock {
     private String userId;
     private String supplierId;
     private String importDate;
+    
+    public ImportStock(String importStockId, String userId, String supplierId, String importDate) {
+        this.importStockId = importStockId;
+        this.userId = userId;
+        this.supplierId = supplierId;
+        this.importDate = importDate;
+    }
+
+    public ImportStock() {
+    }
 
     public String getImportStockId() {
         return importStockId;
@@ -47,13 +57,5 @@ public class ImportStock {
         this.importDate = importDate;
     }
 
-    public ImportStock(String importStockId, String userId, String supplierId, String importDate) {
-        this.importStockId = importStockId;
-        this.userId = userId;
-        this.supplierId = supplierId;
-        this.importDate = importDate;
-    }
-
-    public ImportStock() {
-    }
+    
 }

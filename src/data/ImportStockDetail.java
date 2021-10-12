@@ -17,6 +17,19 @@ public class ImportStockDetail {
     private String mfgDate;
     private String expDate;
 
+    public ImportStockDetail(String importStockId, String productId, int quantity, double price, String mfgDate, String expDate) {
+        this.importStockId = importStockId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.price = price;
+        this.mfgDate = mfgDate;
+        this.expDate = expDate;
+    }
+
+    public ImportStockDetail() {
+    }
+    
+    
     public String getImportStockId() {
         return importStockId;
     }
@@ -65,16 +78,5 @@ public class ImportStockDetail {
         this.expDate = expDate;
     }
 
-    public ImportStockDetail(String importStockId, String productId, int quantity, double price, String mfgDate, String expDate) {
-        this.importStockId = importStockId;
-        this.productId = productId;
-        this.quantity = quantity;
-        this.price = price;
-        this.mfgDate = mfgDate;
-        this.expDate = expDate;
-    }
-
-    public ImportStockDetail() {
-    }
     
 }

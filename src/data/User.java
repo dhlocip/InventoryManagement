@@ -18,8 +18,13 @@ public class User extends Person{
     private String position;
     private String email;
     private String token;
-    
-    public User(String birthday, String hireDate, String shift, String userName, String password, String position, String email, String token) {
+
+    public User(String personId, String fullName, String address, String gender, String phone) {
+        super(personId, fullName, address, gender, phone);
+    }
+
+    public User(String birthday, String hireDate, String shift, String userName, String password, String position, String email, String token, String personId, String fullName, String address, String gender, String phone) {
+        super(personId, fullName, address, gender, phone);
         this.birthday = birthday;
         this.hireDate = hireDate;
         this.shift = shift;
@@ -29,8 +34,6 @@ public class User extends Person{
         this.email = email;
         this.token = token;
     }
-    
-
 
     public String getBirthday() {
         return birthday;
@@ -95,7 +98,9 @@ public class User extends Person{
     public void setToken(String token) {
         this.token = token;
     }
+    
 
+    
     
     
 }
