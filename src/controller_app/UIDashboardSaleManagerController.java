@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -22,12 +23,22 @@ import javafx.scene.layout.VBox;
  */
 public class UIDashboardSaleManagerController implements Initializable {
 
+    static String gUserId;
+    static String gFullName;
+    static String gPosition;
+    
     @FXML
     private BorderPane homePane;
     @FXML
     private VBox supMenuBox;
     @FXML
     private VBox menuBox;
+    @FXML
+    private Label userIdLabel;
+    @FXML
+    private Label positionLabel;
+    @FXML
+    private Label fullNameLabel;
 
     /**
      * Initializes the controller class.
@@ -36,6 +47,18 @@ public class UIDashboardSaleManagerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         hideMenu(false);
+        
+        
+    }
+    
+    public void setVariableStatic(String userId, String fullName, String position){
+        gUserId = userId;
+        userIdLabel.setText(userId);
+        gFullName = fullName;
+        fullNameLabel.setText(fullName);
+        gPosition = position;
+        positionLabel.setText(position);
+        
     }
 
     private void hideMenu(boolean value) {
@@ -73,6 +96,7 @@ public class UIDashboardSaleManagerController implements Initializable {
     @FXML
     private void viewEventClicked(MouseEvent event) throws IOException {
         setCenterBox("ViewEvent");
+//        System.out.println(gPosition);
     }
 
     @FXML
