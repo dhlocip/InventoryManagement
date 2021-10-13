@@ -4,6 +4,9 @@
  */
 package controller_app;
 
+import static controller_app.UIDashboardSaleManagerController.gFullName;
+import static controller_app.UIDashboardSaleManagerController.gPosition;
+import static controller_app.UIDashboardSaleManagerController.gUserId;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -23,6 +27,10 @@ import javafx.scene.layout.VBox;
  */
 public class UIDashboardAdminController implements Initializable {
 
+    static String gUserId;
+    static String gFullName;
+    static String gPosition;
+    
     @FXML
     private BorderPane homePane;
     @FXML
@@ -51,6 +59,12 @@ public class UIDashboardAdminController implements Initializable {
     private HBox changePassHB;
     @FXML
     private HBox languageHB;
+    @FXML
+    private Label userIdLabel;
+    @FXML
+    private Label positionLabel;
+    @FXML
+    private Label fullNameLabel;
 
     /**
      * Initializes the controller class.
@@ -59,6 +73,18 @@ public class UIDashboardAdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         hideMenu(false);
+        
+        
+    }
+    
+    public void setVariableStatic(String userId, String fullName, String position){
+        gUserId = userId;
+        userIdLabel.setText(userId);
+        gFullName = fullName;
+        fullNameLabel.setText(fullName);
+        gPosition = position;
+        positionLabel.setText(position);
+        
     }
 
     private void hideMenu(boolean value){

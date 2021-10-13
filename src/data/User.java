@@ -23,6 +23,9 @@ public class User extends Person{
         super(personId, fullName, address, gender, phone);
     }
 
+    public User() {
+    }
+    
     public User(String birthday, String hireDate, String shift, String userName, String password, String position, String email, String token, String personId, String fullName, String address, String gender, String phone) {
         super(personId, fullName, address, gender, phone);
         this.birthday = birthday;
