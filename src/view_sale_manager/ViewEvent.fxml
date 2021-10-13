@@ -13,7 +13,7 @@
 
 <BorderPane stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_sale_manager.ViewEventController">
    <top>
-      <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="164.0" prefWidth="736.0" BorderPane.alignment="CENTER">
          <children>
             <Label prefHeight="30.0" text="Date:" />
             <DatePicker fx:id="datefind" prefHeight="30.0">
@@ -61,7 +61,7 @@
         <columns>
             <TableColumn fx:id="eventId" prefWidth="75.0" text="EventID" />
           <TableColumn fx:id="eventName" prefWidth="75.0" text="EventName" />
-          <TableColumn fx:id="productName" prefWidth="75.0" text="ProductID" />
+          <TableColumn fx:id="productId" prefWidth="75.0" text="ProductId" />
             <TableColumn fx:id="discount" prefWidth="75.0" text="Discount" />
             <TableColumn fx:id="startDate" prefWidth="75.0" text="StartDate" />
             <TableColumn fx:id="endDate" prefWidth="75.0" text="EndDate" />

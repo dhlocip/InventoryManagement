@@ -57,12 +57,12 @@
       </HBox>
    </top>
    <center>
-      <TableView fx:id="eventTable" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+      <TableView fx:id="deleteEvent" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
         <columns>
-            <TableColumn fx:id="eventID" prefWidth="75.0" text="EventID" />
+            <TableColumn fx:id="eventId" prefWidth="75.0" text="EventId" />
           <TableColumn fx:id="eventName" prefWidth="75.0" text="EventName" />
           <TableColumn fx:id="productId" prefWidth="75.0" text="ProductID" />
-            <TableColumn fx:id="distcount" prefWidth="75.0" text="Discount" />
+            <TableColumn fx:id="discount" prefWidth="75.0" text="Discount" />
             <TableColumn fx:id="startDate" prefWidth="75.0" text="StartDate" />
             <TableColumn fx:id="endDate" prefWidth="75.0" text="EndDate" />
         </columns>
