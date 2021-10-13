@@ -12,16 +12,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_sale_manager.StatisticByCancelController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_sale_manager.StatisticByCancelController">
    <center>
-      <TableView BorderPane.alignment="CENTER">
+      <TableView fx:id="cancelTable" prefHeight="400.0" prefWidth="811.0" BorderPane.alignment="CENTER">
          <columns>
-            <TableColumn prefWidth="75.0" text="UserID" />
-            <TableColumn prefWidth="75.0" text="BillID" />
-            <TableColumn prefWidth="75.0" text="Total" />
-            <TableColumn prefWidth="75.0" text="TransactionDate" />
-            <TableColumn prefWidth="75.0" text="PaymentName" />
-            <TableColumn prefWidth="75.0" text="StatusCancel" />
+            <TableColumn fx:id="userID" prefWidth="75.0" text="UserID" />
+            <TableColumn fx:id="billId" prefWidth="75.0" text="BillID" />
+            <TableColumn fx:id="total" prefWidth="75.0" text="Total" />
+            <TableColumn fx:id="transactionDate" prefWidth="75.0" text="TransactionDate" />
+            <TableColumn fx:id="paymentName" prefWidth="75.0" text="PaymentName" />
+            <TableColumn fx:id="statusCancel" prefWidth="75.0" text="StatusCancel" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -34,7 +34,7 @@
             <HBox alignment="CENTER">
                <children>
                   <Label prefHeight="30.0" text="Date:" />
-                  <DatePicker prefHeight="30.0">
+                  <DatePicker fx:id="datefind" prefHeight="30.0">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" top="10.0" />
                      </HBox.margin>
@@ -55,7 +55,7 @@
                                     <Insets left="5.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label prefHeight="30.0" styleClass="app-button" stylesheets="@../css/app.css" text="Find">
+                              <Label fx:id="find" prefHeight="30.0" styleClass="app-button" stylesheets="@../css/app.css" text="Find">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -84,8 +84,8 @@
             </VBox>
             <VBox>
                <children>
-                  <Label prefHeight="30.0" text="0" />
-                  <Label prefHeight="30.0" text="0" />
+                  <Label fx:id="number" prefHeight="30.0" text="0" />
+                  <Label fx:id="totalCancel" prefHeight="30.0" text="0" />
                </children>
                <HBox.margin>
                   <Insets left="10.0" />
