@@ -10,7 +10,7 @@
       <TableView fx:id="newRequestTable" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="newRequestId" prefWidth="75.0" text="NewRequestID" />
-          <TableColumn fx:id="newproductId" prefWidth="75.0" text="NewProductName" />
+          <TableColumn fx:id="newproductName" prefWidth="75.0" text="NewProductName" />
             <TableColumn fx:id="quantity" prefWidth="75.0" text="Quantity" />
             <TableColumn fx:id="userId" prefWidth="75.0" text="UserID" />
             <TableColumn fx:id="startDate" prefWidth="75.0" text="StartDate" />

@@ -5,10 +5,14 @@
 package controller_sale_manager;
 
 
-import data.EventDetail;
-import data.Events;
+import com.sun.javafx.logging.PlatformLogger.Level;
+import data.VEvent;
+import data_modifier.VEventModifier;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +33,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class CreateEventController implements Initializable {
 
     @FXML
-    private ComboBox<?> productIdcombobox;
+    private ComboBox<VEvent> productIdcombobox;
     @FXML
     private Label createlabel;
     @FXML
@@ -41,55 +45,51 @@ public class CreateEventController implements Initializable {
     @FXML
     private DatePicker txtEndDate;
     @FXML
-    private TableView<Events> createEvent;
+    private TableView<VEvent> createEvent;
     @FXML
-    private TableColumn<Events, String> eventId;
+    private TableColumn<VEvent, String> eventId;
     @FXML
-    private TableColumn<Events, String> eventName;
+    private TableColumn<VEvent, String> eventName;
     @FXML
-    private TableColumn<EventDetail, String> productId;
+    private TableColumn<VEvent, String> productId;
     @FXML
-    private TableColumn<EventDetail, String> discount;
+    private TableColumn<VEvent, String> discount;
     @FXML
-    private TableColumn<Events, String> userId;
+    private TableColumn<VEvent, String> userId;
     @FXML
-    private TableColumn<EventDetail, String> startDate;
+    private TableColumn<VEvent, String> startDate;
     @FXML
-    private TableColumn<EventDetail, String> endDate;
+    private TableColumn<VEvent, String> endDate;
 
-    private ObservableList<Events> eventsList;
-    private ObservableList<EventDetail> eventDetailList;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         
+        try {
+            getShow();
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateEventController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         
-        eventsList = FXCollections.observableArrayList(
-        //new Events(eventId, userId, eventName, startDate, endDate)
-        new Events("1", "ID001", "Sale 50%","11/11/2020", "12/12/2020"),
-        new Events("2", "ID002", "Sale 80%","12/12/2020", "21/12/2020")
-        );
-        
-        eventDetailList = FXCollections.observableArrayList(
-        //new EventDetail(eventId, productId, discount, mfdDate, expDate)
-        new EventDetail("1", "PR001", "50%", "11/11/2020", "12/12/2020"),
-        new EventDetail("2", "PR002", "80%", "12/12/2020", "21/12/2020")
-        );
-//        newRequestId.setCellValueFactory(new PropertyValueFactory<NewRequest, String>("requestId"));
-        eventId.setCellValueFactory(new PropertyValueFactory<Events, String>("eventId"));
-        userId.setCellValueFactory(new PropertyValueFactory<Events, String>("userId"));
-        
-        
-        createEvent.setItems(eventsList);
-        //createEvent.setItems(eventDetailList);
     }    
     
-    
-
-    
+    private void getShow() throws SQLException{
+        
+        ObservableList<VEvent> oList = new VEventModifier().getInfo();
+        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata
+        eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
+        productId.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata
+        discount.setCellValueFactory(new PropertyValueFactory<>("discount")); //tenbiendata
+        userId.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
+        startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
+        endDate.setCellValueFactory(new PropertyValueFactory<>("endDate")); //tenbiendata
+        
+        createEvent.setItems(oList);
+        
+    }
+        
     
 }
