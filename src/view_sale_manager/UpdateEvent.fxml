@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -23,7 +24,7 @@
                   <Label prefHeight="30.0" text="Event Name:" />
                   <TextField fx:id="txtEventName" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Product ID:" />
-                  <ComboBox prefHeight="30.0" promptText="P0001" />
+                  <ComboBox fx:id="comboboxProductId" prefHeight="30.0" promptText="P0001" />
                   <Label prefHeight="30.0" text="Discount:" />
                   <TextField fx:id="txtDiscount" prefHeight="30.0" />
                </children>
@@ -36,7 +37,7 @@
                   <Label prefHeight="30.0" text="Start Date:" />
                   <DatePicker fx:id="txtStartDate" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="End Date:" />
-                  <DatePicker fx:id="txtEndName" prefHeight="30.0" />
+                  <DatePicker fx:id="txtEndDate" prefHeight="30.0" />
                   <HBox alignment="CENTER_LEFT">
                      <children>
                         <HBox alignment="CENTER" stylesheets="@../css/app.css">
@@ -64,6 +65,7 @@
                               <String fx:value="app-controls" />
                            </styleClass>
                         </HBox>
+                        <Button fx:id="updatebtn" mnemonicParsing="false" onAction="#getUpdate" text="Update" />
                      </children>
                      <VBox.margin>
                         <Insets top="29.0" />

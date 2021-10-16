@@ -78,7 +78,7 @@ public class CreateEventController implements Initializable {
     
     private void getShow() throws SQLException{
         
-        ObservableList<VEvent> oList = new VEventModifier().getInfo();
+        ObservableList<VEvent> oList = new VEventModifier().getEventInfo();
         eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
         productId.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata

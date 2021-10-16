@@ -19,11 +19,13 @@ public class VBills {
     private int quantity;
     private String mfgDate;
     private String expDate;
+    private float price;
+    private float total = quantity * price;
 
     public VBills() {
     }
 
-    public VBills(String billId, String userId, String transactionDate, String statusCancel, String paymentName, String productId, int quantity, String mfgDate, String expDate) {
+    public VBills(String billId, String userId, String transactionDate, String statusCancel, String paymentName, String productId, int quantity, String mfgDate, String expDate, float price) {
         this.billId = billId;
         this.userId = userId;
         this.transactionDate = transactionDate;
@@ -33,8 +35,10 @@ public class VBills {
         this.quantity = quantity;
         this.mfgDate = mfgDate;
         this.expDate = expDate;
+        this.price = price;
     }
 
+    
     public String getBillId() {
         return billId;
     }
@@ -106,6 +110,22 @@ public class VBills {
     public void setExpDate(String expDate) {
         this.expDate = expDate;
     }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
     
-    
+            
 }

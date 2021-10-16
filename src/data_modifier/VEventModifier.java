@@ -24,7 +24,7 @@ public class VEventModifier {
        return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SIMS","sa","123456");
     }
     
-    public ObservableList<VEvent> getInfo() throws SQLException{
+    public ObservableList<VEvent> getEventInfo() throws SQLException{
     ObservableList<VEvent> oList = FXCollections.observableArrayList();
     String sql = "Select * from VEvent"; //viewsql
     PreparedStatement preStatement= connect().prepareStatement(sql);

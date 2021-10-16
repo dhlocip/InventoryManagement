@@ -4,11 +4,16 @@
  */
 package controller_sale_manager;
 
-import data.NewRequest;
-import data.NewRequestDetail;
 
+
+
+import data.VNewRequest;
+import data_modifier.NewRequestModilfier;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,52 +30,47 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class NewRequestController implements Initializable {
 
     @FXML
-    private TableView<NewRequest> newRequestTable;
+    private TableView<VNewRequest> newRequestTable;
     @FXML
-    private TableColumn<NewRequest, String> newRequestId;
+    private TableColumn<VNewRequest, String> newRequestId;
     @FXML
-    private TableColumn<NewRequestDetail, String> newproductName;
+    private TableColumn<VNewRequest, String> newproductName;
     @FXML
-    private TableColumn<NewRequestDetail, Integer> quantity;
+    private TableColumn<VNewRequest, Integer> quantity;
     @FXML
-    private TableColumn<NewRequest, String> userId;
+    private TableColumn<VNewRequest, String> userId;
     @FXML
-    private TableColumn<NewRequest, String> startDate;
+    private TableColumn<VNewRequest, String> startDate;
     @FXML
-    private TableColumn<NewRequest, String> statusVerify;
-
-    
-    private ObservableList<NewRequest> newRequestList;
-    private ObservableList<NewRequestDetail> newRequestDetailList;
-    
+    private TableColumn<VNewRequest, String> statusVerify;
+      
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
-        newRequestList =FXCollections.observableArrayList(
-        //new NewRequest(newRequestId, userId, startDate, statuVerify)
-        
-        new NewRequest("1", "ID001", "11/11/2020", "Yes"),
-        new NewRequest("2", "ID002", "12/12/2020", "No")       
-        );
-        newRequestDetailList = FXCollections.observableArrayList(
-        //new NewRequestDetail(newRequestId, newProductName, 0)
-        
-        new NewRequestDetail("PR001", "One", 1),
-        new NewRequestDetail("PR002", "Two", 2)
-        );
-        newRequestId.setCellValueFactory(new PropertyValueFactory<NewRequest, String>("requestId"));
-        userId.setCellValueFactory(new PropertyValueFactory<NewRequest, String>("userId"));
-        startDate.setCellValueFactory(new PropertyValueFactory<NewRequest, String>("startDate"));
-        statusVerify.setCellValueFactory(new PropertyValueFactory<NewRequest, String>("statusVerify"));
-        newproductName.setCellValueFactory(new PropertyValueFactory<NewRequestDetail, String>("productId"));
-        quantity.setCellValueFactory(new PropertyValueFactory<NewRequestDetail, Integer>("quantity"));
-        newRequestTable.setItems(newRequestList);
-        //RequestTable.setItems(requestDetailList);
+        try {
+            // TODO
+            getShow();
+        } catch (SQLException ex) {
+            Logger.getLogger(NewRequestController.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 
-    }    
+    } 
+    
+    private void getShow() throws SQLException{
+        
+        ObservableList<VNewRequest> oList = new NewRequestModilfier().getNewRequestInfo();
+        newRequestId.setCellValueFactory(new PropertyValueFactory<>("newRequestId")); //tenbiendata
+        newproductName.setCellValueFactory(new PropertyValueFactory<>("newproductName")); //tenbiendata
+        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity")); //tenbiendata
+        userId.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
+        startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
+        statusVerify.setCellValueFactory(new PropertyValueFactory<>("statusVarify")); //tenbiendata
+        
+        newRequestTable.setItems(oList);
+        
+    }
+    
     
 }

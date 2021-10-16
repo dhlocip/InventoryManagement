@@ -8,12 +8,20 @@ import data.VEvent;
 import data_modifier.VEventModifier;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -28,10 +36,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class DeleteEventController implements Initializable {
 
     @FXML
-    private DatePicker findDate;
-    @FXML
-    private Label find;
-    @FXML
     private TableColumn<VEvent, String> eventName;
     @FXML
     private TableColumn<VEvent, String> productId;
@@ -44,7 +48,12 @@ public class DeleteEventController implements Initializable {
     @FXML
     private TableColumn<VEvent, String> eventId;
     @FXML
-    private TableView<VEvent> deleteEvent;
+    private TableView<VEvent> deleteEvent;    
+    @FXML
+    private Button deletebtn;
+    @FXML
+    private DatePicker findDate;
+
 
     /**
      * Initializes the controller class.
@@ -53,6 +62,7 @@ public class DeleteEventController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             getShow();
+            
         } catch (SQLException ex) {
             Logger.getLogger(DeleteEventController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -61,16 +71,41 @@ public class DeleteEventController implements Initializable {
     
     private void getShow() throws SQLException{
         
-        ObservableList<VEvent> oList = new VEventModifier().getInfo();
-        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata
+        ObservableList<VEvent> oList = new VEventModifier().getEventInfo();
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
         productId.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata
         discount.setCellValueFactory(new PropertyValueFactory<>("discount")); //tenbiendata
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
         endDate.setCellValueFactory(new PropertyValueFactory<>("endDate")); //tenbiendata
-        
+        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata    
         deleteEvent.setItems(oList);
-        
     }
+
+    
+
+    @FXML
+    private void get(ActionEvent event) {
+    }
+
+    @FXML
+    private void getDelete(ActionEvent event) {        
+        
+//        
+//        LocalDate date = findDate.getValue();
+//        System.out.println(date.toString());
+//        
+//        LocalDate start = LocalDate.parse(startDate.getText());
+//        LocalDate end = LocalDate.parse(endDate.getText());
+//        
+////	Date date1 = new SimpleDateFormat("MM/dd/yyyy").parse();
+//	
+//        List<LocalDate> totalDate =  new ArrayList<>();
+        
+        
+    deleteEvent.getItems().removeAll(deleteEvent.getSelectionModel().getSelectedItem());
+        
+    
+    }
+    
     
 }

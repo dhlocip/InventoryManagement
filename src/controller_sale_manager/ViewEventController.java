@@ -54,7 +54,8 @@ public class ViewEventController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {            
+                   
+        try {
             getVEvent();
         } catch (SQLException ex) {
             Logger.getLogger(ViewEventController.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,7 +65,7 @@ public class ViewEventController implements Initializable {
     
     private void getVEvent() throws SQLException{
         
-        ObservableList<VEvent> oList = new VEventModifier().getInfo();
+        ObservableList<VEvent> oList = new VEventModifier().getEventInfo();
         eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
         productId.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata
