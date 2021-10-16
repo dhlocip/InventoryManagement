@@ -10,7 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
+<<<<<<< HEAD
 <BorderPane fx:id="homePane" prefHeight="805.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardAdminController">
+=======
+<BorderPane fx:id="homePane" prefHeight="804.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardAdminController">
+>>>>>>> Hien thi danh sach len bang va xoa
    <left>
       <HBox BorderPane.alignment="CENTER">
          <children>

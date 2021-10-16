@@ -23,7 +23,7 @@ public class NewRequestModilfier {
        return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SIMS","sa","123456");
     }
     
-    public ObservableList<VNewRequest> getInfo() throws SQLException{
+    public ObservableList<VNewRequest> getNewRequestInfo() throws SQLException{
     ObservableList<VNewRequest> oList = FXCollections.observableArrayList();
     String sql = "Select * from VNewRequest"; //viewsql
     PreparedStatement preStatement= connect().prepareStatement(sql);

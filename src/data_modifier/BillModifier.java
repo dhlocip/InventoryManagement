@@ -6,11 +6,38 @@
 package data_modifier;
 
 
+import data.VBills;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+
 
 /**
  *
  * @author ADMIN
  */
 public class BillModifier {
+    public Connection connect() throws SQLException{
+       return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SIMS","sa","123456");
+    }
+    
+    public ObservableList<VBills> getBillsInfo() throws SQLException{
+    ObservableList<VBills> oList = FXCollections.observableArrayList();
+    String sql = "Select * from VBills"; //viewsql
+    PreparedStatement preStatement= connect().prepareStatement(sql);
+    preStatement.execute();
+    ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(new VBills(result.getString("billId"), result.getString("userId"), result.getString("transactionDate"),
+                    result.getString("paymentName"), result.getString("statusCancel"), result.getString("peoductId"), result.getInt("quantity"),
+                    result.getString("mfgDate"), result.getString("expDate"), result.getFloat("price"))); //tencotsql
+        }
+        return oList;
+}
     
 }
