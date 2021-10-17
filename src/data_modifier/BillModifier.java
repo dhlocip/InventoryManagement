@@ -21,10 +21,7 @@ import javafx.collections.ObservableList;
  *
  * @author ADMIN
  */
-public class BillModifier {
-    public Connection connect() throws SQLException{
-       return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SIMS","sa","123456");
-    }
+public class BillModifier extends JDBCConnect {
     
     public ObservableList<VBills> getBillsInfo() throws SQLException{
     ObservableList<VBills> oList = FXCollections.observableArrayList();

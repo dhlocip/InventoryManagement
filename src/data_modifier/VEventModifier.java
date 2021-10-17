@@ -18,11 +18,7 @@ import javafx.collections.ObservableList;
  *
  * @author ADMIN
  */
-public class VEventModifier {
-    
-    public Connection connect() throws SQLException{
-       return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SIMS","sa","123456");
-    }
+public class VEventModifier extends JDBCConnect {
     
     public ObservableList<VEvent> getEventInfo() throws SQLException{
     ObservableList<VEvent> oList = FXCollections.observableArrayList();

@@ -17,11 +17,7 @@ import javafx.collections.ObservableList;
  *
  * @author ADMIN
  */
-public class RequestModifier {
-    
-     public Connection connect() throws SQLException{
-       return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SIMS","sa","123456");
-    }
+public class RequestModifier extends JDBCConnect {
     
     public ObservableList<VRequest> getRequestInfo() throws SQLException{
     ObservableList<VRequest> oList = FXCollections.observableArrayList();
