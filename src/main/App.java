@@ -27,7 +27,10 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/vi_admin/UILogIn.fxml"));
+        
+        
+        
+        Parent root = FXMLLoader.load(getClass().getResource("/view_admin/UILogIn.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
