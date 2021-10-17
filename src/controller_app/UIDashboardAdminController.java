@@ -72,7 +72,7 @@ public class UIDashboardAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        hideMenu(false);
+        hideSupMenu(false);
         
         
     }

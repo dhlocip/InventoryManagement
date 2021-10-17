@@ -26,7 +26,7 @@ public class UIDashboardSaleManagerController implements Initializable {
     static String gUserId;
     static String gFullName;
     static String gPosition;
-    
+
     @FXML
     private BorderPane homePane;
     @FXML
@@ -46,19 +46,18 @@ public class UIDashboardSaleManagerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        hideMenu(false);
-        
-        
+        hideSupMenu(false);
+
     }
-    
-    public void setVariableStatic(String userId, String fullName, String position){
+
+    public void setVariableStatic(String userId, String fullName, String position) {
         gUserId = userId;
         userIdLabel.setText(userId);
         gFullName = fullName;
         fullNameLabel.setText(fullName);
         gPosition = position;
         positionLabel.setText(position);
-        
+
     }
 
     private void hideMenu(boolean value) {
