@@ -29,6 +29,7 @@ public class App extends Application {
 
         
         System.out.println("hello1");
+        System.out.println("hello1");
         
         Parent root = FXMLLoader.load(getClass().getResource("/view_admin/UILogIn.fxml"));
 
