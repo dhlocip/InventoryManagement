@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane fx:id="homePane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardAdminController">
+<BorderPane fx:id="homePane" prefHeight="805.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardAdminController">
    <left>
       <HBox BorderPane.alignment="CENTER">
          <children>
