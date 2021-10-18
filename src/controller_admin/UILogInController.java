@@ -95,7 +95,7 @@ public class UILogInController implements Initializable {
             Parent root = loader.load();
 
             UIDashboardAdminController control = loader.getController();
-            control.setVariableStatic(lUserId, lFullName, lPosition);
+            control.setValueForVariableStatic(lUserId, lFullName, lPosition);
 
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -109,7 +109,7 @@ public class UILogInController implements Initializable {
             Parent root = loader.load();
 
             UIDashboardInventoryManagerController control = loader.getController();
-            control.setVariableStatic(lUserId, lFullName, lPosition);
+            control.setValueForVariableStatic(lUserId, lFullName, lPosition);
 
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -123,7 +123,7 @@ public class UILogInController implements Initializable {
             Parent root = loader.load();
 
             UIDashboardSaleManagerController control = loader.getController();
-            control.setVariableStatic(lUserId, lFullName, lPosition);
+            control.setValueForVariableStatic(lUserId, lFullName, lPosition);
 
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -138,7 +138,7 @@ public class UILogInController implements Initializable {
             
 //            chua tao sale peron ui
             UIDashboardAdminController control = loader.getController();
-            control.setVariableStatic(lUserId, lFullName, lPosition);
+            control.setValueForVariableStatic(lUserId, lFullName, lPosition);
 
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

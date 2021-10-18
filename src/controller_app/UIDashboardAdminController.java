@@ -4,21 +4,21 @@
  */
 package controller_app;
 
-import static controller_app.UIDashboardSaleManagerController.gFullName;
-import static controller_app.UIDashboardSaleManagerController.gPosition;
-import static controller_app.UIDashboardSaleManagerController.gUserId;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -27,9 +27,9 @@ import javafx.scene.layout.VBox;
  */
 public class UIDashboardAdminController implements Initializable {
 
-    static String gUserId;
-    static String gFullName;
-    static String gPosition;
+    public static String gUserId;
+    public static String gFullName;
+    public static String gPosition;
     
     @FXML
     private BorderPane homePane;
@@ -77,7 +77,7 @@ public class UIDashboardAdminController implements Initializable {
         
     }
     
-    public void setVariableStatic(String userId, String fullName, String position){
+    public void setValueForVariableStatic(String userId, String fullName, String position){
         gUserId = userId;
         userIdLabel.setText(userId);
         gFullName = fullName;
@@ -165,8 +165,16 @@ public class UIDashboardAdminController implements Initializable {
     }
 
     @FXML
-    private void logoutClicked(MouseEvent event) {
-        
+    private void logoutClicked(MouseEvent event) throws IOException {
+        gUserId = null;
+        gFullName = null;
+        gPosition = null;
+        Parent root = FXMLLoader.load(getClass().getResource("/view_admin/UILogIn.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Sign In");
+        stage.show();
     }
 
     

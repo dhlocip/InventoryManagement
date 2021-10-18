@@ -26,7 +26,7 @@ public class User extends Person{
     public User() {
     }
     
-    public User(String birthday, String hireDate, String shift, String userName, String password, String position, String email, String token, String personId, String fullName, String address, String gender, String phone) {
+    public User(String personId, String fullName, String address, String gender, String phone, String birthday, String hireDate, String shift, String userName, String password, String position, String email, String token) {
         super(personId, fullName, address, gender, phone);
         this.birthday = birthday;
         this.hireDate = hireDate;

@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -18,15 +19,15 @@
             <VBox alignment="CENTER_LEFT" prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="UserID" />
-                  <TextField disable="true" prefHeight="30.0" />
+                  <TextField fx:id="userIdTF" disable="true" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Full Name:" />
-                  <TextField prefHeight="30.0" />
+                  <TextField fx:id="fullNameTF" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Birthday:" />
-                  <TextField prefHeight="30.0" />
+                  <DatePicker fx:id="birthDayDatePicker" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Hire Date:" />
-                  <TextField prefHeight="30.0" />
+                  <DatePicker fx:id="hireDatePicker" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Address:" />
-                  <TextField prefHeight="30.0" />
+                  <TextField fx:id="addressTF" prefHeight="30.0" />
                   <HBox prefHeight="32.0">
                      <VBox.margin>
                         <Insets top="15.0" />
@@ -37,18 +38,18 @@
             <VBox alignment="CENTER_LEFT" prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="Phone:" />
-                  <TextField prefHeight="30.0" />
+                  <TextField fx:id="phoneTF" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Gender:" />
-                  <ComboBox prefHeight="30.0" promptText="Male" />
+                  <ComboBox fx:id="genderComboBox" prefHeight="30.0" promptText="Male" />
                   <Label prefHeight="30.0" text="Shiff:" />
-                  <TextField prefHeight="30.0" />
+                  <TextField fx:id="shiffTF" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Position:" />
-                  <ComboBox disable="true" prefHeight="30.0" promptText="Invetory Manager" />
+                  <ComboBox fx:id="positionComboBox" disable="true" prefHeight="30.0" promptText="Invetory Manager" />
                   <Label prefHeight="30.0" text="Email:" />
-                  <TextField prefHeight="30.0" />
+                  <TextField fx:id="emailTF" prefHeight="30.0" />
                   <HBox alignment="CENTER">
                      <children>
-                        <HBox alignment="CENTER" stylesheets="@../css/app.css">
+                        <HBox alignment="CENTER" onMouseClicked="#updateProfileClicked" stylesheets="@../css/app.css">
                            <children>
                               <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                                  <graphic>
