@@ -62,11 +62,11 @@ public class NewRequestController implements Initializable {
         
         ObservableList<VNewRequest> oList = new NewRequestModilfier().getNewRequestInfo();
         newRequestId.setCellValueFactory(new PropertyValueFactory<>("newRequestId")); //tenbiendata
-        newproductName.setCellValueFactory(new PropertyValueFactory<>("newproductName")); //tenbiendata
+        newproductName.setCellValueFactory(new PropertyValueFactory<>("newProductName")); //tenbiendata
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity")); //tenbiendata
         userId.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
-        statusVerify.setCellValueFactory(new PropertyValueFactory<>("statusVarify")); //tenbiendata
+        statusVerify.setCellValueFactory(new PropertyValueFactory<>("statuVerify")); //tenbiendata
         
         newRequestTable.setItems(oList);
         

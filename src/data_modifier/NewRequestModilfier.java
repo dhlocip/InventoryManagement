@@ -30,7 +30,7 @@ public class NewRequestModilfier extends JDBCConnect {
         while (result.next()) {
             oList.add(new VNewRequest(result.getString("newRequestId"),result.getString("userId"), 
                     result.getString("startDate"), result.getString("statusVerify")
-                    , result.getString("productName"), result.getInt("quantity"))); //tencotsql
+                    , result.getString("newProductName"), result.getInt("quantity"))); //tencotsql
         }
         return oList;
 }

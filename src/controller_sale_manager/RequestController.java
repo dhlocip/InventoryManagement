@@ -64,9 +64,9 @@ public class RequestController implements Initializable {
         requestId.setCellValueFactory(new PropertyValueFactory<>("requestId")); //tenbiendata
         productId.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata
         quantity.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata
-        userId.setCellValueFactory(new PropertyValueFactory<>("discount")); //tenbiendata
+        userId.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
-        statusVerify.setCellValueFactory(new PropertyValueFactory<>("endDate")); //tenbiendata
+        statusVerify.setCellValueFactory(new PropertyValueFactory<>("statusVerify")); //tenbiendata
         
         RequestTable.setItems(oList);
         
