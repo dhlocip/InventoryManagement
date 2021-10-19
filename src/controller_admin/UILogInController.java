@@ -89,7 +89,7 @@ public class UILogInController implements Initializable {
     }
 
     private void nextToDashboard(String permission, ActionEvent event) throws IOException {
-        if(permission.equalsIgnoreCase("admin")){
+        if (permission.equalsIgnoreCase("admin")) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view_app/UIDashboardAdmin.fxml"));
             Parent root = loader.load();
@@ -102,8 +102,8 @@ public class UILogInController implements Initializable {
             stage.setScene(scene);
             stage.setTitle("Dashboard Admin");
             stage.show();
-            
-        }else if(permission.equalsIgnoreCase("inventory manager")){
+
+        } else if (permission.equalsIgnoreCase("inventory manager")) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view_app/UIDashboardInventoryManager.fxml"));
             Parent root = loader.load();
@@ -116,8 +116,8 @@ public class UILogInController implements Initializable {
             stage.setScene(scene);
             stage.setTitle("Dashboard Inventory Manager");
             stage.show();
-            
-        }else if(permission.equalsIgnoreCase("sale manager")){
+
+        } else {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view_app/UIDashboardSaleManager.fxml"));
             Parent root = loader.load();
@@ -130,22 +130,7 @@ public class UILogInController implements Initializable {
             stage.setScene(scene);
             stage.setTitle("Dashboard Sale Manager");
             stage.show();
-            
-        }else {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view_app/UIDashboardSalePerson.fxml"));
-            Parent root = loader.load();
-            
-//            chua tao sale peron ui
-            UIDashboardAdminController control = loader.getController();
-            control.setValueForVariableStatic(lUserId, lFullName, lPosition);
 
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Dashboard Sale Person");
-            stage.show();
-            
         }
     }
 
@@ -161,17 +146,13 @@ public class UILogInController implements Initializable {
                 lPosition = user.getPosition();
                 if (lPosition.equalsIgnoreCase("admin")) {
                     nextToDashboard(lPosition, event);
-                    
+
                 } else if (lPosition.equalsIgnoreCase("inventory manager")) {
                     nextToDashboard(lPosition, event);
-                    
-                } else if (lPosition.equalsIgnoreCase("sale manager")) {
+
+                } else {
                     nextToDashboard(lPosition, event);
-                    
-                } 
-                else {
-                    nextToDashboard(lPosition, event);
-                    
+
                 }
             } else {
                 hideError(true);

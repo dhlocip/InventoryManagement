@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -80,6 +81,21 @@ public class EditProfileController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
+//        get userId
+        if (UIDashboardAdminController.gPosition != null
+                && UIDashboardInventoryManagerController.gPosition == null
+                && UIDashboardSaleManagerController.gPosition == null) {
+            lUserId = UIDashboardAdminController.gUserId;
+
+        } else if (UIDashboardAdminController.gPosition == null
+                && UIDashboardInventoryManagerController.gPosition != null
+                && UIDashboardSaleManagerController.gPosition == null) {
+
+            lUserId = UIDashboardInventoryManagerController.gUserId;
+        } else {
+            lUserId = UIDashboardSaleManagerController.gUserId;
+        }
+
         setGender();
         setPosition();
 
@@ -89,7 +105,7 @@ public class EditProfileController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         hideErrorOfFullName(false);
         hideErrorOfBirthday(false);
         hideErrorOfHireDate(false);
@@ -100,123 +116,74 @@ public class EditProfileController implements Initializable {
         hideErrorOfEmail(false);
 
     }
-    
-    private void hideErrorOfFullName(boolean value){
+
+    private void hideErrorOfFullName(boolean value) {
         errorFullName.setVisible(value);
         errorFullName.managedProperty().bind(errorFullName.visibleProperty());
     }
-    
-    private void hideErrorOfBirthday(boolean value){
+
+    private void hideErrorOfBirthday(boolean value) {
         errorBirthDay.setVisible(value);
         errorBirthDay.managedProperty().bind(errorBirthDay.visibleProperty());
     }
-    
-    private void hideErrorOfHireDate(boolean value){
+
+    private void hideErrorOfHireDate(boolean value) {
         errorHireDate.setVisible(value);
         errorHireDate.managedProperty().bind(errorHireDate.visibleProperty());
     }
-    
-    private void hideErrorOfAddress(boolean value){
+
+    private void hideErrorOfAddress(boolean value) {
         errorAddress.setVisible(value);
         errorAddress.managedProperty().bind(errorAddress.visibleProperty());
     }
-    
-    private void hideErrorOfPhone(boolean value){
+
+    private void hideErrorOfPhone(boolean value) {
         errorPhone.setVisible(value);
         errorPhone.managedProperty().bind(errorPhone.visibleProperty());
     }
-    
-    private void hideErrorOfGender(boolean value){
+
+    private void hideErrorOfGender(boolean value) {
         errorGender.setVisible(value);
         errorGender.managedProperty().bind(errorGender.visibleProperty());
     }
 
-    private void hideErrorOfShiff(boolean value){
+    private void hideErrorOfShiff(boolean value) {
         errorShiff.setVisible(value);
         errorShiff.managedProperty().bind(errorShiff.visibleProperty());
     }
-    
-    private void hideErrorOfEmail(boolean value){
+
+    private void hideErrorOfEmail(boolean value) {
         errorEmail.setVisible(value);
         errorEmail.managedProperty().bind(errorEmail.visibleProperty());
     }
-    
+
     private void getPersonalInfo() throws SQLException {
-        if (UIDashboardAdminController.gPosition != null
-                && UIDashboardInventoryManagerController.gPosition == null
-                && UIDashboardSaleManagerController.gPosition == null) {
-            lUserId = UIDashboardAdminController.gUserId;
-            User user = new User();
-            user = new UserModifier().getUser(lUserId);
-            userIdTF.setText(user.getPersonId());
-            fullNameTF.setText(user.getFullName());
-            
-            String formatBirthDay = user.getBirthday().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-            LocalDate localBirthDay = LocalDate.parse(formatBirthDay);
-            birthDayDatePicker.setValue(localBirthDay);
-            
-            String formatHireDate = user.getHireDate().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-            LocalDate hireDate = LocalDate.parse(formatHireDate);
-            hireDatePicker.setValue(hireDate);
-            
-            addressTF.setText(user.getAddress());
-            phoneTF.setText(user.getPhone());
-            genderComboBox.setValue(user.getGender());
-            shiffTF.setText(user.getShift());
-            positionComboBox.setValue(user.getPosition());
-            emailTF.setText(user.getEmail());
-        } else if (UIDashboardInventoryManagerController.gPosition != null
-                && UIDashboardAdminController.gPosition == null
-                && UIDashboardSaleManagerController.gPosition == null) {
-            lUserId = UIDashboardInventoryManagerController.gUserId;
-            User user = new User();
-            user = new UserModifier().getUser(lUserId);
-            userIdTF.setText(user.getPersonId());
-            fullNameTF.setText(user.getFullName());
-            
-            String formatBirthDay = user.getBirthday().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-            LocalDate localBirthDay = LocalDate.parse(formatBirthDay);
-            birthDayDatePicker.setValue(localBirthDay);
-            
-            String formatHireDate = user.getHireDate().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-            LocalDate hireDate = LocalDate.parse(formatHireDate);
-            hireDatePicker.setValue(hireDate);
-            
-            addressTF.setText(user.getAddress());
-            phoneTF.setText(user.getPhone());
-            genderComboBox.setValue(user.getGender());
-            shiffTF.setText(user.getShift());
-            positionComboBox.setValue(user.getPosition());
-            emailTF.setText(user.getEmail());
-        } else {
-            lUserId = UIDashboardSaleManagerController.gUserId;
-            User user = new User();
-            user = new UserModifier().getUser(lUserId);
-            userIdTF.setText(user.getPersonId());
-            fullNameTF.setText(user.getFullName());
-            
-            String formatBirthDay = user.getBirthday().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-            LocalDate localBirthDay = LocalDate.parse(formatBirthDay);
-            birthDayDatePicker.setValue(localBirthDay);
-            
-            String formatHireDate = user.getHireDate().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-            LocalDate hireDate = LocalDate.parse(formatHireDate);
-            hireDatePicker.setValue(hireDate);
-            
-            addressTF.setText(user.getAddress());
-            phoneTF.setText(user.getPhone());
-            genderComboBox.setValue(user.getGender());
-            shiffTF.setText(user.getShift());
-            positionComboBox.setValue(user.getPosition());
-            emailTF.setText(user.getEmail());
-        }
+        User user = new User();
+        user = new UserModifier().getUser(lUserId);
+        userIdTF.setText(user.getPersonId());
+        fullNameTF.setText(user.getFullName());
+
+        String formatBirthDay = user.getBirthday().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        LocalDate localBirthDay = LocalDate.parse(formatBirthDay);
+        birthDayDatePicker.setValue(localBirthDay);
+
+        String formatHireDate = user.getHireDate().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        LocalDate hireDate = LocalDate.parse(formatHireDate);
+        hireDatePicker.setValue(hireDate);
+
+        addressTF.setText(user.getAddress());
+        phoneTF.setText(user.getPhone());
+        genderComboBox.setValue(user.getGender());
+        shiffTF.setText(user.getShiff());
+        positionComboBox.setValue(user.getPosition());
+        emailTF.setText(user.getEmail());
     }
 
     private void setGender() {
         ObservableList<String> oList = FXCollections.observableArrayList();
         oList.addAll("Male", "Female");
         genderComboBox.setItems(oList);
-        
+
         genderComboBox.setOnAction((t) -> {
             genderComboBox.getValue();
         });
@@ -226,7 +193,7 @@ public class EditProfileController implements Initializable {
         ObservableList<String> oList = FXCollections.observableArrayList();
         oList.addAll("Admin", "Inventory Manager", "Sale Manager", "Sale Person");
         positionComboBox.setItems(oList);
-        
+
         positionComboBox.setOnAction((t) -> {
             positionComboBox.getValue();
         });
@@ -234,42 +201,107 @@ public class EditProfileController implements Initializable {
 
     @FXML
     private void updateProfileClicked(MouseEvent event) throws SQLException {
-//        User user = new User();
-//        user.setPersonId(lUserId);
-//        user.setFullName(fullNameTF.getText());
-        System.out.println(genderComboBox.getValue());
-        System.out.println(birthDayDatePicker.getValue());
+        User user = new User();
+
+        user.setPersonId(lUserId);
+        user.setFullName(fullNameTF.getText());
+
+        LocalDate myBirthday = birthDayDatePicker.getValue();
+        user.setBirthday(String.valueOf(myBirthday));
+
+        LocalDate myHireDate = hireDatePicker.getValue();
+        user.setHireDate(String.valueOf(myHireDate));
+
+        user.setAddress(addressTF.getText());
+        user.setPhone(phoneTF.getText());
+        user.setGender(genderComboBox.getValue());
+        user.setShiff(shiffTF.getText());
+        user.setEmail(emailTF.getText());
+
+        if (new UserModifier().updateUser(user)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Notification");
+            alert.setHeaderText("Success");
+            alert.setContentText("Personal info is update successfully.");
+            alert.showAndWait();
+            getPersonalInfo();
+        }
+
     }
-    
-    private boolean isFullNameRight(){
+
+    private boolean isFullNameRight() {
         String tmp = fullNameTF.getText();
         return tmp.matches("^[a-zA-Z]{1}[a-zA-Z\\s]{3,50}");
     }
 
     @FXML
     private void fullNameReleased(KeyEvent event) {
-        if(isFullNameRight()){
+        if (isFullNameRight()) {
             hideErrorOfFullName(false);
-        }else{
+        } else {
             hideErrorOfFullName(true);
             errorFullName.setText("\"" + fullNameTF.getText() + "\" is invalid.");
         }
     }
 
+    private boolean isAddressRight() {
+        String tmp = addressTF.getText();
+        return tmp.matches("^[\\w]{1}[\\w\\s,.]{5,100}");
+    }
+
     @FXML
     private void addressReleased(KeyEvent event) {
+        if (isAddressRight()) {
+            hideErrorOfAddress(false);
+        } else {
+            hideErrorOfAddress(true);
+            errorAddress.setText("\"" + addressTF.getText() + "\" is invalid.");
+        }
+    }
+
+    private boolean isPhoneRight() {
+        String tmp = phoneTF.getText();
+        return tmp.matches("^[0]{1}[\\d]{9,10}");
     }
 
     @FXML
     private void phoneReleased(KeyEvent event) {
+        if (isPhoneRight()) {
+            hideErrorOfPhone(false);
+        } else {
+            hideErrorOfPhone(true);
+            errorPhone.setText("\"" + phoneTF.getText() + "\" is invalid.");
+        }
+    }
+
+    private boolean isShiffRight() {
+        String tmp = shiffTF.getText();
+        return tmp.matches("^[\\w]{1,5}");
     }
 
     @FXML
     private void shiffReleased(KeyEvent event) {
+        if (isShiffRight()) {
+            hideErrorOfShiff(false);
+        } else {
+            hideErrorOfShiff(true);
+            errorShiff.setText("\"" + shiffTF.getText() + "\" is invalid.");
+        }
+    }
+
+    private boolean isEmailRight() {
+        String tmp = emailTF.getText();
+        return tmp.matches("^[^\\W\\d]{1}[\\w]+[.]?[\\w]+[@]{1}[^\\W\\d]{4,7}[.]{1}[^\\W\\d]{3}[.]{0,1}[^\\W\\d]{0,3}[.]{0,1}[^\\W\\d]{0,2}");
     }
 
     @FXML
     private void emailReleased(KeyEvent event) {
+        if (isEmailRight()) {
+            hideErrorOfEmail(false);
+        } else {
+            hideErrorOfEmail(true);
+            errorEmail.setText("\"" + emailTF.getText() + "\" is invalid.");
+        }
     }
 
 }
