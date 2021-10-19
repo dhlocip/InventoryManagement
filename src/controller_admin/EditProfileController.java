@@ -22,7 +22,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -54,6 +56,22 @@ public class EditProfileController implements Initializable {
     private DatePicker birthDayDatePicker;
     @FXML
     private DatePicker hireDatePicker;
+    @FXML
+    private Label errorFullName;
+    @FXML
+    private Label errorBirthDay;
+    @FXML
+    private Label errorHireDate;
+    @FXML
+    private Label errorAddress;
+    @FXML
+    private Label errorPhone;
+    @FXML
+    private Label errorGender;
+    @FXML
+    private Label errorShiff;
+    @FXML
+    private Label errorEmail;
 
     /**
      * Initializes the controller class.
@@ -71,9 +89,58 @@ public class EditProfileController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        hideErrorOfFullName(false);
+        hideErrorOfBirthday(false);
+        hideErrorOfHireDate(false);
+        hideErrorOfAddress(false);
+        hideErrorOfPhone(false);
+        hideErrorOfGender(false);
+        hideErrorOfShiff(false);
+        hideErrorOfEmail(false);
 
     }
+    
+    private void hideErrorOfFullName(boolean value){
+        errorFullName.setVisible(value);
+        errorFullName.managedProperty().bind(errorFullName.visibleProperty());
+    }
+    
+    private void hideErrorOfBirthday(boolean value){
+        errorBirthDay.setVisible(value);
+        errorBirthDay.managedProperty().bind(errorBirthDay.visibleProperty());
+    }
+    
+    private void hideErrorOfHireDate(boolean value){
+        errorHireDate.setVisible(value);
+        errorHireDate.managedProperty().bind(errorHireDate.visibleProperty());
+    }
+    
+    private void hideErrorOfAddress(boolean value){
+        errorAddress.setVisible(value);
+        errorAddress.managedProperty().bind(errorAddress.visibleProperty());
+    }
+    
+    private void hideErrorOfPhone(boolean value){
+        errorPhone.setVisible(value);
+        errorPhone.managedProperty().bind(errorPhone.visibleProperty());
+    }
+    
+    private void hideErrorOfGender(boolean value){
+        errorGender.setVisible(value);
+        errorGender.managedProperty().bind(errorGender.visibleProperty());
+    }
 
+    private void hideErrorOfShiff(boolean value){
+        errorShiff.setVisible(value);
+        errorShiff.managedProperty().bind(errorShiff.visibleProperty());
+    }
+    
+    private void hideErrorOfEmail(boolean value){
+        errorEmail.setVisible(value);
+        errorEmail.managedProperty().bind(errorEmail.visibleProperty());
+    }
+    
     private void getPersonalInfo() throws SQLException {
         if (UIDashboardAdminController.gPosition != null
                 && UIDashboardInventoryManagerController.gPosition == null
@@ -170,6 +237,39 @@ public class EditProfileController implements Initializable {
 //        User user = new User();
 //        user.setPersonId(lUserId);
 //        user.setFullName(fullNameTF.getText());
+        System.out.println(genderComboBox.getValue());
+        System.out.println(birthDayDatePicker.getValue());
+    }
+    
+    private boolean isFullNameRight(){
+        String tmp = fullNameTF.getText();
+        return tmp.matches("^[a-zA-Z]{1}[a-zA-Z\\s]{3,50}");
+    }
+
+    @FXML
+    private void fullNameReleased(KeyEvent event) {
+        if(isFullNameRight()){
+            hideErrorOfFullName(false);
+        }else{
+            hideErrorOfFullName(true);
+            errorFullName.setText("\"" + fullNameTF.getText() + "\" is invalid.");
+        }
+    }
+
+    @FXML
+    private void addressReleased(KeyEvent event) {
+    }
+
+    @FXML
+    private void phoneReleased(KeyEvent event) {
+    }
+
+    @FXML
+    private void shiffReleased(KeyEvent event) {
+    }
+
+    @FXML
+    private void emailReleased(KeyEvent event) {
     }
 
 }

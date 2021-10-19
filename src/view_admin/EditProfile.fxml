@@ -21,13 +21,17 @@
                   <Label prefHeight="30.0" text="UserID" />
                   <TextField fx:id="userIdTF" disable="true" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Full Name:" />
-                  <TextField fx:id="fullNameTF" prefHeight="30.0" />
+                  <TextField fx:id="fullNameTF" onKeyReleased="#fullNameReleased" prefHeight="30.0" />
+                  <Label fx:id="errorFullName" style="-fx-text-fill: red;" text="error" />
                   <Label prefHeight="30.0" text="Birthday:" />
                   <DatePicker fx:id="birthDayDatePicker" prefHeight="30.0" />
+                  <Label fx:id="errorBirthDay" style="-fx-text-fill: red;" text="error" />
                   <Label prefHeight="30.0" text="Hire Date:" />
                   <DatePicker fx:id="hireDatePicker" prefHeight="30.0" />
+                  <Label fx:id="errorHireDate" style="-fx-text-fill: red;" text="error" />
                   <Label prefHeight="30.0" text="Address:" />
-                  <TextField fx:id="addressTF" prefHeight="30.0" />
+                  <TextField fx:id="addressTF" onKeyReleased="#addressReleased" prefHeight="30.0" />
+                  <Label fx:id="errorAddress" style="-fx-text-fill: red;" text="error" />
                   <HBox prefHeight="32.0">
                      <VBox.margin>
                         <Insets top="15.0" />
@@ -38,15 +42,19 @@
             <VBox alignment="CENTER_LEFT" prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="Phone:" />
-                  <TextField fx:id="phoneTF" prefHeight="30.0" />
+                  <TextField fx:id="phoneTF" onKeyReleased="#phoneReleased" prefHeight="30.0" />
+                  <Label fx:id="errorPhone" style="-fx-text-fill: red;" text="error" />
                   <Label prefHeight="30.0" text="Gender:" />
                   <ComboBox fx:id="genderComboBox" prefHeight="30.0" promptText="Male" />
+                  <Label fx:id="errorGender" style="-fx-text-fill: red;" text="error" />
                   <Label prefHeight="30.0" text="Shiff:" />
-                  <TextField fx:id="shiffTF" prefHeight="30.0" />
+                  <TextField fx:id="shiffTF" onKeyReleased="#shiffReleased" prefHeight="30.0" />
+                  <Label fx:id="errorShiff" style="-fx-text-fill: red;" text="error" />
                   <Label prefHeight="30.0" text="Position:" />
                   <ComboBox fx:id="positionComboBox" disable="true" prefHeight="30.0" promptText="Invetory Manager" />
                   <Label prefHeight="30.0" text="Email:" />
-                  <TextField fx:id="emailTF" prefHeight="30.0" />
+                  <TextField fx:id="emailTF" onKeyReleased="#emailReleased" prefHeight="30.0" />
+                  <Label fx:id="errorEmail" style="-fx-text-fill: red;" text="error" />
                   <HBox alignment="CENTER">
                      <children>
                         <HBox alignment="CENTER" onMouseClicked="#updateProfileClicked" stylesheets="@../css/app.css">
