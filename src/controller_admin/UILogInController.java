@@ -64,9 +64,19 @@ public class UILogInController implements Initializable {
         errorHBox.managedProperty().bind(errorHBox.visibleProperty());
     }
 
+    private boolean isUserNameRight() {
+        String tmp = userNameTF.getText();
+        return tmp.matches("^[a-zA-Z]+[_.]?[\\w]*") && tmp.length() >= 5;
+    }
+
     @FXML
     private void userNameReleased(KeyEvent event) {
         hideError(false);
+    }
+
+    private boolean isPasswordRight() {
+        String tmp = passwordTF.getText();
+        return tmp.matches("^[\\w_.!@#$%^*]+") && tmp.length() >= 8;
     }
 
     @FXML
@@ -76,16 +86,6 @@ public class UILogInController implements Initializable {
 
     @FXML
     private void forgotPasswordClicked(MouseEvent event) {
-    }
-
-    private boolean isRightUserName() {
-        String tmp = userNameTF.getText();
-        return tmp.matches("^[a-zA-Z]+[_.]?[\\d]*") && tmp.length() >= 5;
-    }
-
-    private boolean isRightPassword() {
-        String tmp = passwordTF.getText();
-        return tmp.matches("^[a-zA-Z]+[_.!@#$%^*]?[\\d]*") && tmp.length() >= 8;
     }
 
     private void nextToDashboard(String permission, ActionEvent event) throws IOException {
@@ -136,7 +136,7 @@ public class UILogInController implements Initializable {
 
     @FXML
     private void signInAction(ActionEvent event) throws IOException, SQLException {
-        if (isRightUserName() && isRightPassword()) {
+        if (isUserNameRight() && isPasswordRight()) {
             hideError(false);
             User user = new User();
             user = new UserModifier().signIn(userNameTF.getText(), passwordTF.getText());

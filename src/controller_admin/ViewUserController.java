@@ -58,8 +58,6 @@ public class ViewUserController implements Initializable {
     private TableColumn<User, String> positionCol;
     @FXML
     private TableColumn<User, String> emailCol;
-    @FXML
-    private TableColumn<User, String> tokenCol;
 
     /**
      * Initializes the controller class.
@@ -91,7 +89,6 @@ public class ViewUserController implements Initializable {
         passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
         positionCol.setCellValueFactory(new PropertyValueFactory<>("position"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-        tokenCol.setCellValueFactory(new PropertyValueFactory<>("token"));
         userTableView.setItems(oList);
     }
     
@@ -109,7 +106,6 @@ public class ViewUserController implements Initializable {
         passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
         positionCol.setCellValueFactory(new PropertyValueFactory<>("position"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-        tokenCol.setCellValueFactory(new PropertyValueFactory<>("token"));
         userTableView.setItems(oList);
     }
 
