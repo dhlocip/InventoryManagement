@@ -62,6 +62,19 @@ public class UserModifier extends JDBCConnect {
         return oList;
     }
     
+//    check user name is exists
+    public boolean userNameIsExists(String userName) throws SQLException{
+        String sql = "select * from users where userName = ?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userName);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while(result.next()){
+            return true;
+        }
+        return false;
+    }
+    
 //    get user info with userID
     public User getUser(String userId) throws SQLException {
         User user = new User();
@@ -147,7 +160,7 @@ public class UserModifier extends JDBCConnect {
     }
 
 //    public static void main(String[] args) throws SQLException {
-//        boolean user = new UserModifier().changePassword("U0001", "rootroot");
+//        boolean user = new UserModifier().userNameIsExists("sale04");
 //        System.out.println(user);
 //    }
 }

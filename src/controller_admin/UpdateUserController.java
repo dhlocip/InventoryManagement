@@ -11,6 +11,8 @@ import data.User;
 import data_modifier.UserModifier;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +41,7 @@ import javafx.scene.input.MouseEvent;
 public class UpdateUserController implements Initializable {
 
     String lUserId;
+    String lSearch;
 
     @FXML
     private TextField searchTF;
@@ -115,21 +118,6 @@ public class UpdateUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
-        //        get userId
-        if (UIDashboardAdminController.gPosition != null
-                && UIDashboardInventoryManagerController.gPosition == null
-                && UIDashboardSaleManagerController.gPosition == null) {
-            lUserId = UIDashboardAdminController.gUserId;
-
-        } else if (UIDashboardAdminController.gPosition == null
-                && UIDashboardInventoryManagerController.gPosition != null
-                && UIDashboardSaleManagerController.gPosition == null) {
-
-            lUserId = UIDashboardInventoryManagerController.gUserId;
-        } else {
-            lUserId = UIDashboardSaleManagerController.gUserId;
-        }
 
         setGender();
         setPosition();
@@ -220,6 +208,23 @@ public class UpdateUserController implements Initializable {
         userTableView.setItems(oList);
     }
 
+    private void getListUserAfterSearch(String idOrName) throws SQLException {
+        ObservableList<User> oList = new UserModifier().findUser(idOrName);
+        userIdCol.setCellValueFactory(new PropertyValueFactory<>("personId"));
+        fullNameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        birthdayCol.setCellValueFactory(new PropertyValueFactory<>("birthday"));
+        hireDateCol.setCellValueFactory(new PropertyValueFactory<>("hireDate"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        genderCol.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        shiffCol.setCellValueFactory(new PropertyValueFactory<>("shiff"));
+        userNameCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
+        positionCol.setCellValueFactory(new PropertyValueFactory<>("position"));
+        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        userTableView.setItems(oList);
+    }
+
     private void setGender() {
         ObservableList<String> oList = FXCollections.observableArrayList();
         oList.addAll("Male", "Female");
@@ -241,22 +246,110 @@ public class UpdateUserController implements Initializable {
     }
 
     @FXML
-    private void updateUserClicked(MouseEvent event) {
-        User item = userTableView.getSelectionModel().getSelectedItem();
-        if (item != null) {
-            System.out.println(item.getPersonId());
-
+    private void updateUserClicked(MouseEvent event) throws SQLException {
+        User user = userTableView.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            user.setFullName(fullNameTF.getText());
+            
+            user.setBirthday(((LocalDate) birthdayDatePicker.getValue()).toString());
+            user.setHireDate(((LocalDate) hireDatePicker.getValue()).toString());
+            
+            user.setAddress(addressTF.getText());
+            user.setPhone(phoneTF.getText());
+            user.setGender(genderComboBox.getValue());
+            user.setShiff(shiffTF.getText());
+            user.setPosition(positionComboBox.getValue());
+            user.setEmail(emailTF.getText());
+            
+            if (new UserModifier().updateUser(user)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Notification");
+                alert.setHeaderText("Success");
+                alert.setContentText("Update user is update successfully.");
+                alert.showAndWait();
+                getListUserInfo();
+            }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Notification");
-                alert.setHeaderText("Error");
-                alert.setContentText("Please click to a row into table.");
-                alert.showAndWait();
+            alert.setTitle("Notification");
+            alert.setHeaderText("Error");
+            alert.setContentText("Please click to a row into table.");
+            alert.showAndWait();
+
+            checkFullName();
+            if (birthdayDatePicker.getValue() == null) {
+                hideErrorOfBirthday(true);
+                errorBirthday.setText("\"birthday\" is not null.");
+            } else {
+                hideErrorOfBirthday(false);
+            }
+
+            if (hireDatePicker.getValue() == null) {
+                hideErrorOfHireDate(true);
+                errorHireDate.setText("\"hire date\" is not null.");
+            } else {
+                hideErrorOfHireDate(false);
+            }
+            checkAddress();
+            checkPhone();
+            checkShiff();
+            checkEmail();
         }
     }
 
+    private void getUserInfo() throws SQLException {
+        User user = userTableView.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            userIdTF.setText(user.getPersonId());
+            fullNameTF.setText(user.getFullName());
+
+            String formatBirthDay = user.getBirthday().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+            LocalDate localBirthDay = LocalDate.parse(formatBirthDay);
+            birthdayDatePicker.setValue(localBirthDay);
+
+            String formatHireDate = user.getHireDate().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+            LocalDate hireDate = LocalDate.parse(formatHireDate);
+            hireDatePicker.setValue(hireDate);
+
+            addressTF.setText(user.getAddress());
+            phoneTF.setText(user.getPhone());
+            genderComboBox.setValue(user.getGender());
+            shiffTF.setText(user.getShiff());
+            positionComboBox.setValue(user.getPosition());
+            emailTF.setText(user.getEmail());
+            
+            checkFullName();
+            if (birthdayDatePicker.getValue() == null) {
+                hideErrorOfBirthday(true);
+                errorBirthday.setText("\"birthday\" is not null.");
+            } else {
+                hideErrorOfBirthday(false);
+            }
+
+            if (hireDatePicker.getValue() == null) {
+                hideErrorOfHireDate(true);
+                errorHireDate.setText("\"hire date\" is not null.");
+            } else {
+                hideErrorOfHireDate(false);
+            }
+            checkAddress();
+            checkPhone();
+            checkShiff();
+            checkEmail();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Notification");
+            alert.setHeaderText("Error");
+            alert.setContentText("Please click to a row into table.");
+            alert.showAndWait();
+
+        }
+
+    }
+
     @FXML
-    private void userTableViewClicked(MouseEvent event) {
+    private void userTableViewClicked(MouseEvent event) throws SQLException {
+        getUserInfo();
     }
 
     private boolean isFullNameRight() {
@@ -365,7 +458,9 @@ public class UpdateUserController implements Initializable {
     }
 
     @FXML
-    private void searchReleased(KeyEvent event) {
+    private void searchReleased(KeyEvent event) throws SQLException {
+        lSearch = searchTF.getText();
+        getListUserAfterSearch(lSearch);
     }
 
 }

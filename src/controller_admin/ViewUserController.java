@@ -28,7 +28,7 @@ import javafx.scene.input.KeyEvent;
  */
 public class ViewUserController implements Initializable {
 
-    String lSearchTF;
+    String lSearch;
     
     @FXML
     private TextField searchTF;
@@ -111,8 +111,8 @@ public class ViewUserController implements Initializable {
 
     @FXML
     private void searchReleased(KeyEvent event) throws SQLException {
-        lSearchTF = searchTF.getText();
-        getListUserAfterSearch(lSearchTF);
+        lSearch = searchTF.getText();
+        getListUserAfterSearch(lSearch);
     }
 
 }

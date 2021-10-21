@@ -277,6 +277,12 @@ public class CreateUserController implements Initializable {
                 getListUserInfo();
             }
         } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Notification");
+            alert.setHeaderText("Error");
+            alert.setContentText("Text fields are not empty.");
+            alert.showAndWait();
+
             checkFullName();
             if (birthdayDatePicker.getValue() == null) {
                 hideErrorOfBirthday(true);
@@ -376,12 +382,13 @@ public class CreateUserController implements Initializable {
         checkShiff();
     }
 
-    private boolean isUserNameRight() {
+    private boolean isUserNameRight() throws SQLException {
         String tmp = userNameTF.getText();
-        return tmp.matches("^[a-zA-Z]+[_.]?[\\w]*") && tmp.length() >= 5;
+        boolean checkUserNameIsExists = new UserModifier().userNameIsExists(tmp);
+        return tmp.matches("^[a-zA-Z]+[_.]?[\\w]*") && tmp.length() >= 5 && !checkUserNameIsExists;
     }
 
-    private void checkUserName() {
+    private void checkUserName() throws SQLException {
         if (isUserNameRight()) {
             hideErrorOfUserName(false);
         } else {
@@ -391,7 +398,7 @@ public class CreateUserController implements Initializable {
     }
 
     @FXML
-    private void userNameReleased(KeyEvent event) {
+    private void userNameReleased(KeyEvent event) throws SQLException {
         checkUserName();
     }
 

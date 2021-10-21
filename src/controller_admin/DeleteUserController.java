@@ -29,7 +29,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class DeleteUserController implements Initializable {
     
-    String lSearchTF;
+    String lSearch;
 
     @FXML
     private TextField searchTF;
@@ -112,8 +112,8 @@ public class DeleteUserController implements Initializable {
     
     @FXML
     private void searchReleased(KeyEvent event) throws SQLException {
-        lSearchTF = searchTF.getText();
-        getListUserAfterSearch(lSearchTF);
+        lSearch = searchTF.getText();
+        getListUserAfterSearch(lSearch);
     }
 
     @FXML
