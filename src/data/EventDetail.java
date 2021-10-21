@@ -15,10 +15,9 @@ public class EventDetail {
     private String discount;
     private String mfdDate;
     private String expDate;
-    
-     public EventDetail() {
-    }
 
+    public EventDetail() {
+    }
 
     public EventDetail(String eventId, String productId, String discount, String mfdDate, String expDate) {
         this.eventId = eventId;
@@ -28,7 +27,6 @@ public class EventDetail {
         this.expDate = expDate;
     }
 
-   
     public String getEventId() {
         return eventId;
     }
@@ -68,5 +66,7 @@ public class EventDetail {
     public void setExpDate(String expDate) {
         this.expDate = expDate;
     }
+
+    
     
 }

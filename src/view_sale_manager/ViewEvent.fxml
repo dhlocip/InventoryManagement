@@ -2,7 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -15,15 +15,11 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="164.0" prefWidth="736.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="30.0" text="Date:" />
-            <DatePicker fx:id="datefind" prefHeight="30.0">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" top="10.0" />
-               </HBox.margin>
-            </DatePicker>
+            <Label prefHeight="30.0" text="Event ID:" />
+            <ComboBox fx:id="eventIdCombobox" prefWidth="150.0" />
             <HBox alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" stylesheets="@../css/app.css">
+                  <HBox fx:id="search" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" onMouseReleased="#getFind" stylesheets="@../css/app.css">
                      <children>
                         <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                            <graphic>

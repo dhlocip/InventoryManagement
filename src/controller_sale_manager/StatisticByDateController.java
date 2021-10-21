@@ -9,10 +9,13 @@ import data.VBills;
 import data_modifier.BillModifier;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import javafx.css.converter.StringConverter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
@@ -20,6 +23,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 /**
  * FXML Controller class
@@ -27,15 +32,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author sa
  */
 public class StatisticByDateController implements Initializable {
-
+    LocalDate date;
+    
+    
+    
     @FXML
     private DatePicker datefind;
     @FXML
     private Label find;
     @FXML
     private Label revenue;
-    @FXML
-    private Label numberdate;
     @FXML
     private TableView<VBills> dateTable;
     @FXML
@@ -48,6 +54,10 @@ public class StatisticByDateController implements Initializable {
     private TableColumn<VBills, String> transactionDate;
     @FXML
     private TableColumn<VBills, String> paymentName;
+    @FXML
+    private HBox search;
+    @FXML
+    private Label numberBills;
 
     /**
      * Initializes the controller class.
@@ -64,7 +74,7 @@ public class StatisticByDateController implements Initializable {
     
     private void getShow() throws SQLException{
         
-        ObservableList<VBills> oList = new BillModifier().getBillsInfo();
+        ObservableList<VBills> oList = new BillModifier().getVBillsInfo();
         userId.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
         billId.setCellValueFactory(new PropertyValueFactory<>("billId")); //tenbiendata
         total.setCellValueFactory(new PropertyValueFactory<>("total")); //tenbiendata
@@ -76,5 +86,35 @@ public class StatisticByDateController implements Initializable {
         
     }
     
+      
+
+    
+    public void getBillsByTransactionDate(LocalDate tranDate) throws SQLException{
+        
+        
+    
+        ObservableList<VBills> oList = new BillModifier().getInfoByTransactionDate(date);
+        userId.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
+        billId.setCellValueFactory(new PropertyValueFactory<>("billId")); //tenbiendata
+        total.setCellValueFactory(new PropertyValueFactory<>("total")); //tenbiendata
+        transactionDate.setCellValueFactory(new PropertyValueFactory<>("transactionDate")); //tenbiendata
+        paymentName.setCellValueFactory(new PropertyValueFactory<>("paymentName")); //tenbiendata
+
+        
+        dateTable.setItems(oList);
+    }
+
+    
+
+  
+
+    @FXML
+    private void getFind(MouseEvent event) throws SQLException {
+        getBillsByTransactionDate(datefind.getValue());
+    }
+
+    @FXML
+    private void searchBillByDate(MouseEvent event) {
+    }
     
 }

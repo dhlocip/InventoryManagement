@@ -41,7 +41,7 @@
                   </DatePicker>
                   <HBox alignment="CENTER">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" stylesheets="@../css/app.css">
+                        <HBox fx:id="search" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" onMouseReleased="#getFind" stylesheets="@../css/app.css">
                            <children>
                               <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                                  <graphic>
@@ -84,7 +84,7 @@
             </VBox>
             <VBox>
                <children>
-                  <Label fx:id="number" prefHeight="30.0" text="0" />
+                  <Label fx:id="numberBills" prefHeight="30.0" text="0" />
                   <Label fx:id="totalCancel" prefHeight="30.0" text="0" />
                </children>
                <HBox.margin>

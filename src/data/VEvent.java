@@ -19,11 +19,11 @@ public class VEvent {
     private String discount;
     private String mfdDate;
     private String expDate;
-    
+
     public VEvent() {
     }
 
-     public VEvent(String eventId, String userId, String eventName, String startDate, String endDate, String productId, String discount, String mfdDate, String expDate) {
+    public VEvent(String eventId, String userId, String eventName, String startDate, String endDate, String productId, String discount, String mfdDate, String expDate) {
         this.eventId = eventId;
         this.userId = userId;
         this.eventName = eventName;
@@ -34,7 +34,7 @@ public class VEvent {
         this.mfdDate = mfdDate;
         this.expDate = expDate;
     }
-    
+
     public String getEventId() {
         return eventId;
     }
@@ -107,6 +107,5 @@ public class VEvent {
         this.expDate = expDate;
     }
 
-   
     
 }
