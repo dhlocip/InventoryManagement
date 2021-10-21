@@ -5,7 +5,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -24,7 +23,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </HBox.margin>
                <children>
-                  <TextField fx:id="searchTF" prefHeight="40.0" prefWidth="318.0" promptText="Search here" style="-fx-background-color: grey;">
+                  <TextField fx:id="searchTF" onKeyReleased="#searchReleased" prefHeight="40.0" prefWidth="318.0" promptText="Search here" style="-fx-background-color: grey;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -79,7 +78,7 @@
                   <TextField fx:id="fullNameTF" onKeyPressed="#fullNameReleased" prefHeight="30.0" />
                   <Label fx:id="errorFullName" style="-fx-text-fill: red;" text="error" />
                   <Label prefHeight="30.0" text="Birthday:" />
-                  <DatePicker fx:id="birthdayDatePicker" prefHeight="30.0" />
+                  <DatePicker fx:id="birthdayDatePicker" onAction="#birthdayAction" prefHeight="30.0" />
                   <Label fx:id="errorBirthday" style="-fx-text-fill: red;" text="error" />
                </children>
                <HBox.margin>
@@ -89,7 +88,7 @@
             <VBox prefWidth="246.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label prefHeight="30.0" text="Hire Date:" />
-                  <DatePicker fx:id="hireDatePicker" prefHeight="30.0" />
+                  <DatePicker fx:id="hireDatePicker" onAction="#hireDateAction" prefHeight="30.0" />
                   <Label fx:id="errorHireDate" style="-fx-text-fill: red;" text="error" />
                   <Label prefHeight="30.0" text="Address:" />
                   <TextField fx:id="addressTF" onKeyPressed="#addressReleased" prefHeight="30.0" />
@@ -110,9 +109,9 @@
                   <Label prefHeight="30.0" text="Shiff:" />
                   <TextField fx:id="shiffTF" onKeyPressed="#shiffReleased" prefHeight="30.0" />
                   <Label fx:id="errorShiff" style="-fx-text-fill: red;" text="error" />
-                  <Label prefHeight="30.0" text="User Name:" />
-                  <TextField fx:id="userNameTF" disable="true" onKeyPressed="#userNameReleased" prefHeight="30.0" />
-                  <Label fx:id="errorUserName" style="-fx-text-fill: red;" text="error" />
+                  <Label prefHeight="30.0" text="Position:" />
+                  <ComboBox fx:id="positionComboBox" prefHeight="30.0" promptText="Invetory Manager" />
+                  <Label fx:id="errorPosition" style="-fx-text-fill: red;" text="error" />
                </children>
                <HBox.margin>
                   <Insets right="10.0" />
@@ -120,12 +119,6 @@
             </VBox>
             <VBox prefWidth="246.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label prefHeight="30.0" text="Password:" />
-                  <PasswordField fx:id="passwordPF" onKeyPressed="#passwordReleased" prefHeight="30.0" />
-                  <Label fx:id="errorPassword" style="-fx-text-fill: red;" text="error" />
-                  <Label prefHeight="30.0" text="Position:" />
-                  <ComboBox fx:id="positionComboBox" prefHeight="30.0" promptText="Invetory Manager" />
-                  <Label fx:id="errorPosition" style="-fx-text-fill: red;" text="error" />
                   <Label prefHeight="30.0" text="Email:" />
                   <TextField fx:id="emailTF" onKeyPressed="#emailReleased" prefHeight="30.0" />
                   <Label fx:id="errorEmail" style="-fx-text-fill: red;" text="error" />

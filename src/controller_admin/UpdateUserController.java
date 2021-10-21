@@ -4,13 +4,22 @@
  */
 package controller_admin;
 
+import controller_app.UIDashboardAdminController;
+import controller_app.UIDashboardInventoryManagerController;
+import controller_app.UIDashboardSaleManagerController;
 import data.User;
+import data_modifier.UserModifier;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -18,6 +27,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -27,6 +37,8 @@ import javafx.scene.input.MouseEvent;
  * @author sa
  */
 public class UpdateUserController implements Initializable {
+
+    String lUserId;
 
     @FXML
     private TextField searchTF;
@@ -58,14 +70,6 @@ public class UpdateUserController implements Initializable {
     private TextField shiffTF;
     @FXML
     private Label errorShiff;
-    @FXML
-    private TextField userNameTF;
-    @FXML
-    private Label errorUserName;
-    @FXML
-    private PasswordField passwordPF;
-    @FXML
-    private Label errorPassword;
     @FXML
     private ComboBox<String> positionComboBox;
     @FXML
@@ -101,8 +105,6 @@ public class UpdateUserController implements Initializable {
     @FXML
     private TableColumn<User, String> emailCol;
     @FXML
-    private TableColumn<User, String> tokenCol;
-    @FXML
     private DatePicker birthdayDatePicker;
     @FXML
     private DatePicker hireDatePicker;
@@ -113,10 +115,25 @@ public class UpdateUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
+        //        get userId
+        if (UIDashboardAdminController.gPosition != null
+                && UIDashboardInventoryManagerController.gPosition == null
+                && UIDashboardSaleManagerController.gPosition == null) {
+            lUserId = UIDashboardAdminController.gUserId;
+
+        } else if (UIDashboardAdminController.gPosition == null
+                && UIDashboardInventoryManagerController.gPosition != null
+                && UIDashboardSaleManagerController.gPosition == null) {
+
+            lUserId = UIDashboardInventoryManagerController.gUserId;
+        } else {
+            lUserId = UIDashboardSaleManagerController.gUserId;
+        }
+
         setGender();
         setPosition();
-        
+
         hideErrorOfUserId(false);
         hideErrorOfFullName(false);
         hideErrorOfBirthday(false);
@@ -125,18 +142,22 @@ public class UpdateUserController implements Initializable {
         hideErrorOfPhone(false);
         hideErrorOfGender(false);
         hideErrorOfShiff(false);
-        hideErrorOfUserName(false);
-        hideErrorOfPassword(false);
         hideErrorOfPosition(false);
         hideErrorOfEmail(false);
-        
-    }    
-    
+
+        try {
+            getListUserInfo();
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     private void hideErrorOfUserId(boolean value) {
         errorUserId.setVisible(value);
         errorUserId.managedProperty().bind(errorUserId.visibleProperty());
     }
-    
+
     private void hideErrorOfFullName(boolean value) {
         errorFullName.setVisible(value);
         errorFullName.managedProperty().bind(errorFullName.visibleProperty());
@@ -171,17 +192,7 @@ public class UpdateUserController implements Initializable {
         errorShiff.setVisible(value);
         errorShiff.managedProperty().bind(errorShiff.visibleProperty());
     }
-    
-    private void hideErrorOfUserName(boolean value) {
-        errorUserName.setVisible(value);
-        errorUserName.managedProperty().bind(errorUserName.visibleProperty());
-    }
-    
-    private void hideErrorOfPassword(boolean value) {
-        errorPassword.setVisible(value);
-        errorPassword.managedProperty().bind(errorPassword.visibleProperty());
-    }
-    
+
     private void hideErrorOfPosition(boolean value) {
         errorPosition.setVisible(value);
         errorPosition.managedProperty().bind(errorPosition.visibleProperty());
@@ -191,7 +202,24 @@ public class UpdateUserController implements Initializable {
         errorEmail.setVisible(value);
         errorEmail.managedProperty().bind(errorEmail.visibleProperty());
     }
-    
+
+    private void getListUserInfo() throws SQLException {
+        ObservableList<User> oList = new UserModifier().getListUser();
+        userIdCol.setCellValueFactory(new PropertyValueFactory<>("personId"));
+        fullNameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        birthdayCol.setCellValueFactory(new PropertyValueFactory<>("birthday"));
+        hireDateCol.setCellValueFactory(new PropertyValueFactory<>("hireDate"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        genderCol.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        shiffCol.setCellValueFactory(new PropertyValueFactory<>("shiff"));
+        userNameCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
+        positionCol.setCellValueFactory(new PropertyValueFactory<>("position"));
+        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        userTableView.setItems(oList);
+    }
+
     private void setGender() {
         ObservableList<String> oList = FXCollections.observableArrayList();
         oList.addAll("Male", "Female");
@@ -214,38 +242,130 @@ public class UpdateUserController implements Initializable {
 
     @FXML
     private void updateUserClicked(MouseEvent event) {
+        User item = userTableView.getSelectionModel().getSelectedItem();
+        if (item != null) {
+            System.out.println(item.getPersonId());
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Notification");
+                alert.setHeaderText("Error");
+                alert.setContentText("Please click to a row into table.");
+                alert.showAndWait();
+        }
     }
 
     @FXML
     private void userTableViewClicked(MouseEvent event) {
     }
 
+    private boolean isFullNameRight() {
+        String tmp = fullNameTF.getText();
+        return tmp.matches("^[a-zA-Z]{1}[a-zA-Z\\s]{3,50}");
+    }
+
+    private void checkFullName() {
+        if (isFullNameRight()) {
+            hideErrorOfFullName(false);
+        } else {
+            hideErrorOfFullName(true);
+            errorFullName.setText("\"" + fullNameTF.getText() + "\" is invalid.");
+        }
+    }
+
     @FXML
     private void fullNameReleased(KeyEvent event) {
+        checkFullName();
+    }
+
+    private boolean isAddressRight() {
+        String tmp = addressTF.getText();
+        return tmp.matches("^[\\w]{1}[\\w\\s,.]{5,100}");
+    }
+
+    private void checkAddress() {
+        if (isAddressRight()) {
+            hideErrorOfAddress(false);
+        } else {
+            hideErrorOfAddress(true);
+            errorAddress.setText("\"" + addressTF.getText() + "\" is invalid.");
+        }
     }
 
     @FXML
     private void addressReleased(KeyEvent event) {
+        checkAddress();
+    }
+
+    private boolean isPhoneRight() {
+        String tmp = phoneTF.getText();
+        return tmp.matches("^[0]{1}[\\d]{9,10}");
+    }
+
+    private void checkPhone() {
+        if (isPhoneRight()) {
+            hideErrorOfPhone(false);
+        } else {
+            hideErrorOfPhone(true);
+            errorPhone.setText("\"" + phoneTF.getText() + "\" is invalid.");
+        }
     }
 
     @FXML
     private void phoneReleased(KeyEvent event) {
+        checkPhone();
+    }
+
+    private boolean isShiffRight() {
+        String tmp = shiffTF.getText();
+        return tmp.matches("^[\\w]{1,5}");
+    }
+
+    private void checkShiff() {
+        if (isShiffRight()) {
+            hideErrorOfShiff(false);
+        } else {
+            hideErrorOfShiff(true);
+            errorShiff.setText("\"" + shiffTF.getText() + "\" is invalid.");
+        }
     }
 
     @FXML
     private void shiffReleased(KeyEvent event) {
+        checkShiff();
     }
 
-    @FXML
-    private void userNameReleased(KeyEvent event) {
+    private boolean isEmailRight() {
+        String tmp = emailTF.getText();
+        return tmp.matches("^[^\\W\\d]{1}[\\w]+[.]?[\\w]+[@]{1}[^\\W\\d]{4,7}[.]{1}[^\\W\\d]{3}[.]{0,1}[^\\W\\d]{0,3}[.]{0,1}[^\\W\\d]{0,2}");
     }
 
-    @FXML
-    private void passwordReleased(KeyEvent event) {
+    private void checkEmail() {
+        if (isEmailRight()) {
+            hideErrorOfEmail(false);
+        } else {
+            hideErrorOfEmail(true);
+            errorEmail.setText("\"" + emailTF.getText() + "\" is invalid.");
+        }
     }
 
     @FXML
     private void emailReleased(KeyEvent event) {
+        checkEmail();
     }
-    
+
+    @FXML
+    private void birthdayAction(ActionEvent event) {
+        hideErrorOfBirthday(false);
+    }
+
+    @FXML
+    private void hireDateAction(ActionEvent event) {
+        hideErrorOfHireDate(false);
+    }
+
+    @FXML
+    private void searchReleased(KeyEvent event) {
+    }
+
 }

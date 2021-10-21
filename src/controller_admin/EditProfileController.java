@@ -81,7 +81,7 @@ public class EditProfileController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-//        get userId
+        //        get userId
         if (UIDashboardAdminController.gPosition != null
                 && UIDashboardInventoryManagerController.gPosition == null
                 && UIDashboardSaleManagerController.gPosition == null) {

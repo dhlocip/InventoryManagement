@@ -39,9 +39,7 @@ import javafx.scene.input.MouseEvent;
  * @author sa
  */
 public class CreateUserController implements Initializable {
-    
-    String lUserId;
-    
+
     @FXML
     private TableView<User> userTableView;
     @FXML
@@ -124,24 +122,9 @@ public class CreateUserController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-        //        get userId
-        if (UIDashboardAdminController.gPosition != null
-                && UIDashboardInventoryManagerController.gPosition == null
-                && UIDashboardSaleManagerController.gPosition == null) {
-            lUserId = UIDashboardAdminController.gUserId;
-            
-        } else if (UIDashboardAdminController.gPosition == null
-                && UIDashboardInventoryManagerController.gPosition != null
-                && UIDashboardSaleManagerController.gPosition == null) {
-            
-            lUserId = UIDashboardInventoryManagerController.gUserId;
-        } else {
-            lUserId = UIDashboardSaleManagerController.gUserId;
-        }
-        
         setGender();
         setPosition();
-        
+
         hideErrorOfUserId(false);
         hideErrorOfFullName(false);
         hideErrorOfBirthday(false);
@@ -154,75 +137,75 @@ public class CreateUserController implements Initializable {
         hideErrorOfPassword(false);
         hideErrorOfPosition(false);
         hideErrorOfEmail(false);
-        
+
         try {
             getListUserInfo();
         } catch (SQLException ex) {
             Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
     private void hideErrorOfUserId(boolean value) {
         errorUserId.setVisible(value);
         errorUserId.managedProperty().bind(errorUserId.visibleProperty());
     }
-    
+
     private void hideErrorOfFullName(boolean value) {
         errorFullName.setVisible(value);
         errorFullName.managedProperty().bind(errorFullName.visibleProperty());
     }
-    
+
     private void hideErrorOfBirthday(boolean value) {
         errorBirthday.setVisible(value);
         errorBirthday.managedProperty().bind(errorBirthday.visibleProperty());
     }
-    
+
     private void hideErrorOfHireDate(boolean value) {
         errorHireDate.setVisible(value);
         errorHireDate.managedProperty().bind(errorHireDate.visibleProperty());
     }
-    
+
     private void hideErrorOfAddress(boolean value) {
         errorAddress.setVisible(value);
         errorAddress.managedProperty().bind(errorAddress.visibleProperty());
     }
-    
+
     private void hideErrorOfPhone(boolean value) {
         errorPhone.setVisible(value);
         errorPhone.managedProperty().bind(errorPhone.visibleProperty());
     }
-    
+
     private void hideErrorOfGender(boolean value) {
         errorGender.setVisible(value);
         errorGender.managedProperty().bind(errorGender.visibleProperty());
     }
-    
+
     private void hideErrorOfShiff(boolean value) {
         errorShiff.setVisible(value);
         errorShiff.managedProperty().bind(errorShiff.visibleProperty());
     }
-    
+
     private void hideErrorOfUserName(boolean value) {
         errorUserName.setVisible(value);
         errorUserName.managedProperty().bind(errorUserName.visibleProperty());
     }
-    
+
     private void hideErrorOfPassword(boolean value) {
         errorPassword.setVisible(value);
         errorPassword.managedProperty().bind(errorPassword.visibleProperty());
     }
-    
+
     private void hideErrorOfPosition(boolean value) {
         errorPosition.setVisible(value);
         errorPosition.managedProperty().bind(errorPosition.visibleProperty());
     }
-    
+
     private void hideErrorOfEmail(boolean value) {
         errorEmail.setVisible(value);
         errorEmail.managedProperty().bind(errorEmail.visibleProperty());
     }
-    
+
     private void getListUserInfo() throws SQLException {
         ObservableList<User> oList = new UserModifier().getListUser();
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("personId"));
@@ -239,43 +222,43 @@ public class CreateUserController implements Initializable {
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         userTableView.setItems(oList);
     }
-    
+
     private void setGender() {
         ObservableList<String> oList = FXCollections.observableArrayList();
         oList.addAll("Male", "Female");
         genderComboBox.setItems(oList);
         genderComboBox.setValue("Male");
-        
+
         genderComboBox.setOnAction((t) -> {
             genderComboBox.getValue();
         });
     }
-    
+
     private void setPosition() {
         ObservableList<String> oList = FXCollections.observableArrayList();
         oList.addAll("Admin", "Inventory Manager", "Sale Manager", "Sale Person");
         positionComboBox.setItems(oList);
         positionComboBox.setValue("Sale Person");
-        
+
         positionComboBox.setOnAction((t) -> {
             positionComboBox.getValue();
         });
     }
-    
+
     @FXML
-    private void createUserClicked(MouseEvent event) {
+    private void createUserClicked(MouseEvent event) throws SQLException {
         User user = new User();
         if (isFullNameRight() && birthdayDatePicker.getValue() != null && hireDatePicker.getValue() != null
                 && isAddressRight() && isPhoneRight() && isShiffRight() && isUserNameRight() && isPasswordRight()
                 && isEmailRight()) {
             user.setFullName(fullNameTF.getText());
-            
+
             LocalDate myBirthday = birthdayDatePicker.getValue();
             user.setBirthday(myBirthday.toString());
-            
+
             LocalDate myHireDate = hireDatePicker.getValue();
             user.setHireDate(myHireDate.toString());
-            
+
             user.setAddress(addressTF.getText());
             user.setPhone(phoneTF.getText());
             user.setGender(genderComboBox.getValue());
@@ -284,24 +267,16 @@ public class CreateUserController implements Initializable {
             user.setPassword(passwordPF.getText());
             user.setPosition(positionComboBox.getValue());
             user.setEmail(emailTF.getText());
-            
-            System.out.println(user.getFullName());
-            System.out.println(user.getBirthday());
-            System.out.println(user.getHireDate());
-            System.out.println(user.getAddress());
-            System.out.println(user.getPhone());
-            System.out.println(user.getGender());
-            System.out.println(user.getShiff());
-            System.out.println(user.getUserName());
-            System.out.println(user.getPassword());
-            System.out.println(user.getPosition());
-            System.out.println(user.getEmail());
+
+            if (new UserModifier().createUser(user)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Notification");
+                alert.setHeaderText("Success");
+                alert.setContentText("Create user is successfully.");
+                alert.showAndWait();
+                getListUserInfo();
+            }
         } else {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Notification");
-//            alert.setHeaderText("Error");
-//            alert.setContentText("Text fields are not empty.");
-//            alert.showAndWait();
             checkFullName();
             if (birthdayDatePicker.getValue() == null) {
                 hideErrorOfBirthday(true);
@@ -309,7 +284,7 @@ public class CreateUserController implements Initializable {
             } else {
                 hideErrorOfBirthday(false);
             }
-            
+
             if (hireDatePicker.getValue() == null) {
                 hideErrorOfHireDate(true);
                 errorHireDate.setText("\"hire date\" is not null.");
@@ -324,12 +299,12 @@ public class CreateUserController implements Initializable {
             checkEmail();
         }
     }
-    
+
     private boolean isFullNameRight() {
         String tmp = fullNameTF.getText();
         return tmp.matches("^[a-zA-Z]{1}[a-zA-Z\\s]{3,50}");
     }
-    
+
     private void checkFullName() {
         if (isFullNameRight()) {
             hideErrorOfFullName(false);
@@ -338,17 +313,17 @@ public class CreateUserController implements Initializable {
             errorFullName.setText("\"" + fullNameTF.getText() + "\" is invalid.");
         }
     }
-    
+
     @FXML
     private void fullNameReleased(KeyEvent event) {
         checkFullName();
     }
-    
+
     private boolean isAddressRight() {
         String tmp = addressTF.getText();
         return tmp.matches("^[\\w]{1}[\\w\\s,.]{5,100}");
     }
-    
+
     private void checkAddress() {
         if (isAddressRight()) {
             hideErrorOfAddress(false);
@@ -357,17 +332,17 @@ public class CreateUserController implements Initializable {
             errorAddress.setText("\"" + addressTF.getText() + "\" is invalid.");
         }
     }
-    
+
     @FXML
     private void addressReleased(KeyEvent event) {
         checkAddress();
     }
-    
+
     private boolean isPhoneRight() {
         String tmp = phoneTF.getText();
         return tmp.matches("^[0]{1}[\\d]{9,10}");
     }
-    
+
     private void checkPhone() {
         if (isPhoneRight()) {
             hideErrorOfPhone(false);
@@ -376,17 +351,17 @@ public class CreateUserController implements Initializable {
             errorPhone.setText("\"" + phoneTF.getText() + "\" is invalid.");
         }
     }
-    
+
     @FXML
     private void phoneReleased(KeyEvent event) {
         checkPhone();
     }
-    
+
     private boolean isShiffRight() {
         String tmp = shiffTF.getText();
         return tmp.matches("^[\\w]{1,5}");
     }
-    
+
     private void checkShiff() {
         if (isShiffRight()) {
             hideErrorOfShiff(false);
@@ -395,17 +370,17 @@ public class CreateUserController implements Initializable {
             errorShiff.setText("\"" + shiffTF.getText() + "\" is invalid.");
         }
     }
-    
+
     @FXML
     private void shiffReleased(KeyEvent event) {
         checkShiff();
     }
-    
+
     private boolean isUserNameRight() {
         String tmp = userNameTF.getText();
         return tmp.matches("^[a-zA-Z]+[_.]?[\\w]*") && tmp.length() >= 5;
     }
-    
+
     private void checkUserName() {
         if (isUserNameRight()) {
             hideErrorOfUserName(false);
@@ -414,17 +389,17 @@ public class CreateUserController implements Initializable {
             errorUserName.setText("\"" + userNameTF.getText() + "\" is invalid.");
         }
     }
-    
+
     @FXML
     private void userNameReleased(KeyEvent event) {
         checkUserName();
     }
-    
+
     private boolean isPasswordRight() {
         String tmp = passwordPF.getText();
         return tmp.matches("^[\\w_.!@#$%^*]+") && tmp.length() >= 8;
     }
-    
+
     private void checkPassword() {
         if (isPasswordRight()) {
             hideErrorOfPassword(false);
@@ -433,17 +408,17 @@ public class CreateUserController implements Initializable {
             errorPassword.setText("\"password\" is invalid.");
         }
     }
-    
+
     @FXML
     private void passwordReleased(KeyEvent event) {
         checkPassword();
     }
-    
+
     private boolean isEmailRight() {
         String tmp = emailTF.getText();
         return tmp.matches("^[^\\W\\d]{1}[\\w]+[.]?[\\w]+[@]{1}[^\\W\\d]{4,7}[.]{1}[^\\W\\d]{3}[.]{0,1}[^\\W\\d]{0,3}[.]{0,1}[^\\W\\d]{0,2}");
     }
-    
+
     private void checkEmail() {
         if (isEmailRight()) {
             hideErrorOfEmail(false);
@@ -452,7 +427,7 @@ public class CreateUserController implements Initializable {
             errorEmail.setText("\"" + emailTF.getText() + "\" is invalid.");
         }
     }
-    
+
     @FXML
     private void emailReleased(KeyEvent event) {
         checkEmail();
@@ -467,5 +442,5 @@ public class CreateUserController implements Initializable {
     private void hireDateAction(ActionEvent event) {
         hideErrorOfHireDate(false);
     }
-    
+
 }
