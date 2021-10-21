@@ -8,6 +8,7 @@ import data.VBills;
 import data_modifier.BillModifier;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 /**
  * FXML Controller class
@@ -27,12 +30,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class StatisticByCancelController implements Initializable {
 
+    LocalDate date;
+    
+    
     @FXML
     private DatePicker datefind;
     @FXML
     private Label find;
-    @FXML
-    private Label number;
     @FXML
     private Label totalCancel;
     @FXML
@@ -49,6 +53,10 @@ public class StatisticByCancelController implements Initializable {
     private TableColumn<VBills, String> paymentName;
     @FXML
     private TableColumn<VBills, String> statusCancel;
+    @FXML
+    private HBox search;
+    @FXML
+    private Label numberBills;
 
     /**
      * Initializes the controller class.
@@ -58,16 +66,16 @@ public class StatisticByCancelController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
                    
         try {
-            getShow();
+            getBillCancel();
         } catch (SQLException ex) {
             Logger.getLogger(RequestController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }   
-    
-    private void getShow() throws SQLException{
-        
-        ObservableList<VBills> oList = new BillModifier().getBillsInfo();
+
+       public void getBillCancel() throws SQLException {
+
+        ObservableList<VBills> oList = new BillModifier().getInfoByCancel();
         userID.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
         billId.setCellValueFactory(new PropertyValueFactory<>("billId")); //tenbiendata
         total.setCellValueFactory(new PropertyValueFactory<>("total")); //tenbiendata
@@ -76,7 +84,34 @@ public class StatisticByCancelController implements Initializable {
         statusCancel.setCellValueFactory(new PropertyValueFactory<>("statusCancel")); //tenbiendata
         
         cancelTable.setItems(oList);
-        
     }
+
+       
+       public void getBillsByTransactionDate(LocalDate tranDate) throws SQLException{
+        
+        
+    
+        ObservableList<VBills> oList = new BillModifier().getInfoByTransactionDate(date);
+        
+        userID.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
+        billId.setCellValueFactory(new PropertyValueFactory<>("billId")); //tenbiendata
+        total.setCellValueFactory(new PropertyValueFactory<>("total")); //tenbiendata
+        transactionDate.setCellValueFactory(new PropertyValueFactory<>("transactionDate")); //tenbiendata
+        paymentName.setCellValueFactory(new PropertyValueFactory<>("paymentName")); //tenbiendata
+        statusCancel.setCellValueFactory(new PropertyValueFactory<>("statusCancel")); //tenbiendata
+        
+        cancelTable.setItems(oList);
+    }
+
+    @FXML
+    private void getFind(MouseEvent event) throws SQLException{
+        
+        
+        
+    
+    }
+    
+    
+    
     
 }

@@ -4,8 +4,6 @@
  */
 package controller_sale_manager;
 
-import data.EventDetail;
-import data.Events;
 import data.VEvent;
 import data_modifier.VEventModifier;
 import java.net.URL;
@@ -14,20 +12,15 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -102,14 +95,13 @@ public class DeleteEventController implements Initializable {
     @FXML
     private void getDelete(MouseEvent event) throws SQLException {
 
-//        deleteEvent.getItems().removeAll(deleteEvent.getSelectionModel().getSelectedItem());
 
         VEvent item = deleteEvent.getSelectionModel().getSelectedItem();
         if (item != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Notification");
             alert.setHeaderText("Confirm");
-            alert.setContentText("Are you sure?\nClick OK to delete the line.");
+            alert.setContentText("Are you sure?\nClick OK to delete the Event.");
             Optional<ButtonType> result = alert.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -131,10 +123,7 @@ public class DeleteEventController implements Initializable {
     }
 
     public void getEventByEventId(String eventID) throws SQLException {
-//
-//        VEventModifier searchEventByEventId = new VEventModifier();
-//        ObservableList oLists = FXCollections.observableArrayList();
-//        oLists = searchEventByEventId.getInfoByEventId();
+
         ObservableList<VEvent> oList = new VEventModifier().getInfoByEventId(eventID);
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
         productId.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata
@@ -145,13 +134,13 @@ public class DeleteEventController implements Initializable {
         deleteEvent.setItems(oList);
     }
 
-
     @FXML
     private void getFind(MouseEvent event) throws SQLException {
-
-//        System.out.println(eventIdCombobox.getValue());
+        
         getEventByEventId(eventIdCombobox.getValue());
+        
     }
 
 
+    
 }

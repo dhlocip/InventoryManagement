@@ -10,26 +10,21 @@ import data.VEvent;
 import data_modifier.VEventModifier;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 /**
  * FXML Controller class
@@ -37,6 +32,13 @@ import javafx.scene.input.MouseEvent;
  * @author sa
  */
 public class UpdateEventController implements Initializable {
+
+    String proID;
+    String updateEventName;
+    String updateDiscount;
+    String updateStartDate;
+    String updateEndDate;
+    String updateProductId;
 
     @FXML
     private TextField txtEventName;
@@ -46,8 +48,7 @@ public class UpdateEventController implements Initializable {
     private DatePicker txtStartDate;
     @FXML
     private TableView<VEvent> updateEventTable;
-    @FXML
-    private TableColumn<VEvent, String> eventId;
+
     @FXML
     private TableColumn<VEvent, String> eventName;
     @FXML
@@ -57,14 +58,18 @@ public class UpdateEventController implements Initializable {
     @FXML
     private TableColumn<VEvent, String> userId;
     @FXML
-    private TableColumn<VEvent, String> startDate;  
+    private TableColumn<VEvent, String> startDate;
 
     @FXML
     private TableColumn<VEvent, String> endDate;
     @FXML
-    private ComboBox<?> comboboxProductId;
-    @FXML
     private DatePicker txtEndDate;
+    @FXML
+    private ComboBox<String> productICombobox;
+    @FXML
+    private HBox upDateEvent;
+    @FXML
+    private HBox upDateEventDetail;
 
     /**
      * Initializes the controller class.
@@ -74,16 +79,16 @@ public class UpdateEventController implements Initializable {
         try {
             // TODO
             getShow();
+            setValueProductIdComboBox();
         } catch (SQLException ex) {
             Logger.getLogger(UpdateEventController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-    }    
-    private void getShow() throws SQLException{
-        
+
+    }
+
+    private void getShow() throws SQLException {
+
         ObservableList<VEvent> oList = new VEventModifier().getEventInfo();
-        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
         productId.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata
         discount.setCellValueFactory(new PropertyValueFactory<>("discount")); //tenbiendata
@@ -93,89 +98,47 @@ public class UpdateEventController implements Initializable {
         updateEventTable.setItems(oList);
     }
 
-    
+    private void setValueProductIdComboBox() throws SQLException {
+        ObservableList<String> oList = new VEventModifier().getListProductId();
+        productICombobox.setItems(oList);
+        productICombobox.setValue(oList.get(0));
+
+        proID = productICombobox.getValue();
+
+        productICombobox.setOnAction((t) -> {
+            proID = productICombobox.getValue();
+        });
+
+    }
+
     @FXML
-    private void updateEventClicked(MouseEvent event) {        
-        System.out.println(txtStartDate.getValue());
+    private void updateEventMouseClicked(MouseEvent event) {
+        VEvent item = updateEventTable.getSelectionModel().getSelectedItem();
         
+        if (item != null) {
+            txtEventName.setText(item.getEventName()); //tenbiendata
+            txtDiscount.setText(item.getDiscount());
+
+            LocalDate start = LocalDate.parse(item.getStartDate());
+            txtStartDate.setValue(start);
+
+            LocalDate end = LocalDate.parse(item.getEndDate());
+            txtEndDate.setValue(end);
+            productICombobox.setValue(item.getProductId());
+        }
     }
-    
-     @FXML
-    private void getDelete(ActionEvent event) {     
-              
-    if(updateEventTable.getSelectionModel().getSelectedItem() != null){
+
+   
+    @FXML
+    private void updateEventDetailClicked(MouseEvent event) throws SQLException {
         
-    
-    };
-    
-    
-        
-    
+
+
     }
-    
-    
-    
-    
+
+    @FXML
+    private void updateEventClick(MouseEvent event) {
+
+    }
+
 }
-//
-// @FXML
-//    private void updateProductClicked(MouseEvent event) throws SQLException {
-//
-//        if (lProductTypeId != null && isPriceRight() && isUnitRight() && isProNameRight()) {
-//            Products items = productDetailTableView.getSelectionModel().getSelectedItem();
-//            lPrice = Double.parseDouble(priceTextField.getText());
-//            lUnit = unitTextField.getText();
-//            lProductName = productNameTextField.getText();
-//            lProductTypeId = productTypeIdComboBox.getValue();
-//
-//            if (items != null) {
-//                items.setProductTypeId(lProductTypeId);
-//                items.setProductName(lProductName);
-//                items.setUnit(lUnit);
-//                items.setPrice(lPrice);
-//
-//                if (new ProductsModifier().updateProducts(items)) {
-//                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                    alert.setTitle("Notification");
-//                    alert.setHeaderText("Success");
-//                    alert.setContentText("update product is successfully.");
-//                    alert.showAndWait();
-//
-////                reload table products 
-//                    getProductsInfo();
-//                }
-//            }
-//
-//        } else {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Notification");
-//            alert.setHeaderText("Error");
-//            alert.setContentText("Please click to item.");
-//            alert.showAndWait();
-//
-//            if (!isPriceRight()) {
-//                hideErrorOfPrice(true);
-//                errorOfPrice.setText("Price is invalid.");
-//            }
-//
-//            if (!isUnitRight()) {
-//                hideErrorOfUnit(true);
-//                errorOfUnit.setText("Unit is invalid.");
-//            }
-//
-//            if (!isProNameRight()) {
-//                hideErrorOfProName(true);
-//                errorOfProductName.setText("ProductName is invalid.");
-//            }
-//
-//            if (lProductTypeId == null) {
-//                hideErrorOfProTypeId(true);
-//                errorOfProductTypeId.setText("ProductTypeId can't empty.");
-//            }
-//        }
-//    }
-//
-//    @FXML
-//    private void searchReleased(KeyEvent event) throws SQLException {
-//        getProductsInfoWhenSearch(searchTextField.getText());
-//    }

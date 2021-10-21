@@ -14,18 +14,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_sale_manager.UpdateEventController">
+<BorderPane prefHeight="403.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_sale_manager.UpdateEventController">
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <VBox prefWidth="300.0">
+            <VBox prefWidth="301.0">
                <children>
                   <Label prefHeight="30.0" text="Event Name:" />
                   <TextField fx:id="txtEventName" prefHeight="30.0" />
-                  <Label prefHeight="30.0" text="Product ID:" />
-                  <ComboBox fx:id="comboboxProductId" prefHeight="30.0" promptText="P0001" />
-                  <Label prefHeight="30.0" text="Discount:" />
-                  <TextField fx:id="txtDiscount" prefHeight="30.0" />
+                  <Label prefHeight="30.0" text="Start Date:" />
+                  <DatePicker fx:id="txtStartDate" prefHeight="30.0" />
+                  <Label prefHeight="30.0" text="End Date:" />
+                  <DatePicker fx:id="txtEndDate" prefHeight="30.0" />
                </children>
                <HBox.margin>
                   <Insets right="10.0" />
@@ -33,13 +33,13 @@
             </VBox>
             <VBox prefWidth="300.0">
                <children>
-                  <Label prefHeight="30.0" text="Start Date:" />
-                  <DatePicker fx:id="txtStartDate" prefHeight="30.0" />
-                  <Label prefHeight="30.0" text="End Date:" />
-                  <DatePicker fx:id="txtEndDate" prefHeight="30.0" />
+                  <Label prefHeight="30.0" text="Product ID:" />
+                  <ComboBox fx:id="productICombobox" prefHeight="30.0" promptText="P0001" />
+                  <Label prefHeight="30.0" text="Discount:" />
+                  <TextField fx:id="txtDiscount" prefHeight="30.0" />
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <HBox alignment="CENTER" onMouseClicked="#updateEventClicked" stylesheets="@../css/app.css">
+                        <HBox fx:id="upDateEvent" alignment="CENTER" onMouseReleased="#updateEventClick" stylesheets="@../css/app.css">
                            <children>
                               <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                                  <graphic>
@@ -54,6 +54,34 @@
                                  </HBox.margin>
                               </Label>
                               <Label prefHeight="30.0" styleClass="app-button" stylesheets="@../css/app.css" text="Update Event">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <styleClass>
+                              <String fx:value="app-border" />
+                              <String fx:value="app-controls" />
+                           </styleClass>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </HBox>
+                        <HBox fx:id="upDateEventDetail" alignment="CENTER" onMouseReleased="#updateEventDetailClicked" prefHeight="32.0" prefWidth="203.0" stylesheets="@../css/app.css">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-edit-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label prefHeight="30.0" styleClass="app-button" stylesheets="@../css/app.css" text="Update EventDetail">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -78,9 +106,8 @@
       </HBox>
    </bottom>
    <center>
-      <TableView fx:id="updateEventTable" prefHeight="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="updateEventTable" onMouseClicked="#updateEventMouseClicked" prefHeight="200.0" BorderPane.alignment="CENTER">
          <columns>
-            <TableColumn fx:id="eventId" prefWidth="75.0" text="Event ID" />
             <TableColumn fx:id="eventName" prefWidth="75.0" text="Event Name" />
             <TableColumn fx:id="productId" prefWidth="75.0" text="Product ID" />
             <TableColumn fx:id="discount" prefWidth="75.0" text="Discount" />

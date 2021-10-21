@@ -5,6 +5,8 @@
  */
 package data;
 
+import java.util.Date;
+
 /**
  *
  * @author ADMIN
@@ -12,7 +14,7 @@ package data;
 public class VBills {
     private String billId;
     private String userId;
-    private String transactionDate;
+    private Date transactionDate;
     private String statusCancel;
     private String paymentName;
     private String productId;
@@ -20,12 +22,22 @@ public class VBills {
     private String mfgDate;
     private String expDate;
     private float price;
-    private float total = quantity * price;
+    private float total = quantity*price;
+//    private float revenue;
+//    private  int numberBills;
+//    private float totalCancel;
+
+   
+    
+//        this.revenue = revenue;
+//        this.numberBills = numberBills;
+//        this.totalCancel = totalCancel;
+ 
 
     public VBills() {
     }
 
-    public VBills(String billId, String userId, String transactionDate, String statusCancel, String paymentName, String productId, int quantity, String mfgDate, String expDate, float price) {
+    public VBills(String billId, String userId, Date transactionDate, String statusCancel, String paymentName, String productId, int quantity, String mfgDate, String expDate, float price, float total) {
         this.billId = billId;
         this.userId = userId;
         this.transactionDate = transactionDate;
@@ -36,9 +48,11 @@ public class VBills {
         this.mfgDate = mfgDate;
         this.expDate = expDate;
         this.price = price;
+        this.total = total;
     }
 
     
+
     public String getBillId() {
         return billId;
     }
@@ -55,11 +69,11 @@ public class VBills {
         this.userId = userId;
     }
 
-    public String getTransactionDate() {
+    public Date getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(String transactionDate) {
+    public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
     }
 
@@ -127,5 +141,31 @@ public class VBills {
         this.total = total;
     }
     
-            
+    
+
+
+//    public float getRevenue() {
+//        return revenue;
+//    }
+//
+//    public void setRevenue(float revenue) {
+//        this.revenue = revenue;
+//    }
+//
+//    public int getNumberBills() {
+//        return numberBills;
+//    }
+//
+//    public void setNumberBills(int numberBills) {
+//        this.numberBills = numberBills;
+//    }
+//
+//    public float getTotalCancel() {
+//        return totalCancel;
+//    }
+//
+//    public void setTotalCancel(float totalCancel) {
+//        this.totalCancel = totalCancel;
+//    }
+    
 }
