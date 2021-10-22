@@ -10,17 +10,39 @@ package data;
  * @author ADMIN
  */
 public class Suppliers extends Person{
+    private String supplierId;
     private String companyName;
+    private String address;
+    private String phone;
     private String homePage;
+    private String personRepresentative;
 
-    public Suppliers(String personId, String fullName, String address, String gender, String phone) {
-        super(personId, fullName, address, gender, phone);
+    public Suppliers() {
     }
 
-    public Suppliers(String companyName, String homePage, String personId, String fullName, String address, String gender, String phone) {
-        super(personId, fullName, address, gender, phone);
+    public Suppliers(String companyName, String address, String phone, String homePage, String personRepresentative) {
         this.companyName = companyName;
+        this.address = address;
+        this.phone = phone;
         this.homePage = homePage;
+        this.personRepresentative = personRepresentative;
+    }
+    
+    public Suppliers(String supplierId, String companyName, String address, String phone, String homePage, String personRepresentative) {
+        this.supplierId = supplierId;
+        this.companyName = companyName;
+        this.address = address;
+        this.phone = phone;
+        this.homePage = homePage;
+        this.personRepresentative = personRepresentative;
+    }
+
+    public String getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(String supplierId) {
+        this.supplierId = supplierId;
     }
 
     public String getCompanyName() {
@@ -31,6 +53,22 @@ public class Suppliers extends Person{
         this.companyName = companyName;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getHomePage() {
         return homePage;
     }
@@ -39,5 +77,12 @@ public class Suppliers extends Person{
         this.homePage = homePage;
     }
 
-   
+    public String getPersonRepresentative() {
+        return personRepresentative;
+    }
+
+    public void setPersonRepresentative(String personRepresentative) {
+        this.personRepresentative = personRepresentative;
+    }
+    
    }

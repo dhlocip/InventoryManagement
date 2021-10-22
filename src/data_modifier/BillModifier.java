@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -88,6 +89,44 @@ public class BillModifier extends JDBCConnect {
         }
         return oList;
     }
+    
+    // ---------------
+    
+    //  get list billId
+    public ObservableList<String> getListBillId(String userId) throws SQLException{
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select * from bills "
+                + "where userId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userId);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while(result.next()){
+            oList.add(result.getString("billId"));
+        }
+        return oList;
+    }
+    
+    //    delete bill detail by billId
+    public boolean deleteBillDetail(String billId) throws SQLException{
+        String sql = "delete from billDetail "
+                + "where billId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, billId);
+        preS.execute();
+        return true;
+    }
+    
+    //    delete bill by userId
+    public boolean deleteBill(String userId) throws SQLException{
+        String sql = "delete from bills "
+                + "where userId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userId);
+        preS.execute();
+        return true;
+    }
+    
     
 }
 

@@ -133,7 +133,7 @@ public class UserModifier extends JDBCConnect {
         preS.setString(7, user.getShiff());
         preS.setString(8, user.getEmail());
         preS.setString(9, user.getPersonId());
-        preS.execute();
+        preS.executeUpdate();
         return true;
     }
 
@@ -155,6 +155,16 @@ public class UserModifier extends JDBCConnect {
         preS.setString(9, user.getPassword());
         preS.setString(10, user.getPosition());
         preS.setString(11, user.getEmail());
+        preS.execute();
+        return true;
+    }
+    
+//    delete user
+    public boolean deleteUser(String userId) throws SQLException{
+        String sql = "delete from users "
+                + "where userId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userId);
         preS.execute();
         return true;
     }

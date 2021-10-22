@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 /**
@@ -33,5 +34,41 @@ public class RequestModifier extends JDBCConnect {
         return oList;
     }
     
+    // ---------------
+    
+    //  get list request
+    public ObservableList<String> getListRequestId(String userId) throws SQLException{
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select * from requests "
+                + "where userId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userId);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while(result.next()){
+            oList.add(result.getString("requestId"));
+        }
+        return oList;
+    }
+    
+    //    delete request detail by requestId
+    public boolean deleteRequestDetail(String requestId) throws SQLException{
+        String sql = "delete from requestDetail "
+                + "where requestId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, requestId);
+        preS.execute();
+        return true;
+    }
+    
+    //    delete requests by userId
+    public boolean deleteRequest(String userId) throws SQLException{
+        String sql = "delete from requests "
+                + "where userId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userId);
+        preS.execute();
+        return true;
+    }
     
 }

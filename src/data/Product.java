@@ -10,12 +10,13 @@ package data;
  * @author ADMIN
  */
 public class Product {
+
     private String productId;
     private String productName;
     private String categoryId;
     private float price;
 
-      public Product(String productId, String productName, String categoryId, float price) {
+    public Product(String productId, String productName, String categoryId, float price) {
         this.productId = productId;
         this.productName = productName;
         this.categoryId = categoryId;
@@ -24,7 +25,7 @@ public class Product {
 
     public Product() {
     }
-    
+
     public String getProductId() {
         return productId;
     }
@@ -57,5 +58,4 @@ public class Product {
         this.price = price;
     }
 
-  
 }
