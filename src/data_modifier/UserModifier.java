@@ -169,8 +169,4 @@ public class UserModifier extends JDBCConnect {
         return true;
     }
 
-//    public static void main(String[] args) throws SQLException {
-//        boolean user = new UserModifier().userNameIsExists("sale04");
-//        System.out.println(user);
-//    }
 }

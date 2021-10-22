@@ -53,13 +53,4 @@ public class SendEmail {
         return true;
     }
 
-    public static void main(String[] args) {
-//        if(new SendEmail().send("Your token", "your token: " + "123324", "dhlocip@gmail.com")){
-//            System.out.println("ok");
-//        }
-
-//        int randomNum = (int) (Math.random() * 999999);  // 0 to 100
-//        System.out.printf("%06d",randomNum);
-
-    }
 }
