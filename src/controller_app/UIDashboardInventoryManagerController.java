@@ -84,6 +84,11 @@ public class UIDashboardInventoryManagerController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view_admin/" + value + ".fxml"));
         homePane.setCenter(root);
     }
+    
+    private void setCenterBoxFromViewSaleManager(String value) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view_sale_manager/" + value + ".fxml"));
+        homePane.setCenter(root);
+    }
 
     @FXML
     private void supMenuClicked(MouseEvent event) {
@@ -120,6 +125,7 @@ public class UIDashboardInventoryManagerController implements Initializable {
         setCenterBox("DeleteProduct");
 
     }
+    
 
     @FXML
     private void viewImportClicked(MouseEvent event) throws IOException {
@@ -183,5 +189,17 @@ public class UIDashboardInventoryManagerController implements Initializable {
         stage.setTitle("Sign In");
         stage.show();
     }
+
+    @FXML
+    private void viewRequestClicked(MouseEvent event) throws IOException {
+        setCenterBoxFromViewSaleManager("Request");
+    }
+
+    @FXML
+    private void viewNewRequestClicked(MouseEvent event) throws IOException {
+        setCenterBoxFromViewSaleManager("NewRequest");
+    }
+
+    
 
 }

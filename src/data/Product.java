@@ -14,9 +14,9 @@ public class Product {
     private String productId;
     private String productName;
     private String categoryId;
-    private float price;
+    private double price;
 
-    public Product(String productId, String productName, String categoryId, float price) {
+    public Product(String productId, String productName, String categoryId, double price) {
         this.productId = productId;
         this.productName = productName;
         this.categoryId = categoryId;
@@ -50,11 +50,11 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

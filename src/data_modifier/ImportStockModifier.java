@@ -33,11 +33,12 @@ public class ImportStockModifier extends JDBCConnect {
     }
 
     //    delete import Stock detail by importStockId
-    public boolean deleteImportStockDetail(String importStockId) throws SQLException {
+    public boolean deleteImportStockDetail(String importStockIdOrProductId) throws SQLException {
         String sql = "delete from importStockDetail "
-                + "where importStockId =?";
+                + "where importStockId =? or productId = ?";
         PreparedStatement preS = connect().prepareStatement(sql);
-        preS.setString(1, importStockId);
+        preS.setString(1, importStockIdOrProductId);
+        preS.setString(2, importStockIdOrProductId);
         preS.execute();
         return true;
     }

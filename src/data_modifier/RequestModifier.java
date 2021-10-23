@@ -52,11 +52,12 @@ public class RequestModifier extends JDBCConnect {
     }
     
     //    delete request detail by requestId
-    public boolean deleteRequestDetail(String requestId) throws SQLException{
+    public boolean deleteRequestDetail(String requestIdOrProductId) throws SQLException{
         String sql = "delete from requestDetail "
-                + "where requestId =?";
+                + "where requestId =? or productId =?";
         PreparedStatement preS = connect().prepareStatement(sql);
-        preS.setString(1, requestId);
+        preS.setString(1, requestIdOrProductId);
+        preS.setString(2, requestIdOrProductId);
         preS.execute();
         return true;
     }

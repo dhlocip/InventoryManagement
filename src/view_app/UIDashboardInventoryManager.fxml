@@ -166,6 +166,69 @@
                         </HBox>
                      </children>
                   </VBox>
+                  <Line endX="104.29289245605469" startX="-100.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Request">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#viewRequestClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/folder-documents-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="View request info">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#viewNewRequestClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/folder-documents-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="View new request info">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
                   <Line endX="100.0" startX="-100.0">
                      <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
@@ -196,7 +259,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="View import info">
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="View import stock">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
