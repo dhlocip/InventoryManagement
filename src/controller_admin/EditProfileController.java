@@ -225,6 +225,7 @@ public class EditProfileController implements Initializable {
             alert.setContentText("Personal info is update successfully.");
             alert.showAndWait();
             getPersonalInfo();
+
         }
 
     }

@@ -57,11 +57,11 @@ public class UIDashboardInventoryManagerController implements Initializable {
     
     public void setValueForVariableStatic(String userId, String fullName, String position){
         gUserId = userId;
-        userIdLabel.setText(userId);
+        userIdLabel.setText(gUserId);
         gFullName = fullName;
-        fullNameLabel.setText(fullName);
+        fullNameLabel.setText(gFullName);
         gPosition = position;
-        positionLabel.setText(position);
+        positionLabel.setText(gPosition);
         
     }
 
