@@ -34,4 +34,14 @@ public class NewRequestModilfier extends JDBCConnect {
         }
         return oList;
 }
+    
+    public boolean getNewRequestUpdate(String newStatusVerify, String newProductName) throws SQLException{
+    String sql = "Update NewRequests set statusVerify = ? where productName = ? "; //viewsql
+    PreparedStatement preStatement= connect().prepareStatement(sql);
+    preStatement.setString(1, newStatusVerify);
+    preStatement.setString(2, newProductName);
+    preStatement.execute();
+    
+        return true;
+    }
 }

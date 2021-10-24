@@ -30,10 +30,8 @@ public class VRequest {
         this.quantity = quantity;
     }
 
-    public VRequest(String string, String string0, String string1, String string2, String string3, String string4, String string5, String string6, String string7) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
+    
     public String getRequestId() {
         return requestId;
     }
@@ -81,7 +79,7 @@ public class VRequest {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
+
     
     
 }
