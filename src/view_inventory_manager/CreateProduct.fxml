@@ -19,11 +19,8 @@
          <children>
             <VBox prefWidth="300.0">
                <children>
-                  <Label prefHeight="30.0" text="Product ID:" />
-                  <TextField fx:id="productTF" prefHeight="30.0" />
-                  <Label fx:id="errorProductId" style="-fx-text-fill: red;" text="Label" />
                   <Label prefHeight="30.0" text="Product Name:" />
-                  <TextField fx:id="productNameTF" prefHeight="30.0" />
+                  <TextField fx:id="productNameTF" onKeyReleased="#productNameReleased" prefHeight="30.0" />
                   <Label fx:id="errorProductName" style="-fx-text-fill: red;" text="Label" />
                   <Label prefHeight="30.0" text="Category ID:" />
                   <ComboBox fx:id="categoryIdComboBox" prefHeight="30.0" />
@@ -36,7 +33,7 @@
             <VBox prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="Price:" />
-                  <TextField fx:id="priceTF" prefHeight="30.0" />
+                  <TextField fx:id="priceTF" onKeyReleased="#priceReleased" prefHeight="30.0" />
                   <Label fx:id="errorPrice" style="-fx-text-fill: red;" text="Label" />
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0">
                      <children>
@@ -85,7 +82,7 @@
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <center>
-      <TableView fx:id="productTableView" onMouseClicked="#productTableClicked" prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+      <TableView fx:id="productTableView" prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
          <columns>
             <TableColumn fx:id="categoryIdCol" prefWidth="75.0" text="CategoryID" />
             <TableColumn fx:id="productIdCol" prefWidth="75.0" text="ProductID" />

@@ -10,6 +10,7 @@ import controller_app.UIDashboardSaleManagerController;
 import data.User;
 import data_modifier.BillModifier;
 import data_modifier.EventModifier;
+import data_modifier.ImportStockDetailModifier;
 import data_modifier.ImportStockModifier;
 import data_modifier.NewRequestModilfier;
 import data_modifier.RequestModifier;
@@ -179,7 +180,7 @@ public class DeleteUserController implements Initializable {
                 if (result.isPresent() && result.get() == ButtonType.OK) {
 
                     for (String listId : listImportStockId) {
-                        new ImportStockModifier().deleteImportStockDetail(listId);
+                        new ImportStockDetailModifier().deleteImportStockDetail(listId);
                     }
 
                     if (new ImportStockModifier().deleteImportStock(lUserId)) {

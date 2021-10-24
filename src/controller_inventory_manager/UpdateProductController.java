@@ -127,7 +127,7 @@ public class UpdateProductController implements Initializable {
         productTableView.setItems(oList);
     }
 
-//    set categoryId
+//  set categoryId
     private void setCategoryId() throws SQLException {
         ObservableList<String> oList = new CategoryModifier().getListCategoryId();
         categoryIdComboBox.setItems(oList);
@@ -196,7 +196,7 @@ public class UpdateProductController implements Initializable {
             hideErrorOfProductName(false);
         } else {
             hideErrorOfProductName(true);
-            errorProductName.setText(productNameTF.getText() + " is invalid.");
+            errorProductName.setText("\'" + productNameTF.getText() + "\' is invalid.");
         }
     }
 
@@ -207,7 +207,7 @@ public class UpdateProductController implements Initializable {
 
     private boolean isPriceRight() {
         String tmp = priceTF.getText();
-        return tmp.matches("^[\\d]+");
+        return tmp.matches("^[\\d]+[.]?[\\d]+");
     }
 
     private void checkPrice() {
@@ -215,7 +215,7 @@ public class UpdateProductController implements Initializable {
             hideErrorOfPrice(false);
         } else {
             hideErrorOfPrice(true);
-            errorPrice.setText(priceTF.getText() + " is invalid.");
+            errorPrice.setText("\'" + priceTF.getText() + "\' is invalid.");
         }
     }
 

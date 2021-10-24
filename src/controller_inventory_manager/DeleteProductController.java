@@ -7,6 +7,7 @@ package controller_inventory_manager;
 import data.Product;
 import data_modifier.BillModifier;
 import data_modifier.EventModifier;
+import data_modifier.ImportStockDetailModifier;
 import data_modifier.ImportStockModifier;
 import data_modifier.ProductModifier;
 import data_modifier.RequestModifier;
@@ -108,7 +109,7 @@ public class DeleteProductController implements Initializable {
             alert.setContentText("Are you sure?\nClick OK to delete the line.");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                if (new ImportStockModifier().deleteImportStockDetail(item.getProductId())
+                if (new ImportStockDetailModifier().deleteImportStockDetail(item.getProductId())
                         && new EventModifier().deleteEventDetail(item.getProductId())
                         && new BillModifier().deleteBillDetail(item.getProductId())
                         && new RequestModifier().deleteRequestDetail(item.getProductId())) {

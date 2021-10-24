@@ -4,10 +4,9 @@
  */
 package data_modifier;
 
+import data.ImportStock;
 import static data_modifier.JDBCConnect.connect;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -17,7 +16,7 @@ import javafx.collections.ObservableList;
  */
 public class ImportStockModifier extends JDBCConnect {
 
-    //  get list importStockId
+    //  get list importStockId from importStocks
     public ObservableList<String> getListImportStockId(String userId) throws SQLException {
         ObservableList<String> oList = FXCollections.observableArrayList();
         String sql = "select * from ImportStocks "
@@ -31,25 +30,43 @@ public class ImportStockModifier extends JDBCConnect {
         }
         return oList;
     }
-
-    //    delete import Stock detail by importStockId
-    public boolean deleteImportStockDetail(String importStockIdOrProductId) throws SQLException {
-        String sql = "delete from importStockDetail "
-                + "where importStockId =? or productId = ?";
+    
+    // create ImportStocks
+    public boolean createImportStock(ImportStock importStock) throws SQLException{
+        String sql = "insert into importStocks (userId, supplierId, importDate) "
+                + "values (?,?,?)";
         PreparedStatement preS = connect().prepareStatement(sql);
-        preS.setString(1, importStockIdOrProductId);
-        preS.setString(2, importStockIdOrProductId);
+        preS.setString(1, importStock.getUserId());
+        preS.setString(2, importStock.getSupplierId());
+        preS.setString(3, importStock.getImportDate());
+        preS.execute();
+        return true;
+    }
+    
+    // update ImportStocks
+    public boolean updateImportStock(ImportStock importStock) throws SQLException{
+        String sql = "update importStocks "
+                + "set supplierId = ?, importDate =? "
+                + "where importStockId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, importStock.getSupplierId());
+        preS.setString(2, importStock.getImportDate());
+        preS.setString(3, importStock.getImportStockId());
         preS.execute();
         return true;
     }
 
-    //    delete importStocks by userId
-    public boolean deleteImportStock(String userId) throws SQLException {
+    //    delete importStocks by userId or importStockId
+    public boolean deleteImportStock(String userIdOrImportStockId) throws SQLException {
         String sql = "delete from importStocks "
-                + "where userId =?";
+                + "where userId =? or importStockId =?";
         PreparedStatement preS = connect().prepareStatement(sql);
-        preS.setString(1, userId);
+        preS.setString(1, userIdOrImportStockId);
+        preS.setString(2, userIdOrImportStockId);
         preS.execute();
         return true;
     }
+    
+    
+    
 }
