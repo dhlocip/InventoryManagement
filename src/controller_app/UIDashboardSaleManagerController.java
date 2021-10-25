@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -42,6 +43,10 @@ public class UIDashboardSaleManagerController implements Initializable {
     private Label positionLabel;
     @FXML
     private Label fullNameLabel;
+    @FXML
+    private Label RequestNumber;
+    @FXML
+    private Label newRequestNumber;
 
     /**
      * Initializes the controller class.
@@ -52,6 +57,7 @@ public class UIDashboardSaleManagerController implements Initializable {
         hideSupMenu(false);
 
     }
+    
 
     public void setValueForVariableStatic(String userId, String fullName, String position) {
         gUserId = userId;

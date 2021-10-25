@@ -5,16 +5,13 @@
 package controller_sale_manager;
 
 import data.VNewRequest;
-import data.VRequest;
 import data_modifier.NewRequestModilfier;
-import data_modifier.RequestModifier;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,7 +30,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class NewRequestController implements Initializable {
 
-    String newProductId, newProductName, newStatusVerify;
+    String userID, newStatusVerify;
 
     @FXML
     private TableView<VNewRequest> newRequestTable;
@@ -82,7 +79,7 @@ public class NewRequestController implements Initializable {
     private void getNewRequest(MouseEvent event) throws SQLException {
 
         VNewRequest item = newRequestTable.getSelectionModel().getSelectedItem();
-        newProductName = item.getNewProductName();
+        userID = item.getUserId();
         if (item != null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Notification");
@@ -96,14 +93,20 @@ public class NewRequestController implements Initializable {
 
             if (result.get() == buttonTypeYes) {
                 newStatusVerify = "YES";
-                new NewRequestModilfier().getNewRequestUpdate(newStatusVerify, newProductName);
+                new NewRequestModilfier().getNewRequestUpdate(newStatusVerify, userID);
                 getShow();
 
             } else if (result.get() == buttonTypeNo) {
                 newStatusVerify = "NO";
-                new NewRequestModilfier().getNewRequestUpdate(newStatusVerify, newProductName);
+                new NewRequestModilfier().getNewRequestUpdate(newStatusVerify, userID);
                 getShow();
             }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please select the event to update");
+            alert.showAndWait();
 
         }
     }

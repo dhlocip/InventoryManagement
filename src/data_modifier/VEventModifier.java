@@ -120,6 +120,27 @@ public class VEventModifier extends JDBCConnect {
         return oList;
     }
     
+     public ObservableList<String> getProductIdEvent() throws SQLException {
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select productId from Products EXCEPT select productId from EventDetail;";
+        PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(result.getString("productId"));
+        }
+        return oList;
+    }
+    
+    
+    
+    
+//    SELECT sanpham_id
+//FROM sanpham
+//EXCEPT 
+//SELECT sanpham_id
+//FROM hangtonkho;
+//    
     
     
     public ObservableList<VEvent> getInfoByEventId(String eventId) throws SQLException {
@@ -167,14 +188,14 @@ public class VEventModifier extends JDBCConnect {
         
         
         public boolean getUpdateEventDetail(EventDetail eventDetail) throws SQLException {
-        String sql = "update eventDetail set productId= ?, discount = ?, mfgDate =?, expDate =?   where eventId = ? ";
+        String sql = "update eventDetail set eventId= ?, discount = ?, mfgDate =?, expDate =?   where productId = ? ";
         PreparedStatement preStatement = connect().prepareStatement(sql);
 
-        preStatement.setString(1, eventDetail.getProductId());
+        preStatement.setString(1, eventDetail.getEventIdDetail());
         preStatement.setString(2, eventDetail.getDiscount());
         preStatement.setString(3, eventDetail.getMfgDate());
         preStatement.setString(4, eventDetail.getExpDate());
-        preStatement.setString(5, eventDetail.getEventIdDetail());
+        preStatement.setString(5, eventDetail.getProductId());
         preStatement.executeUpdate();
         return true;
     }
@@ -190,6 +211,20 @@ public class VEventModifier extends JDBCConnect {
         preStatement.executeUpdate();
         return true;
     }
+        
+        public ObservableList<String> getListEventsName() throws SQLException{
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select eventName from Events";
+        PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(result.getString("eventName"));
+        }
+        return oList;
+        
+        
+        }
     
 }
 

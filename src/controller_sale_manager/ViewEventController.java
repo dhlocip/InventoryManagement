@@ -4,24 +4,17 @@
  */
 package controller_sale_manager;
 
-import controller_app.UIDashboardAdminController;
-import controller_app.UIDashboardSaleManagerController;
-import data.Events;
-import data.User;
 import data.VEvent;
-import data_modifier.UserModifier;
 import data_modifier.VEventModifier;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -118,12 +111,7 @@ public class ViewEventController implements Initializable {
     private void getFind(MouseEvent event) throws SQLException {
         getEventByEventId(eventIdCombobox.getValue());
         
-//lUserId = UIDashboardSaleManagerController.gUserId;
-//            User user = new User();
-//            user = new UserModifier().getUser(lUserId);
-//            userIdTF = user.getPersonId();
-//            
-//            System.out.println(userIdTF);
+
     }
 
 

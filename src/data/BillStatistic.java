@@ -21,13 +21,11 @@ public class BillStatistic {
     private String statusCancel;
     private String paymentName;
     private float total;
-    private float revenue;
-    private float totalCancel;
 
     public BillStatistic() {
     }
 
-    public BillStatistic(String productId, String billId, int quantity, float price, String mfgDate, String expDate, String userId, String transactionDate, String statusCancel, String paymentName, float total, float revenue, float totalCancel) {
+    public BillStatistic(String productId, String billId, int quantity, float price, String mfgDate, String expDate, String userId, String transactionDate, String statusCancel, String paymentName, float total) {
         this.productId = productId;
         this.billId = billId;
         this.quantity = quantity;
@@ -39,11 +37,7 @@ public class BillStatistic {
         this.statusCancel = statusCancel;
         this.paymentName = paymentName;
         this.total = total;
-        this.revenue = revenue;
-        this.totalCancel = totalCancel;
     }
-
-   
 
     public String getProductId() {
         return productId;
@@ -132,24 +126,5 @@ public class BillStatistic {
     public void setTotal(float total) {
         this.total = total;
     }
-
-    public float getRevenue() {
-        return revenue;
-    }
-
-    public void setRevenue(float revenue) {
-        this.revenue = revenue;
-    }
-
-    public float getTotalCancel() {
-        return totalCancel;
-    }
-
-    public void setTotalCancel(float totalCancel) {
-        this.totalCancel = totalCancel;
-    }
-
-    
    
-
 }

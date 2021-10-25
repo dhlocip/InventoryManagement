@@ -29,9 +29,9 @@ import javafx.scene.input.MouseEvent;
  * @author sa
  */
 public class RequestController implements Initializable {
-     
-    String newProductId, newProductName , newStatusVerify;
-    
+
+    String userID,  newStatusVerify;
+
     @FXML
     private TableView<VRequest> RequestTable;
 
@@ -71,14 +71,14 @@ public class RequestController implements Initializable {
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
         statusVerify.setCellValueFactory(new PropertyValueFactory<>("statusVerify"));
         RequestTable.setItems(oList);
- }
+    }
 
     @FXML
     private void getRequest(MouseEvent event) throws SQLException {
-        
-         VRequest item = RequestTable.getSelectionModel().getSelectedItem();
-         newProductId = item.getProductId();
-        if (item != null ) {
+
+        VRequest item = RequestTable.getSelectionModel().getSelectedItem();
+        userID = item.getUserId();
+        if (item != null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Notification");
             alert.setHeaderText("Confirm");
@@ -86,22 +86,26 @@ public class RequestController implements Initializable {
             ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
             ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
             ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo,buttonTypeCancel);
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo, buttonTypeCancel);
             Optional<ButtonType> result = alert.showAndWait();
-            
-            if(result.get()== buttonTypeYes){
+
+            if (result.get() == buttonTypeYes) {
                 newStatusVerify = "YES";
-                new RequestModifier().getRequestUpdate(newStatusVerify, newProductId);
+                new RequestModifier().getRequestUpdate(newStatusVerify, userID);
                 getShow();
-                
-            } else if(result.get()== buttonTypeNo){
+
+            } else if (result.get() == buttonTypeNo) {
                 newStatusVerify = "NO";
-                new RequestModifier().getRequestUpdate(newStatusVerify, newProductId);
+                new RequestModifier().getRequestUpdate(newStatusVerify, userID);
                 getShow();
             }
-            
 
-           
+        } else {
+        
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please select the event to update");
+            alert.showAndWait();
 
         }
 

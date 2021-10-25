@@ -62,8 +62,7 @@ public class UpdateEventController implements Initializable {
     private TextField txtDiscount;
     @FXML
     private HBox updateEventDetail;
-    @FXML
-    private HBox upDateEventDetail;
+
     @FXML
     private DatePicker txtMfgDate;
     @FXML
@@ -88,6 +87,8 @@ public class UpdateEventController implements Initializable {
     private TableColumn<EventDetail, String> mfgDate;
     @FXML
     private TableColumn<EventDetail, String> expDate;
+    @FXML
+    private HBox upDateEventDetail;
 
     /**
      * Initializes the controller class.
@@ -98,7 +99,7 @@ public class UpdateEventController implements Initializable {
             getShowEvent();
             getShowEventDetail();
             setValueEventIdComboBox();
-            setValueProductIdComboBox();
+            
         } catch (SQLException ex) {
             Logger.getLogger(UpdateEventController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -126,7 +127,8 @@ public class UpdateEventController implements Initializable {
     }
 
     private void setValueProductIdComboBox() throws SQLException {
-        ObservableList<String> oList = new VEventModifier().getListProductId();
+        ObservableList<String> oList = new VEventModifier().getListEventId();
+
         productIdCombobox.setItems(oList);
         productIdCombobox.setValue(oList.get(0));
 
@@ -155,11 +157,11 @@ public class UpdateEventController implements Initializable {
     @FXML
     private void updateEventClick(MouseEvent event) throws SQLException {
         Events item = updateEventTable.getSelectionModel().getSelectedItem();
-        if (item != null || txtEventName.getText().isEmpty()
+        if (item == null || txtEventName.getText().isEmpty()
                 || (txtEndDate.getValue() == null) || (txtStartDate.getValue() == null)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Please Fill All Data");
+            alert.setContentText("Please select the event to update");
             alert.showAndWait();
 
         } else {
@@ -185,8 +187,7 @@ public class UpdateEventController implements Initializable {
 
             }
 
-       
- }
+        }
 
         getShowEvent();
         setValueEventIdComboBox();
@@ -196,23 +197,22 @@ public class UpdateEventController implements Initializable {
     @FXML
     private void updateEventDetailClick(MouseEvent event) throws SQLException {
         EventDetail item = updateEventDetailTable.getSelectionModel().getSelectedItem();
-        if (item == null || txtDiscount.getText().isEmpty()
-                || (txtMfgDate.getValue() == null) || (txtExpDate.getValue() == null)) {
+        if ( item == null || txtDiscount.getText().isEmpty()|| (txtMfgDate.getValue() == null) || (txtExpDate.getValue() == null)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Please Fill All Data");
+            alert.setContentText("Please select the eventDetail to update");
             alert.showAndWait();
 
         } else {
 
             updateDiscount = txtDiscount.getText();
             EventDetail eventDetail = new EventDetail();
-            eventDetail.setProductId(proID);
+            eventDetail.setProductId(item.getProductId());
             eventDetail.setDiscount(updateDiscount);
             eventDetail.setMfgDate(updateMfgDate);
             eventDetail.setExpDate(updateExpDate);
-            eventDetail.setEventIdDetail(item.getEventIdDetail());
-
+            eventDetail.setEventIdDetail(evtID);
+           
             if (new VEventModifier().getUpdateEventDetail(eventDetail)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Notification");
@@ -240,7 +240,7 @@ public class UpdateEventController implements Initializable {
 
             LocalDate end = LocalDate.parse(item.getEndDate());
             txtEndDate.setValue(end);
-//            productICombobox.setValue(item.getProductId());
+
         }
 
     }
