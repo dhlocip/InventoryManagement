@@ -6,8 +6,7 @@ package data_modifier;
 
 import data.ImportStockDetail;
 import static data_modifier.JDBCConnect.connect;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  *
@@ -20,13 +19,45 @@ public class ImportStockDetailModifier extends JDBCConnect {
         String sql = "insert into importStockDetail (importStockId, productId, quantity, price, mfgDate, expDate) "
                 + "values (?,?,?,?,?,?)";
         PreparedStatement preS = connect().prepareStatement(sql);
-//        preS.setString(1, importStock.getUserId());
-//        preS.setString(2, importStock.getSupplierId());
-//        preS.setString(3, importStock.getImportDate());
+        preS.setString(1, importStockDetail.getImportStockId());
+        preS.setString(2, importStockDetail.getProductId());
+        preS.setInt(3, importStockDetail.getQuantity());
+        preS.setDouble(4, importStockDetail.getPrice());
+        preS.setString(5, importStockDetail.getMfgDate());
+        preS.setString(6, importStockDetail.getExpDate());
         preS.execute();
         return true;
     }
     // update ImportStockDetail
+    public boolean updateImportStock(ImportStockDetail importStockDetail) throws SQLException{
+        String sql = "update importStockDetail "
+                + "set quantity =?, price =?, mfgDate =?, expDate =? "
+                + "where importStockId =? and productId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setInt(1, importStockDetail.getQuantity());
+        preS.setDouble(2, importStockDetail.getPrice());
+        preS.setString(3, importStockDetail.getMfgDate());
+        preS.setString(4, importStockDetail.getExpDate());
+        preS.setString(5, importStockDetail.getImportStockId());
+        preS.setString(6, importStockDetail.getProductId());
+        preS.executeUpdate();
+        return true;
+    }
+    
+    // check productId is exists
+    public boolean productIdIsExists(String productId, String importStockId) throws SQLException{
+        String sql = "select * from importStockDetail "
+                + "where productId =? and importStockId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, productId);
+        preS.setString(2, importStockId);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while(result.next()){
+            return true;
+        }
+        return false;
+    }
     
     //    delete import Stock detail by importStockId or productId
     public boolean deleteImportStockDetail(String importStockIdOrProductId) throws SQLException {
@@ -39,4 +70,9 @@ public class ImportStockDetailModifier extends JDBCConnect {
         return true;
     }
     
+//    public static void main(String[] args) throws SQLException {
+//        ImportStockDetail imp = new ImportStockDetail("i0009", "p0004", 201, 100000, "01/01/2021", "01/01/2023");
+//        new ImportStockDetailModifier().updateImportStock(imp);
+//        
+//    }
 }

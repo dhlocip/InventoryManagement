@@ -10,14 +10,33 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_inventory_manager.DeleteImportController">
+<BorderPane stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_inventory_manager.CreateImportController">
+   <center>
+      <TableView fx:id="categoryTableView" prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+        <columns>
+            <TableColumn fx:id="categoryIdCol" prefWidth="75.0" text="CategoryId" />
+          <TableColumn fx:id="categoryNameCol" prefWidth="75.0" text="CategoryName" />
+          <TableColumn fx:id="descriptionCol" prefWidth="75.0" text="Description" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </center>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" />
+   </padding>
+   <bottom>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
    <top>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="40.0" styleClass="search-text-field" stylesheets="@../css/app.css">
-               <HBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </HBox.margin>
                <children>
                   <TextField fx:id="searchTF" onKeyReleased="#searchReleased" prefHeight="40.0" prefWidth="318.0" promptText="Search here" style="-fx-background-color: grey;">
                      <HBox.margin>
@@ -37,28 +56,11 @@
                      </HBox.margin>
                   </Label>
                </children>
+               <HBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </HBox.margin>
             </HBox>
          </children>
       </HBox>
    </top>
-   <center>
-      <TableView fx:id="importTableView" onMouseClicked="#importTableClicked" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
-        <columns>
-            <TableColumn fx:id="importStockIdCol" prefWidth="75.0" text="ImportStockID" />
-          <TableColumn fx:id="supplierIdCol" prefWidth="75.0" text="SupplierID" />
-          <TableColumn fx:id="importDateCol" prefWidth="75.0" text="ImportDate" />
-            <TableColumn fx:id="productIdCol" prefWidth="75.0" text="ProductId" />
-            <TableColumn fx:id="quantityCol" prefWidth="75.0" text="Quantity" />
-            <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
-            <TableColumn fx:id="mfgDateCol" prefWidth="75.0" text="MfgDate" />
-            <TableColumn fx:id="expDateCol" prefWidth="75.0" text="ExpDate" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-   </center>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" />
-   </padding>
 </BorderPane>

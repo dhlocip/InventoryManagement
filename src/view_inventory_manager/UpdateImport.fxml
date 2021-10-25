@@ -42,9 +42,10 @@
             <VBox prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="Supplier ID:" />
-                  <ComboBox fx:id="supplierIdComboBox" prefHeight="30.0" promptText="S0001" />
+                  <ComboBox fx:id="supplierIdComboBox" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Import Date:" />
-                  <DatePicker fx:id="importDatePicker" prefHeight="30.0" prefWidth="235.0" />
+                  <DatePicker fx:id="importDatePicker" onAction="#importDateAction" prefHeight="30.0" prefWidth="235.0" />
+                  <Label fx:id="errorImportDate" style="-fx-text-fill: red;" text="Label" />
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0">
                      <children>
                         <HBox alignment="CENTER" onMouseClicked="#updateImportStockClicked" stylesheets="@../css/app.css">
@@ -82,7 +83,7 @@
             <VBox prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="Product ID:" />
-                  <ComboBox fx:id="productIdComboBox" prefHeight="30.0" promptText="P0001" />
+                  <ComboBox fx:id="productIdComboBox" disable="true" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Quantity:" />
                   <Spinner fx:id="quantitySpinner" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Price" />
@@ -96,9 +97,11 @@
             <VBox prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="MFG Date:" />
-                  <DatePicker fx:id="mfgDatePicker" prefHeight="30.0" prefWidth="235.0" />
+                  <DatePicker fx:id="mfgDatePicker" onAction="#mfgDateAction" prefHeight="30.0" prefWidth="235.0" />
+                  <Label fx:id="errorMfgDate" style="-fx-text-fill: red;" text="Label" />
                   <Label prefHeight="30.0" text="EXP Date:" />
-                  <DatePicker fx:id="expDatePicker" prefHeight="30.0" prefWidth="235.0" />
+                  <DatePicker fx:id="expDatePicker" onAction="#expDateAction" prefHeight="30.0" prefWidth="235.0" />
+                  <Label fx:id="errorExpDate" style="-fx-text-fill: red;" text="Label" />
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0">
                      <children>
                         <HBox alignment="CENTER" onMouseClicked="#updateImportStockDetailClicked" stylesheets="@../css/app.css">

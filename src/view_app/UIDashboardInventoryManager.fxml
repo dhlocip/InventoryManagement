@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane fx:id="homePane" prefHeight="871.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardInventoryManagerController">
+<BorderPane fx:id="homePane" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardInventoryManagerController">
 
    <left>
       <HBox BorderPane.alignment="CENTER">
@@ -66,7 +66,112 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox fx:id="categoryBox" alignment="CENTER_LEFT" onMouseClicked="#manageCategoryClicked">
+                     <children>
+                        <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage Categories">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox fx:id="childCategoryBox">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#viewCategoryClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/folder-documents-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="View category info">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#createCategoryClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-new-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Create category">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#updateCategoryClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/document-edit-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Update category">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#deleteCategoryClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="24.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/edit-clear-all-symbolic.symbolic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Delete category">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Line endX="100.0" startX="-100.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <HBox fx:id="productBox" alignment="CENTER_LEFT" onMouseClicked="#manageProductClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage products">
                            <HBox.margin>
@@ -78,7 +183,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childProductBox">
                      <children>
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#viewProductClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -171,7 +276,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox fx:id="requestBox" alignment="CENTER_LEFT" onMouseClicked="#requestClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Request">
                            <HBox.margin>
@@ -183,7 +288,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childRequestBox">
                      <children>
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#viewRequestClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -234,7 +339,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox fx:id="importBox" alignment="CENTER_LEFT" onMouseClicked="#manageStockClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage stocks">
                            <HBox.margin>
@@ -246,7 +351,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childImportBox">
                      <children>
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#viewImportClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -339,7 +444,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox fx:id="personalBox" alignment="CENTER_LEFT" onMouseClicked="#managePersonalClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage personal info">
                            <HBox.margin>
@@ -351,7 +456,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childPersonalBox">
                      <children>
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#editProfileClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -402,7 +507,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox fx:id="requestBox" alignment="CENTER_LEFT" onMouseClicked="#reportClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Report">
                            <HBox.margin>
@@ -414,7 +519,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childReportBox">
                      <children>
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#inventoryByDateClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -465,7 +570,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox fx:id="settingBox" alignment="CENTER_LEFT" onMouseClicked="#settingClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Setting">
                            <HBox.margin>
@@ -477,7 +582,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" onMouseClicked="#languageClicked" prefHeight="35.0" styleClass="app-hover" stylesheets="@../css/app.css">
+                  <HBox fx:id="childSettingBox" alignment="CENTER_LEFT" onMouseClicked="#languageClicked" prefHeight="35.0" styleClass="app-hover" stylesheets="@../css/app.css">
                      <children>
                         <Label prefHeight="24.0" prefWidth="24.0">
                            <graphic>

@@ -44,7 +44,7 @@
    <center>
       <TableView fx:id="importTableView" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
         <columns>
-            <TableColumn fx:id="importIdCol" prefWidth="75.0" text="ImportStockID" />
+            <TableColumn fx:id="importStockIdCol" prefWidth="75.0" text="ImportStockID" />
           <TableColumn fx:id="supplierIdCol" prefWidth="75.0" text="SupplierID" />
           <TableColumn fx:id="importDateCol" prefWidth="75.0" text="ImportDate" />
             <TableColumn fx:id="productIdCol" prefWidth="75.0" text="ProductId" />

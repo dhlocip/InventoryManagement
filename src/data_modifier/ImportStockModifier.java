@@ -47,11 +47,12 @@ public class ImportStockModifier extends JDBCConnect {
     public boolean updateImportStock(ImportStock importStock) throws SQLException{
         String sql = "update importStocks "
                 + "set supplierId = ?, importDate =? "
-                + "where importStockId =?";
+                + "where importStockId =? and productId =?";
         PreparedStatement preS = connect().prepareStatement(sql);
         preS.setString(1, importStock.getSupplierId());
         preS.setString(2, importStock.getImportDate());
         preS.setString(3, importStock.getImportStockId());
+        preS.setString(4, importStock.getUserId());
         preS.execute();
         return true;
     }
@@ -67,6 +68,22 @@ public class ImportStockModifier extends JDBCConnect {
         return true;
     }
     
+    // get max importStockId
+    public String getMaxImportStockId() throws SQLException{
+        String maxImportStockId = null;
+        String sql = "select max(importStockId) as maxImportStockId "
+                + "from ImportStocks";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while(result.next()){
+            maxImportStockId = result.getString("maxImportStockId");
+        }
+        return maxImportStockId;
+    }
     
-    
+//    public static void main(String[] args) throws SQLException {
+//         var a = new ImportStockModifier().getMaxImportStockId();
+//         System.out.println(a);
+//    }
 }
