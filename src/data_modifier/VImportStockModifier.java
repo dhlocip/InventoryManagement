@@ -25,8 +25,8 @@ public class VImportStockModifier extends JDBCConnect {
         ResultSet result = preS.getResultSet();
         while (result.next()) {
             oList.add(new VImportStock(result.getString("importStockId"), result.getString("supplierId"),
-                    result.getString("importDate"), result.getString("productId"), result.getString("quantity"),
-                    result.getString("price"), result.getString("mfgDate"), result.getString("expDate")));
+                    result.getString("importDate"), result.getString("productId"), result.getInt("quantity"),
+                    result.getDouble("price"), result.getString("mfgDate"), result.getString("expDate")));
         }
         return oList;
     }
@@ -37,15 +37,15 @@ public class VImportStockModifier extends JDBCConnect {
         String sql = "select * from VImportStock "
                 + "where importStockId like '%" + idOrDate + "%' or "
                 + "supplierId like '%" + idOrDate + "%' or "
-                + "format(importDate,'MM/dd/yyy') =?";
+                + "format(importDate,'MM/dd/yyyy') =?";
         PreparedStatement preS = connect().prepareStatement(sql);
         preS.setString(1, idOrDate);
         preS.execute();
         ResultSet result = preS.getResultSet();
         while (result.next()) {
             oList.add(new VImportStock(result.getString("importStockId"), result.getString("supplierId"),
-                    result.getString("importDate"), result.getString("productId"), result.getString("quantity"),
-                    result.getString("price"), result.getString("mfgDate"), result.getString("expDate")));
+                    result.getString("importDate"), result.getString("productId"), result.getInt("quantity"),
+                    result.getDouble("price"), result.getString("mfgDate"), result.getString("expDate")));
         }
         return oList;
     }

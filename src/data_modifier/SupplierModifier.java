@@ -47,25 +47,19 @@ public class SupplierModifier extends JDBCConnect {
         return oList;
     }
     
-    // get supplier info with supplierID
-    public Suppliers getSupplier(String supplierId) throws SQLException{
-        Suppliers supplier = new Suppliers();
-        String sql = "select * from suppliers where supplierId =?";
+    // get list supplierID
+    public ObservableList<String> getListSupplierId() throws SQLException{
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select * from suppliers";
         PreparedStatement preS = connect().prepareStatement(sql);
-        preS.setString(1, supplierId);
         preS.execute();
         ResultSet result = preS.getResultSet();
         while(result.next()){
-            supplier.setSupplierId(result.getString("supplierId"));
-            supplier.setCompanyName(result.getString("companyName"));
-            supplier.setAddress(result.getString("address"));
-            supplier.setPhone(result.getString("phone"));
-            supplier.setHomePage(result.getString("homePage"));
-            supplier.setPersonRepresentative(result.getString("personRepresentative"));
+            oList.add(result.getString("supplierId"));
         }
-        return supplier;
+        return oList;
     }
-    
+//    
     // create supplier
     public boolean createSupplier(Suppliers supplier) throws SQLException{
         String sql = "insert into suppliers "

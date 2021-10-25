@@ -9,16 +9,20 @@ package data;
  * @author sa
  */
 public class VImportStock {
+
     private String importStockId;
     private String supplierId;
     private String importDate;
     private String productId;
-    private String quantity;
-    private String price;
+    private int quantity;
+    private double price;
     private String mfgDate;
     private String expDate;
 
-    public VImportStock(String importStockId, String supplierId, String importDate, String productId, String quantity, String price, String mfgDate, String expDate) {
+    public VImportStock() {
+    }
+
+    public VImportStock(String importStockId, String supplierId, String importDate, String productId, int quantity, double price, String mfgDate, String expDate) {
         this.importStockId = importStockId;
         this.supplierId = supplierId;
         this.importDate = importDate;
@@ -27,9 +31,6 @@ public class VImportStock {
         this.price = price;
         this.mfgDate = mfgDate;
         this.expDate = expDate;
-    }
-
-    public VImportStock() {
     }
 
     public String getImportStockId() {
@@ -64,19 +65,19 @@ public class VImportStock {
         this.productId = productId;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -95,6 +96,5 @@ public class VImportStock {
     public void setExpDate(String expDate) {
         this.expDate = expDate;
     }
-    
-    
+
 }

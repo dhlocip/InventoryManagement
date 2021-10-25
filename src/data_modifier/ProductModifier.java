@@ -45,6 +45,19 @@ public class ProductModifier extends JDBCConnect {
         return oList;
     }
     
+    // get list product info
+    public ObservableList<String> getListProductId() throws SQLException{
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select * from products";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while(result.next()){
+            oList.add(result.getString("productId"));
+        }
+        return oList;
+    }
+    
 //    create product
     public boolean createProduct(Product product) throws SQLException{
         String sql = "insert into products (productName, categoryId, price) "
@@ -82,7 +95,7 @@ public class ProductModifier extends JDBCConnect {
     }
     
     
-    public static void main(String[] args) throws SQLException {
-        System.out.println(new ProductModifier().deleteProduct("p0001"));
-    }
+//    public static void main(String[] args) throws SQLException {
+//        System.out.println(new ProductModifier().deleteProduct("p0001"));
+//    }
 }
