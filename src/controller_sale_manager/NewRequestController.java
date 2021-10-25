@@ -30,7 +30,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class NewRequestController implements Initializable {
 
-    String userID, newStatusVerify;
+    String newRequestID, newStatusVerify;
 
     @FXML
     private TableView<VNewRequest> newRequestTable;
@@ -79,7 +79,7 @@ public class NewRequestController implements Initializable {
     private void getNewRequest(MouseEvent event) throws SQLException {
 
         VNewRequest item = newRequestTable.getSelectionModel().getSelectedItem();
-        userID = item.getUserId();
+            newRequestID = item.getNewRequestId();
         if (item != null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Notification");
@@ -93,12 +93,12 @@ public class NewRequestController implements Initializable {
 
             if (result.get() == buttonTypeYes) {
                 newStatusVerify = "YES";
-                new NewRequestModilfier().getNewRequestUpdate(newStatusVerify, userID);
+                new NewRequestModilfier().getNewRequestUpdate(newStatusVerify, newRequestID);
                 getShow();
 
             } else if (result.get() == buttonTypeNo) {
                 newStatusVerify = "NO";
-                new NewRequestModilfier().getNewRequestUpdate(newStatusVerify, userID);
+                new NewRequestModilfier().getNewRequestUpdate(newStatusVerify, newRequestID);
                 getShow();
             }
 

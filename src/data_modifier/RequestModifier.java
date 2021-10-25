@@ -32,12 +32,12 @@ public class RequestModifier extends JDBCConnect {
         return oList;
     }
     
-    public boolean getRequestUpdate(String newStatusVerify, String userID) throws SQLException{
-    String sql = "Update Requests set statusVerify = ? where userId = ? "; //viewsql
+    public boolean getRequestUpdate(String newStatusVerify, String requestID) throws SQLException{
+    String sql = "Update Requests set statusVerify = ? where requestId = ? "; //viewsql
     PreparedStatement preStatement= connect().prepareStatement(sql);
     
     preStatement.setString(1, newStatusVerify);
-    preStatement.setString(2, userID);
+    preStatement.setString(2, requestID);
     
     preStatement.executeUpdate();
         return true;

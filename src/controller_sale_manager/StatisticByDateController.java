@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -36,7 +37,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class StatisticByDateController implements Initializable {
 
     String startDate, endDate, userID;
-    
+
     @FXML
     private DatePicker txtStartDate;
     @FXML
@@ -67,7 +68,6 @@ public class StatisticByDateController implements Initializable {
     private Button searchDate;
     @FXML
     private LineChart<String, Number> dateLineChart;
-    
 
     /**
      * Initializes the controller class.
@@ -79,10 +79,10 @@ public class StatisticByDateController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(StatisticByDateController.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-    }    
-    
-        private void getShow() throws SQLException {
+
+    }
+
+    private void getShow() throws SQLException {
 
         ObservableList<BillStatistic> oList = new BillModifier().getInfoByDate();
         userId.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
@@ -93,13 +93,12 @@ public class StatisticByDateController implements Initializable {
         price.setCellValueFactory(new PropertyValueFactory<>("price")); //tenbiendata
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity")); //tenbiendata
         total.setCellValueFactory(new PropertyValueFactory<>("total")); //tenbiendata
-        
 
         BillDateTable.setItems(oList);
 
     }
-        
-        private void getShowDate(String startDate, String endDate) throws SQLException {
+
+    private void getShowDate(String startDate, String endDate) throws SQLException {
 
         ObservableList<BillStatistic> oList = new BillModifier().getBillDateInfo(startDate, endDate);
         userId.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
@@ -110,15 +109,13 @@ public class StatisticByDateController implements Initializable {
         price.setCellValueFactory(new PropertyValueFactory<>("price")); //tenbiendata
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity")); //tenbiendata
         total.setCellValueFactory(new PropertyValueFactory<>("total")); //tenbiendata
-        
 
         BillDateTable.setItems(oList);
 
     }
-       
-        
-        private void getLineChart(String startDate, String endDate) throws SQLException {
-            
+
+    private void getLineChart(String startDate, String endDate) throws SQLException {
+
         ObservableList<XYChart.Data<String, Number>> CharList = new BillModifier().getDateLineChart(startDate, endDate);
 
         XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
@@ -126,40 +123,46 @@ public class StatisticByDateController implements Initializable {
 
         dateLineChart.getData().clear();
         dateLineChart.getData().add(series);
-        
+
         dateLineChart.setTitle("Revenue");
         series.setName("Daily revenue trend chart.");
     }
 
-
     @FXML
     private void getStartDate(ActionEvent event) {
-        
+
         LocalDate start = txtStartDate.getValue();
         startDate = String.valueOf(start);
     }
 
     @FXML
     private void getEndDate(ActionEvent event) {
-        
+
         LocalDate end = txtEndDate.getValue();
         endDate = String.valueOf(end);
-        
+
     }
 
     @FXML
     private void searchDateAction(ActionEvent event) throws SQLException {
-        
-        ObservableList<String> oList =  new BillModifier().getNumberCancel(startDate,endDate);
-            numberBills.setText(oList.get(0));
-            ObservableList<String> oListTotal = new BillModifier().getTotalDate(startDate, endDate);
-            revenue.setText(oListTotal.get(0));
+
+        ObservableList<String> oList = new BillModifier().getNumberCancel(startDate, endDate);
+        numberBills.setText(oList.get(0));
+        ObservableList<String> oListTotal = new BillModifier().getTotalDate(startDate, endDate);
+        revenue.setText(oListTotal.get(0));
+        if (Integer.valueOf(numberBills.getText()) != 0) {
             getShowDate(startDate, endDate);
-            getLineChart(startDate,endDate);
-            
+            getLineChart(startDate, endDate);
+
+            System.out.println(numberBills.getText());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("No invoices are sold from " + startDate + " to " + endDate);
+            alert.showAndWait();
+
+        }
+
     }
-    
-    
-    
-    
+
 }

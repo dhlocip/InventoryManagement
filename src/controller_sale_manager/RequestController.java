@@ -4,7 +4,6 @@
  */
 package controller_sale_manager;
 
-import controller_app.UIDashboardSaleManagerController;
 import data.VRequest;
 import data_modifier.RequestModifier;
 import java.net.URL;
@@ -31,7 +30,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class RequestController implements Initializable {
 
-    String userID,  newStatusVerify, numberRequest;
+    String requestID,  newStatusVerify, numberRequest;
 
     @FXML
     private TableView<VRequest> RequestTable;
@@ -78,7 +77,7 @@ public class RequestController implements Initializable {
     private void getRequest(MouseEvent event) throws SQLException {
 
         VRequest item = RequestTable.getSelectionModel().getSelectedItem();
-        userID = item.getUserId();
+        requestID = item.getRequestId();
         if (item != null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Notification");
@@ -92,12 +91,12 @@ public class RequestController implements Initializable {
 
             if (result.get() == buttonTypeYes) {
                 newStatusVerify = "YES";
-                new RequestModifier().getRequestUpdate(newStatusVerify, userID);
+                new RequestModifier().getRequestUpdate(newStatusVerify, requestID);
                 getShow();
                             
             } else if (result.get() == buttonTypeNo) {
                 newStatusVerify = "NO";
-                new RequestModifier().getRequestUpdate(newStatusVerify, userID);
+                new RequestModifier().getRequestUpdate(newStatusVerify, requestID);
                 getShow();
             }
 

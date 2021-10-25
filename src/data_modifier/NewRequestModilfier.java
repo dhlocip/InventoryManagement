@@ -33,11 +33,11 @@ public class NewRequestModilfier extends JDBCConnect {
         return oList;
 }
     
-    public boolean getNewRequestUpdate(String newStatusVerify, String userID) throws SQLException{
-    String sql = "Update NewRequests set statusVerify = ? where userId = ? "; //viewsql
+    public boolean getNewRequestUpdate(String newStatusVerify, String newRequestID) throws SQLException{
+    String sql = "Update NewRequests set statusVerify = ? where newRequestId = ? "; //viewsql
     PreparedStatement preStatement= connect().prepareStatement(sql);
     preStatement.setString(1, newStatusVerify);
-    preStatement.setString(2, userID);
+    preStatement.setString(2, newRequestID);
     preStatement.executeUpdate();
     
         return true;
