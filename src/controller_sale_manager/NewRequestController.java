@@ -105,7 +105,7 @@ public class NewRequestController implements Initializable {
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Please select the event to update");
+            alert.setContentText("Please select the new request to be approved.");
             alert.showAndWait();
 
         }

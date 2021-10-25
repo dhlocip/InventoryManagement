@@ -4,6 +4,7 @@
  */
 package controller_sale_manager;
 
+import controller_app.UIDashboardSaleManagerController;
 import data.VRequest;
 import data_modifier.RequestModifier;
 import java.net.URL;
@@ -30,7 +31,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class RequestController implements Initializable {
 
-    String userID,  newStatusVerify;
+    String userID,  newStatusVerify, numberRequest;
 
     @FXML
     private TableView<VRequest> RequestTable;
@@ -93,7 +94,7 @@ public class RequestController implements Initializable {
                 newStatusVerify = "YES";
                 new RequestModifier().getRequestUpdate(newStatusVerify, userID);
                 getShow();
-
+                            
             } else if (result.get() == buttonTypeNo) {
                 newStatusVerify = "NO";
                 new RequestModifier().getRequestUpdate(newStatusVerify, userID);
@@ -104,7 +105,7 @@ public class RequestController implements Initializable {
         
         Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Please select the event to update");
+            alert.setContentText("Please select the request to review.s");
             alert.showAndWait();
 
         }
