@@ -45,7 +45,7 @@ public class NewRequestModilfier extends JDBCConnect {
     
     public ObservableList<String> getNumberNewRequest() throws SQLException {
         ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select count(DISTINCT userId) as NumberNewRequest from NewRequests where statusVerify = ''";
+        String sql = "select count(DISTINCT newRequestId) as NumberNewRequest from NewRequests where statusVerify = ''";
         PreparedStatement preStatement = connect().prepareStatement(sql);
         preStatement.execute();
         ResultSet result = preStatement.getResultSet();

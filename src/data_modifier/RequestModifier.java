@@ -63,7 +63,7 @@ public class RequestModifier extends JDBCConnect {
     
     public ObservableList<String> getNumberRequest() throws SQLException {
         ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select count(DISTINCT userId) as NumberRequest from Requests where statusVerify = ''";
+        String sql = "select count(DISTINCT requestId) as NumberRequest from Requests where statusVerify = ''";
         PreparedStatement preStatement = connect().prepareStatement(sql);
         preStatement.execute();
         ResultSet result = preStatement.getResultSet();
