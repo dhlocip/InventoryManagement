@@ -35,9 +35,7 @@ public class BillModifier extends JDBCConnect {
         while (result.next()) {
             oList.add(new VBills(result.getString("billId"),result.getString("userId"),result.getDate("transactionDate") ,
                     result.getString("statusCancel"),result.getString("paymentName"),result.getString("productId"), 
-                    result.getInt("quantity"),result.getString("mfgDate"),result.getString("expDate"), 
-                    result.getFloat("price"),result.getFloat("total")/*,result.getFloat("revenue"), 
-                    result.getInt("numberBills"),result.getFloat("totalCancel")*/)); //tencotsql
+                    result.getInt("quantity"),result.getString("mfgDate"),result.getString("expDate"))); 
         }
         return oList;
 }
@@ -67,9 +65,7 @@ public class BillModifier extends JDBCConnect {
         while (result.next()) {
             oList.add(new VBills(result.getString("billId"),result.getString("userId"),result.getDate("transactionDate") ,
                     result.getString("statusCancel"),result.getString("paymentName"),result.getString("productId"), 
-                    result.getInt("quantity"),result.getString("mfgDate"),result.getString("expDate"), 
-                    result.getFloat("price"),result.getFloat("total")/*,result.getFloat("revenue"), 
-                    result.getInt("numberBills"),result.getFloat("totalCancel")*/)); //tencotsql
+                    result.getInt("quantity"),result.getString("mfgDate"),result.getString("expDate"))); 
         }
         return oList;
     }
@@ -83,9 +79,7 @@ public class BillModifier extends JDBCConnect {
         while (result.next()) {
             oList.add(new VBills(result.getString("billId"),result.getString("userId"),result.getDate("transactionDate") ,
                     result.getString("statusCancel"),result.getString("paymentName"),result.getString("productId"), 
-                    result.getInt("quantity"),result.getString("mfgDate"),result.getString("expDate"), 
-                    result.getFloat("price"),result.getFloat("total")/*,result.getFloat("revenue"), 
-                    result.getInt("numberBills"),result.getFloat("totalCancel")*/)); //tencotsql
+                    result.getInt("quantity"),result.getString("mfgDate"),result.getString("expDate"))); 
         }
         return oList;
     }
