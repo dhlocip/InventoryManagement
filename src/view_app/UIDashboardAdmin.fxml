@@ -68,7 +68,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#manageUserClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage users">
                            <HBox.margin>
