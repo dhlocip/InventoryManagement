@@ -9,24 +9,34 @@ package data;
  *
  * @author ADMIN
  */
-public class BillDetail {
+public class BillStatistic {
     private String productId;
     private String billId;
     private int quantity;
     private float price;
     private String mfgDate;
     private String expDate;
+    private String userId;
+    private String transactionDate;
+    private String statusCancel;
+    private String paymentName;
+    private float total;
 
-    public BillDetail() {
+    public BillStatistic() {
     }
 
-    public BillDetail(String productId, String billId, int quantity, float price, String mfgDate, String expDate) {
+    public BillStatistic(String productId, String billId, int quantity, float price, String mfgDate, String expDate, String userId, String transactionDate, String statusCancel, String paymentName, float total) {
         this.productId = productId;
         this.billId = billId;
         this.quantity = quantity;
         this.price = price;
         this.mfgDate = mfgDate;
         this.expDate = expDate;
+        this.userId = userId;
+        this.transactionDate = transactionDate;
+        this.statusCancel = statusCancel;
+        this.paymentName = paymentName;
+        this.total = total;
     }
 
     public String getProductId() {
@@ -76,8 +86,45 @@ public class BillDetail {
     public void setExpDate(String expDate) {
         this.expDate = expDate;
     }
-    
 
-     
-    
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public String getStatusCancel() {
+        return statusCancel;
+    }
+
+    public void setStatusCancel(String statusCancel) {
+        this.statusCancel = statusCancel;
+    }
+
+    public String getPaymentName() {
+        return paymentName;
+    }
+
+    public void setPaymentName(String paymentName) {
+        this.paymentName = paymentName;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+   
 }

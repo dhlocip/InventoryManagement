@@ -4,9 +4,15 @@
  */
 package controller_app;
 
+import data_modifier.NewRequestModilfier;
+import data_modifier.RequestModifier;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -42,6 +49,10 @@ public class UIDashboardSaleManagerController implements Initializable {
     private Label positionLabel;
     @FXML
     private Label fullNameLabel;
+    @FXML
+    private Label RequestNumber;
+    @FXML
+    private Label newRequestNumber;
 
     /**
      * Initializes the controller class.
@@ -50,8 +61,15 @@ public class UIDashboardSaleManagerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         hideSupMenu(false);
+        try {
+            NumberRequest();
+            NumberNewRequests();
+        } catch (SQLException ex) {
+            Logger.getLogger(UIDashboardSaleManagerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
+    
 
     public void setValueForVariableStatic(String userId, String fullName, String position) {
         gUserId = userId;
@@ -122,14 +140,34 @@ public class UIDashboardSaleManagerController implements Initializable {
     @FXML
     private void requestClicked(MouseEvent event) throws IOException {
         setCenterBox("Request");
-
+        try {
+            NumberRequest();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UIDashboardSaleManagerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void NumberRequest() throws SQLException{
+        ObservableList<String> oList = new RequestModifier().getNumberRequest();
+            RequestNumber.setText(oList.get(0));
+        
     }
 
     @FXML
     private void newRequestClicked(MouseEvent event) throws IOException {
         setCenterBox("NewRequest");
+        try {
+            NumberNewRequests();
+        } catch (SQLException ex) {
+            Logger.getLogger(UIDashboardSaleManagerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
+    public void NumberNewRequests() throws SQLException{
+    ObservableList<String> oList = new NewRequestModilfier().getNumberNewRequest();
+    newRequestNumber.setText(oList.get(0));
+    }
+    
 
     @FXML
     private void editProfileClicked(MouseEvent event) throws IOException {

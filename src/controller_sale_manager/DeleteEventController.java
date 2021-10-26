@@ -111,14 +111,14 @@ public class DeleteEventController implements Initializable {
                     getShow();
                 }
 
-            }
+            }}
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Notification");
-            alert.setHeaderText("Error");
-            alert.setContentText("Please click on the line different null");
-        }
+//        } else {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Notification");
+//            alert.setHeaderText("Error");
+//            alert.setContentText("Please click on the line different null");
+//        }
 
     }
 

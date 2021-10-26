@@ -5,9 +5,8 @@
  */
 package data_modifier;
 
+import data.Request;
 import data.VRequest;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,6 +33,46 @@ public class RequestModifier extends JDBCConnect {
         return oList;
     }
     
+    public boolean getRequestUpdate(String newStatusVerify, String requestID) throws SQLException{
+    String sql = "Update Requests set statusVerify = ? where requestId = ? "; //viewsql
+    PreparedStatement preStatement= connect().prepareStatement(sql);
+    
+    preStatement.setString(1, newStatusVerify);
+    preStatement.setString(2, requestID);
+    
+    preStatement.executeUpdate();
+        return true;
+    
+       
+    }
+    
+    public ObservableList<Request> getRequestCount() throws SQLException{
+    ObservableList<Request> oList = FXCollections.observableArrayList();
+    String sql = " select COUNT(statusVerify) from Requests where  statusVerify = '' "; //viewsql
+    PreparedStatement preStatement= connect().prepareStatement(sql);
+    preStatement.execute();
+    ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(new Request(result.getString("requestId"),result.getString("userId"), 
+                    result.getString("startDate"), result.getString("statusVerify")));
+            
+        }
+        return oList;
+    
+       
+    }
+    
+    public ObservableList<String> getNumberRequest() throws SQLException {
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select count(DISTINCT requestId) as NumberRequest from Requests where statusVerify = ''";
+        PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(result.getString("NumberRequest"));
+        }
+        return oList;
+
     // ---------------
     
     //  get list request
