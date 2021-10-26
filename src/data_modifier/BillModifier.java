@@ -5,181 +5,130 @@
  */
 package data_modifier;
 
-import data.BillDetail;
-import data.BillStatistic;
-import data.Bills;
+
+import data.VBills;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.XYChart;
+
+
 
 /**
  *
  * @author ADMIN
  */
 public class BillModifier extends JDBCConnect {
-    // tổng số lượng hóa đơn bán được theo ngày
-    public ObservableList<String> getNumbers(String startDate, String endDate) throws SQLException {
-        ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select count(DISTINCT billId) as billQuantity from Bills where (transactiondate between ? and ? ) ";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.setString(1, startDate);
-        preStatement.setString(2, endDate);
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
-        while (result.next()) {
-            oList.add(result.getString("billQuantity"));
-        }
-        return oList;
-    }
-// so luong hoa don bi huy
-    public ObservableList<String> getNumberCancel(String startDate, String endDate) throws SQLException {
-        ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select count(DISTINCT billId) as countCancel from Bills where statusCancel = 'YES' and (transactiondate between ? and ? )";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.setString(1, startDate);
-        preStatement.setString(2, endDate);
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
-        while (result.next()) {
-            oList.add(result.getString("countCancel"));
-        }
-        return oList;
-    }
-// so luong hoa don ban theo ngay
-    public ObservableList<String> getNumberDate(String startDate, String endDate) throws SQLException {
-        ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select count(DISTINCT billId) as countDate from Bills where statusCancel = '' and (transactiondate between ? and ? )";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.setString(1, startDate);
-        preStatement.setString(2, endDate);
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
-        while (result.next()) {
-            oList.add(result.getString("countDate"));
-        }
-        return oList;
-    }
     
- // hoa don bị huy
-    public ObservableList<String> getTotalCancel(String startDate, String endDate) throws SQLException {
-        ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select sum(total) as totalCancel from BillStatistic where (transactiondate between ? and ? ) and statusCancel = 'YES'";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.setString(1, startDate);
-        preStatement.setString(2, endDate);
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
+    public ObservableList<VBills> getVBillsInfo() throws SQLException{
+    ObservableList<VBills> oList = FXCollections.observableArrayList();
+    String sql = "Select * from VBills"; //viewsql
+    PreparedStatement preStatement= connect().prepareStatement(sql);
+    preStatement.execute();
+    ResultSet result = preStatement.getResultSet();
         while (result.next()) {
-            oList.add(result.getString("totalCancel"));
+            oList.add(new VBills(result.getString("billId"),result.getString("userId"),result.getDate("transactionDate") ,
+                    result.getString("statusCancel"),result.getString("paymentName"),result.getString("productId"), 
+                    result.getInt("quantity"),result.getString("mfgDate"),result.getString("expDate"), 
+                    result.getFloat("price"),result.getFloat("total")/*,result.getFloat("revenue"), 
+                    result.getInt("numberBills"),result.getFloat("totalCancel")*/)); //tencotsql
         }
         return oList;
-    }
-//tong doanh thu
-    public ObservableList<String> getTotalDate(String startDate, String endDate) throws SQLException {
-        ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select sum(total) as totalDate from BillStatistic where (transactiondate between ? and ? ) and statusCancel = ''";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.setString(1, startDate);
-        preStatement.setString(2, endDate);
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
-        while (result.next()) {
-            oList.add(result.getString("totalDate"));
-        }
-        return oList;
-    }
-//tong tien bi huy
-    public ObservableList<BillStatistic> getInfoByCancel() throws SQLException {
-        ObservableList<BillStatistic> oList = FXCollections.observableArrayList();
-        String sql = "Select * from BillStatistic where  statusCancel != '' ";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
-        while (result.next()) {
-            oList.add(new BillStatistic(result.getString("productId"), result.getString("billId"),
-                    result.getInt("quantity"), result.getFloat("price"), result.getString("mfgDate"),
-                    result.getString("expDate"), result.getString("userId"),
-                    result.getString("transactionDate"), result.getString("statusCancel"), result.getString("paymentName"),
-                    result.getFloat("total")));
-        }
-        return oList;
-    }
-
-    public ObservableList<BillStatistic> getInfoByDate() throws SQLException {
-        ObservableList<BillStatistic> oList = FXCollections.observableArrayList();
-        String sql = "Select * from BillStatistic where  statusCancel = '' ";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
-        while (result.next()) {
-            oList.add(new BillStatistic(result.getString("productId"), result.getString("billId"),
-                    result.getInt("quantity"), result.getFloat("price"), result.getString("mfgDate"),
-                    result.getString("expDate"), result.getString("userId"),
-                    result.getString("transactionDate"), result.getString("statusCancel"), result.getString("paymentName"),
-                    result.getFloat("total")));
-        }
-        return oList;
-    }
-
-
-    public ObservableList<BillStatistic> getBillCancelInfo(String startDate, String endDate) throws SQLException {
-        ObservableList<BillStatistic> oList = FXCollections.observableArrayList();
-        String sql = "Select * from BillStatistic where  statusCancel = 'Yes' and (transactionDate between ? and ?)";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.setString(1, startDate);
-        preStatement.setString(2, endDate);
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
-        while (result.next()) {
-            oList.add(new BillStatistic(result.getString("productId"), result.getString("billId"),
-                    result.getInt("quantity"), result.getFloat("price"), result.getString("mfgDate"),
-                    result.getString("expDate"), result.getString("userId"),
-                    result.getString("transactionDate"), result.getString("statusCancel"), result.getString("paymentName"),
-                    result.getFloat("total")));
-        }
-        return oList;
-    }
-
-    public ObservableList<BillStatistic> getBillDateInfo(String startDate, String endDate) throws SQLException {
-        ObservableList<BillStatistic> oList = FXCollections.observableArrayList();
-        String sql = "Select * from BillStatistic where  statusCancel = '' and (transactionDate between ? and ?)";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.setString(1, startDate);
-        preStatement.setString(2, endDate);
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
-        while (result.next()) {
-            oList.add(new BillStatistic(result.getString("productId"), result.getString("billId"),
-                    result.getInt("quantity"), result.getFloat("price"), result.getString("mfgDate"),
-                    result.getString("expDate"), result.getString("userId"),
-                    result.getString("transactionDate"), result.getString("statusCancel"), result.getString("paymentName"),
-                    result.getFloat("total")));
-        }
-        return oList;
-    }
-
-    
-    //    --------------------------------------------------------------------
-    
-    public ObservableList<XYChart.Data<String, Number>> getDateLineChart(String startDate, String endDate) throws SQLException {
-        ObservableList<XYChart.Data<String, Number>> dList = FXCollections.observableArrayList();
-//"select * from BillStatistic where (transactionDate between ? and ?) and statusCancel = ''"
-//"select sum(total) as total from BillStatistic where (transactionDate between ? and ?) and statusCancel = 'YES' group by billId"
-        String sql ="select * from BillStatistic where (transactionDate between ? and ?) and statusCancel = ''" ;
-        PreparedStatement preparedStatement = connect().prepareStatement(sql);
-        preparedStatement.setString(1, startDate);
-        preparedStatement.setString(2, endDate);
-        preparedStatement.execute();
-        ResultSet result = preparedStatement.getResultSet();
-        while (result.next()) {
-            dList.add(new XYChart.Data<String, Number>(result.getString("transactionDate"), result.getFloat("total")));
-        }
-        return dList;
-    }
-    
-
 }
+    
+    public ObservableList<String> getListTransactionDate(LocalDate transactionDate) throws SQLException {
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select * from Bills where transactionDate like '%" + transactionDate + "%'";
+        PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(result.getString("transactionDate"));
+        }
+        return oList;
+    }
+
+ 
+    public ObservableList<VBills> getInfoByTransactionDate(LocalDate transactiondate) throws SQLException {
+        ObservableList<VBills> oList = FXCollections.observableArrayList();
+        String sql;
+        PreparedStatement preStatement;
+        sql = "select * from VBills "
+                + " where transactionDate like '%" + transactiondate + "%'";
+        preStatement = connect().prepareStatement(sql);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(new VBills(result.getString("billId"),result.getString("userId"),result.getDate("transactionDate") ,
+                    result.getString("statusCancel"),result.getString("paymentName"),result.getString("productId"), 
+                    result.getInt("quantity"),result.getString("mfgDate"),result.getString("expDate"), 
+                    result.getFloat("price"),result.getFloat("total")/*,result.getFloat("revenue"), 
+                    result.getInt("numberBills"),result.getFloat("totalCancel")*/)); //tencotsql
+        }
+        return oList;
+    }
+    
+    public ObservableList<VBills> getInfoByCancel() throws SQLException {
+        ObservableList<VBills> oList = FXCollections.observableArrayList();
+    String sql = "Select * from VBills where  statusCancel = 'Yes' "; 
+    PreparedStatement preStatement= connect().prepareStatement(sql);
+    preStatement.execute();
+    ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(new VBills(result.getString("billId"),result.getString("userId"),result.getDate("transactionDate") ,
+                    result.getString("statusCancel"),result.getString("paymentName"),result.getString("productId"), 
+                    result.getInt("quantity"),result.getString("mfgDate"),result.getString("expDate"), 
+                    result.getFloat("price"),result.getFloat("total")/*,result.getFloat("revenue"), 
+                    result.getInt("numberBills"),result.getFloat("totalCancel")*/)); //tencotsql
+        }
+        return oList;
+    }
+    
+    // ---------------
+    
+    //  get list billId
+    public ObservableList<String> getListBillId(String userId) throws SQLException{
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select * from bills "
+                + "where userId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userId);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while(result.next()){
+            oList.add(result.getString("billId"));
+        }
+        return oList;
+    }
+    
+    //    delete bill detail by billId
+    public boolean deleteBillDetail(String billIdOrProductId) throws SQLException{
+        String sql = "delete from billDetail "
+                + "where billId =? or productId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, billIdOrProductId);
+        preS.setString(2, billIdOrProductId);
+        preS.execute();
+        return true;
+    }
+    
+    //    delete bill by userId
+    public boolean deleteBill(String userId) throws SQLException{
+        String sql = "delete from bills "
+                + "where userId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userId);
+        preS.execute();
+        return true;
+    }
+    
+    
+}
+
+

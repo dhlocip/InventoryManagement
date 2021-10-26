@@ -12,7 +12,7 @@ package data;
 public class User extends Person{
     private String birthday;
     private String hireDate;
-    private String shift;
+    private String shiff;
     private String userName;
     private String password;
     private String position;
@@ -26,11 +26,11 @@ public class User extends Person{
     public User() {
     }
     
-    public User(String personId, String fullName, String address, String gender, String phone, String birthday, String hireDate, String shift, String userName, String password, String position, String email, String token) {
+    public User(String personId, String fullName, String birthday, String hireDate, String address, String phone, String gender, String shiff, String userName, String password, String position, String email, String token) {
         super(personId, fullName, address, gender, phone);
         this.birthday = birthday;
         this.hireDate = hireDate;
-        this.shift = shift;
+        this.shiff = shiff;
         this.userName = userName;
         this.password = password;
         this.position = position;
@@ -54,12 +54,12 @@ public class User extends Person{
         this.hireDate = hireDate;
     }
 
-    public String getShift() {
-        return shift;
+    public String getShiff() {
+        return shiff;
     }
 
-    public void setShift(String shift) {
-        this.shift = shift;
+    public void setShiff(String shiff) {
+        this.shiff = shiff;
     }
 
     public String getUserName() {

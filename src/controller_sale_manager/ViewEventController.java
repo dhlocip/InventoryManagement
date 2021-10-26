@@ -11,10 +11,12 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,9 +32,8 @@ import javafx.scene.layout.HBox;
 public class ViewEventController implements Initializable {
 
     String eventID;
-
-    String lUserId, userIdTF;
-
+    
+    
     @FXML
     private Label find;
     @FXML
@@ -57,20 +58,22 @@ public class ViewEventController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+                   
         try {
             getVEvent();
             setValueEventIdComboBox();
         } catch (SQLException ex) {
             Logger.getLogger(ViewEventController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }
-
-    private void getVEvent() throws SQLException {
-
+        
+    }   
+    
+    private void getVEvent() throws SQLException{
+        
         ObservableList<VEvent> oList = new VEventModifier().getEventInfo();
         eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
@@ -78,13 +81,14 @@ public class ViewEventController implements Initializable {
         discount.setCellValueFactory(new PropertyValueFactory<>("discount")); //tenbiendata
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
         endDate.setCellValueFactory(new PropertyValueFactory<>("endDate")); //tenbiendata
-
+        
         viewEventTable.setItems(oList);
-
+        
     }
 
     private void setValueEventIdComboBox() throws SQLException {
         ObservableList<String> oList = new VEventModifier().getListEventId();
+        
 
         eventID = eventIdCombobox.getValue();
         eventIdCombobox.setItems(oList);
@@ -94,8 +98,8 @@ public class ViewEventController implements Initializable {
         });
 
     }
-
-    public void getEventByEventId(String eventID) throws SQLException {
+    
+       public void getEventByEventId(String eventID) throws SQLException {
 
         ObservableList<VEvent> oList = new VEventModifier().getInfoByEventId(eventID);
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
@@ -107,13 +111,11 @@ public class ViewEventController implements Initializable {
         viewEventTable.setItems(oList);
     }
 
+    
     @FXML
     private void getFind(MouseEvent event) throws SQLException {
         getEventByEventId(eventIdCombobox.getValue());
         
-
     }
-
-
-
+    
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane fx:id="homePane" prefHeight="804.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardAdminController">
+<BorderPane fx:id="homePane" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardAdminController">
    <left>
       <HBox BorderPane.alignment="CENTER">
          <children>
@@ -400,7 +400,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" onMouseClicked="#logoutClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                  <HBox alignment="CENTER_LEFT" styleClass="app-hover" stylesheets="@../css/app.css">
                      <children>
                         <Label prefHeight="24.0" prefWidth="24.0">
                            <graphic>
@@ -421,7 +421,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" onMouseClicked="#logoutClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                  <HBox alignment="CENTER_LEFT" styleClass="app-hover" stylesheets="@../css/app.css">
                      <children>
                         <Label prefHeight="24.0" prefWidth="24.0">
                            <graphic>
@@ -442,7 +442,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" onMouseClicked="#logoutClicked" styleClass="app-hover" stylesheets="@../css/app.css">
+                  <HBox alignment="CENTER_LEFT" styleClass="app-hover" stylesheets="@../css/app.css">
                      <children>
                         <Label prefHeight="24.0" prefWidth="24.0">
                            <graphic>
