@@ -17,16 +17,16 @@
 
 <BorderPane stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_inventory_manager.UpdateImportController">
    <center>
-      <TableView prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+      <TableView fx:id="importTableView" onMouseClicked="#importTableClicked" prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
         <columns>
-            <TableColumn prefWidth="75.0" text="ImportStockID" />
-          <TableColumn prefWidth="75.0" text="SupplierID" />
-          <TableColumn prefWidth="75.0" text="ImportDate" />
-            <TableColumn prefWidth="75.0" text="ProductId" />
-            <TableColumn prefWidth="75.0" text="Quantity" />
-            <TableColumn prefWidth="75.0" text="Price" />
-            <TableColumn prefWidth="75.0" text="MfgDate" />
-            <TableColumn prefWidth="75.0" text="ExpDate" />
+            <TableColumn fx:id="importStockIdCol" prefWidth="75.0" text="ImportStockID" />
+          <TableColumn fx:id="supplierIdCol" prefWidth="75.0" text="SupplierID" />
+          <TableColumn fx:id="importDateCol" prefWidth="75.0" text="ImportDate" />
+            <TableColumn fx:id="productIdCol" prefWidth="75.0" text="ProductId" />
+            <TableColumn fx:id="quantityCol" prefWidth="75.0" text="Quantity" />
+            <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
+            <TableColumn fx:id="mfgDateCol" prefWidth="75.0" text="MfgDate" />
+            <TableColumn fx:id="expDateCol" prefWidth="75.0" text="ExpDate" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -34,7 +34,7 @@
       </TableView>
    </center>
    <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      <Insets bottom="10.0" left="10.0" right="10.0" />
    </padding>
    <bottom>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
@@ -42,12 +42,13 @@
             <VBox prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="Supplier ID:" />
-                  <ComboBox prefHeight="30.0" promptText="S0001" />
+                  <ComboBox fx:id="supplierIdComboBox" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Import Date:" />
-                  <DatePicker prefHeight="30.0" prefWidth="235.0" />
-                  <HBox alignment="CENTER_LEFT">
+                  <DatePicker fx:id="importDatePicker" onAction="#importDateAction" prefHeight="30.0" prefWidth="235.0" />
+                  <Label fx:id="errorImportDate" style="-fx-text-fill: red;" text="Label" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0">
                      <children>
-                        <HBox alignment="CENTER" stylesheets="@../css/app.css">
+                        <HBox alignment="CENTER" onMouseClicked="#updateImportStockClicked" stylesheets="@../css/app.css">
                            <children>
                               <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                                  <graphic>
@@ -74,7 +75,7 @@
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets top="15.0" />
+                        <Insets top="30.0" />
                      </VBox.margin>
                   </HBox>
                </children>
@@ -82,11 +83,12 @@
             <VBox prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="Product ID:" />
-                  <ComboBox prefHeight="30.0" promptText="P0001" />
+                  <ComboBox fx:id="productIdComboBox" disable="true" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Quantity:" />
-                  <Spinner prefHeight="30.0" />
+                  <Spinner fx:id="quantitySpinner" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Price" />
-                  <TextField prefHeight="30.0" prefWidth="235.0" />
+                  <TextField fx:id="priceTF" onKeyReleased="#priceReleased" prefHeight="30.0" prefWidth="235.0" />
+                  <Label fx:id="errorPrice" style="-fx-text-fill: red;" text="Label" />
                </children>
                <HBox.margin>
                   <Insets />
@@ -95,12 +97,14 @@
             <VBox prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="MFG Date:" />
-                  <DatePicker prefHeight="30.0" prefWidth="235.0" />
+                  <DatePicker fx:id="mfgDatePicker" onAction="#mfgDateAction" prefHeight="30.0" prefWidth="235.0" />
+                  <Label fx:id="errorMfgDate" style="-fx-text-fill: red;" text="Label" />
                   <Label prefHeight="30.0" text="EXP Date:" />
-                  <DatePicker prefHeight="30.0" prefWidth="235.0" />
-                  <HBox alignment="CENTER_LEFT">
+                  <DatePicker fx:id="expDatePicker" onAction="#expDateAction" prefHeight="30.0" prefWidth="235.0" />
+                  <Label fx:id="errorExpDate" style="-fx-text-fill: red;" text="Label" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0">
                      <children>
-                        <HBox alignment="CENTER" stylesheets="@../css/app.css">
+                        <HBox alignment="CENTER" onMouseClicked="#updateImportStockDetailClicked" stylesheets="@../css/app.css">
                            <children>
                               <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                                  <graphic>
@@ -127,7 +131,7 @@
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets top="28.0" />
+                        <Insets top="30.0" />
                      </VBox.margin>
                   </HBox>
                </children>
@@ -141,4 +145,34 @@
          </BorderPane.margin>
       </HBox>
    </bottom>
+   <top>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="40.0" styleClass="search-text-field" stylesheets="@../css/app.css">
+               <HBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </HBox.margin>
+               <children>
+                  <TextField fx:id="searchTF" onKeyReleased="#searchReleased" prefHeight="40.0" prefWidth="318.0" promptText="Search here" style="-fx-background-color: grey;">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label prefHeight="40.0" prefWidth="40.0">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/edit-find-symbolic.symbolic.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

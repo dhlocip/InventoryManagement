@@ -2,8 +2,8 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -19,12 +19,12 @@
          <children>
             <VBox prefWidth="300.0">
                <children>
-                  <Label prefHeight="30.0" text="Category ID:" />
-                  <TextField prefHeight="30.0" />
-                  <Label prefHeight="30.0" text="Product ID:" />
-                  <TextField prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Product Name:" />
-                  <TextField prefHeight="30.0" />
+                  <TextField fx:id="productNameTF" onKeyReleased="#productNameReleased" prefHeight="30.0" />
+                  <Label fx:id="errorProductName" style="-fx-text-fill: red;" text="Label" />
+                  <Label prefHeight="30.0" text="Category ID:" />
+                  <ComboBox fx:id="categoryIdComboBox" prefHeight="30.0" />
+                  <Label fx:id="errorCategoryId" style="-fx-text-fill: red;" text="Label" />
                </children>
                <HBox.margin>
                   <Insets />
@@ -33,14 +33,11 @@
             <VBox prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="Price:" />
-                  <TextField prefHeight="30.0" />
-                  <Label prefHeight="30.0" text="Quantity:" />
-                  <Spinner prefHeight="30.0" />
-                  <Label prefHeight="30.0" text="Phone:" />
-                  <TextField prefHeight="30.0" />
-                  <HBox alignment="CENTER_LEFT">
+                  <TextField fx:id="priceTF" onKeyReleased="#priceReleased" prefHeight="30.0" />
+                  <Label fx:id="errorPrice" style="-fx-text-fill: red;" text="Label" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0">
                      <children>
-                        <HBox alignment="CENTER" stylesheets="@../css/app.css">
+                        <HBox alignment="CENTER" onMouseClicked="#createProductClicked" prefHeight="30.0" stylesheets="@../css/app.css">
                            <children>
                               <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                                  <graphic>
@@ -67,7 +64,7 @@
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets top="15.0" />
+                        <Insets top="30.0" />
                      </VBox.margin>
                   </HBox>
                </children>
@@ -85,13 +82,12 @@
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <center>
-      <TableView prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+      <TableView fx:id="productTableView" prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
          <columns>
-            <TableColumn prefWidth="75.0" text="CategoryID" />
-            <TableColumn prefWidth="75.0" text="ProductID" />
-            <TableColumn prefWidth="75.0" text="ProductName" />
-            <TableColumn prefWidth="75.0" text="Price" />
-            <TableColumn prefWidth="75.0" text="Quantity" />
+            <TableColumn fx:id="categoryIdCol" prefWidth="75.0" text="CategoryID" />
+            <TableColumn fx:id="productIdCol" prefWidth="75.0" text="ProductID" />
+            <TableColumn fx:id="productNameCol" prefWidth="75.0" text="ProductName" />
+            <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

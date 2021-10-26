@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_inventory_manager.InventoryByCategoryController">
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_inventory_manager.InventoryByCategoryController">
    <top>
       <HBox BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -24,7 +24,7 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" stylesheets="@../css/app.css">
+                  <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#exportReportClicked" stylesheets="@../css/app.css">
                      <children>
                         <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                            <graphic>
@@ -56,7 +56,7 @@
                   <Insets left="20.0" />
                </HBox.margin>
             </Label>
-            <ComboBox prefHeight="30.0" promptText="C0001">
+            <ComboBox fx:id="categoryIdComboBox" prefHeight="30.0">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>
@@ -70,26 +70,25 @@
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <TableView>
+            <TableView fx:id="inventoryTableView" tableMenuButtonVisible="true">
               <columns>
-                <TableColumn prefWidth="75.0" text="CategoryID" />
-                <TableColumn prefWidth="75.0" text="ProductID" />
-                  <TableColumn prefWidth="75.0" text="ProductName" />
-                  <TableColumn prefWidth="75.0" text="Quantity" />
-                  <TableColumn prefWidth="75.0" text="MfgDate" />
-                  <TableColumn prefWidth="75.0" text="ExpDate" />
-                  <TableColumn prefWidth="75.0" text="Days" />
+                <TableColumn fx:id="categoryIdCol" prefWidth="75.0" text="CategoryID" />
+                <TableColumn fx:id="productIdCol" prefWidth="75.0" text="ProductID" />
+                  <TableColumn fx:id="productNameCol" prefWidth="75.0" text="ProductName" />
+                  <TableColumn fx:id="quantityCol" prefWidth="75.0" text="Quantity" />
+                  <TableColumn fx:id="mfgDateCol" prefWidth="75.0" text="MfgDate" />
+                  <TableColumn fx:id="expDateCol" prefWidth="75.0" text="ExpDate" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <BarChart>
+            <BarChart fx:id="inventoryBarChart">
               <xAxis>
-                <CategoryAxis side="BOTTOM" />
+                <CategoryAxis side="BOTTOM" fx:id="xAxis" />
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" />
+                <NumberAxis fx:id="yAxis" side="LEFT" />
               </yAxis>
             </BarChart>
          </children>
