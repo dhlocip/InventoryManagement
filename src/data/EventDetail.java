@@ -10,29 +10,29 @@ package data;
  * @author ADMIN
  */
 public class EventDetail {
-    private String eventIdDetail;
+    private String eventId;
     private String productId;
     private String discount;
-    private String mfgDate;
+    private String mfdDate;
     private String expDate;
 
     public EventDetail() {
     }
 
-    public EventDetail(String eventIdDetail, String productId, String discount, String mfgDate, String expDate) {
-        this.eventIdDetail = eventIdDetail;
+    public EventDetail(String eventId, String productId, String discount, String mfdDate, String expDate) {
+        this.eventId = eventId;
         this.productId = productId;
         this.discount = discount;
-        this.mfgDate = mfgDate;
+        this.mfdDate = mfdDate;
         this.expDate = expDate;
     }
 
-    public String getEventIdDetail() {
-        return eventIdDetail;
+    public String getEventId() {
+        return eventId;
     }
 
-    public void setEventIdDetail(String eventIdDetail) {
-        this.eventIdDetail = eventIdDetail;
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 
     public String getProductId() {
@@ -51,12 +51,12 @@ public class EventDetail {
         this.discount = discount;
     }
 
-    public String getMfgDate() {
-        return mfgDate;
+    public String getMfdDate() {
+        return mfdDate;
     }
 
-    public void setMfgDate(String mfgDate) {
-        this.mfgDate = mfgDate;
+    public void setMfdDate(String mfdDate) {
+        this.mfdDate = mfdDate;
     }
 
     public String getExpDate() {
