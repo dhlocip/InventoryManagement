@@ -140,8 +140,6 @@ public class DeleteUserController implements Initializable {
             alert.setContentText("Please click on the line different null.");
             alert.showAndWait();
         } else {
-            System.out.println(lPosition);
-            System.out.println(item.getPosition());
             if (lPosition.equalsIgnoreCase("admin")) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Notification");

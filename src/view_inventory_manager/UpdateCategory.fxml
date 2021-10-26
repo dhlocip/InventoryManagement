@@ -15,7 +15,7 @@
 
 <BorderPane stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_inventory_manager.UpdateCategoryController">
    <center>
-      <TableView fx:id="categoryTableView" prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+      <TableView fx:id="categoryTableView" onMouseClicked="#categoryClicked" prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
         <columns>
             <TableColumn fx:id="categoryIdCol" prefWidth="75.0" text="CategoryId" />
           <TableColumn fx:id="categoryNameCol" prefWidth="75.0" text="CategoryName" />
@@ -35,9 +35,9 @@
             <VBox prefWidth="300.0">
                <children>
                   <Label prefHeight="30.0" text="Category ID:" />
-                  <ComboBox fx:id="categoryIdComboBox" prefHeight="30.0" />
+                  <ComboBox fx:id="categoryIdComboBox" disable="true" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Category Name:" />
-                  <TextField fx:id="categoryTF" onKeyReleased="#categoryNameReleased" prefHeight="30.0" />
+                  <TextField fx:id="categoryNameTF" onKeyReleased="#categoryNameReleased" prefHeight="30.0" />
                   <Label fx:id="errorCategoryName" style="-fx-text-fill: red;" text="Label" />
                </children>
                <HBox.margin>
@@ -51,7 +51,7 @@
                   <Label fx:id="errorDescription" style="-fx-text-fill: red;" text="Label" />
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0">
                      <children>
-                        <HBox alignment="CENTER" onMouseClicked="#createCategoryClicked" stylesheets="@../css/app.css">
+                        <HBox alignment="CENTER" onMouseClicked="#updateCategoryClicked" stylesheets="@../css/app.css">
                            <children>
                               <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                                  <graphic>
@@ -65,7 +65,7 @@
                                     <Insets left="5.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label prefHeight="30.0" styleClass="app-button" stylesheets="@../css/app.css" text="Create Category">
+                              <Label prefHeight="30.0" styleClass="app-button" stylesheets="@../css/app.css" text="Update Category">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>

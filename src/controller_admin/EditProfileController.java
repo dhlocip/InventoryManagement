@@ -250,8 +250,7 @@ public class EditProfileController implements Initializable {
         return tmp.matches("^[\\w]{1}[\\w\\s,.]{5,100}");
     }
 
-    @FXML
-    private void addressReleased(KeyEvent event) {
+    private void checkAddress() {
         if (isAddressRight()) {
             hideErrorOfAddress(false);
         } else {
@@ -260,19 +259,28 @@ public class EditProfileController implements Initializable {
         }
     }
 
+    @FXML
+    private void addressReleased(KeyEvent event) {
+        checkAddress();
+    }
+
     private boolean isPhoneRight() {
         String tmp = phoneTF.getText();
         return tmp.matches("^[0]{1}[\\d]{9,10}");
     }
 
-    @FXML
-    private void phoneReleased(KeyEvent event) {
+    private void checkPhone() {
         if (isPhoneRight()) {
             hideErrorOfPhone(false);
         } else {
             hideErrorOfPhone(true);
             errorPhone.setText("\"" + phoneTF.getText() + "\" is invalid.");
         }
+    }
+
+    @FXML
+    private void phoneReleased(KeyEvent event) {
+        checkPhone();
     }
 
     private boolean isShiffRight() {

@@ -2,7 +2,6 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_inventory_manager.CreateImportController">
+<BorderPane stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_inventory_manager.CreateCategoryController">
    <center>
       <TableView fx:id="categoryTableView" prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
         <columns>
@@ -34,18 +33,9 @@
          <children>
             <VBox prefWidth="300.0">
                <children>
-                  <Label prefHeight="30.0" text="Category ID:" />
-                  <ComboBox fx:id="categoryIdComboBox" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Category Name:" />
-                  <TextField fx:id="categoryTF" onKeyReleased="#categoryReleased" prefHeight="30.0" />
+                  <TextField fx:id="categoryNameTF" onKeyReleased="#categoryNameReleased" prefHeight="30.0" />
                   <Label fx:id="errorCategoryName" style="-fx-text-fill: red;" text="Label" />
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </VBox>
-            <VBox prefWidth="300.0">
-               <children>
                   <Label prefHeight="30.0" text="Description:" />
                   <TextField fx:id="descriptionTF" onKeyReleased="#descriptionReleased" prefHeight="30.0" />
                   <Label fx:id="errorDescription" style="-fx-text-fill: red;" text="Label" />
@@ -83,7 +73,7 @@
                   </HBox>
                </children>
                <HBox.margin>
-                  <Insets left="20.0" />
+                  <Insets />
                </HBox.margin>
             </VBox>
          </children>

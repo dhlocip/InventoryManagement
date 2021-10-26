@@ -47,7 +47,7 @@ public class ImportStockModifier extends JDBCConnect {
     public boolean updateImportStock(ImportStock importStock) throws SQLException{
         String sql = "update importStocks "
                 + "set supplierId = ?, importDate =? "
-                + "where importStockId =? and productId =?";
+                + "where importStockId =? and userId =?";
         PreparedStatement preS = connect().prepareStatement(sql);
         preS.setString(1, importStock.getSupplierId());
         preS.setString(2, importStock.getImportDate());

@@ -270,6 +270,7 @@ public class UpdateImportController implements Initializable {
             importStockDetail.setPrice(Double.parseDouble(priceTF.getText()));
             importStockDetail.setMfgDate((mfgDatePicker.getValue()).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
             importStockDetail.setExpDate((expDatePicker.getValue()).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+            
             if (new ImportStockDetailModifier().updateImportStock(importStockDetail)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Notification");

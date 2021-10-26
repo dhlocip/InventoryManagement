@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_inventory_manager.CreateImportController">
+<BorderPane stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_inventory_manager.ViewCategoryController">
    <center>
       <TableView fx:id="categoryTableView" prefHeight="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
         <columns>

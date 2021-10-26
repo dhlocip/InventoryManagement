@@ -29,12 +29,9 @@ import javafx.scene.input.MouseEvent;
  *
  * @author sa
  */
-public class UpdateCategoryController implements Initializable {
+public class CreateCategoryController implements Initializable {
 
-    @FXML
     private TextField searchTF;
-    @FXML
-    private ComboBox<String> categoryIdComboBox;
     @FXML
     private Label errorCategoryName;
     @FXML
@@ -60,24 +57,12 @@ public class UpdateCategoryController implements Initializable {
 
         try {
             getListCategory();
-            setCategoryId();
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateCategoryController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         hideErrorCategoryName(false);
         hideErrorDescription(false);
-
-    }
-    
-    //  set categoryId
-    private void setCategoryId() throws SQLException {
-        ObservableList<String> oList = new CategoryModifier().getListCategoryId();
-        categoryIdComboBox.setItems(oList);
-
-        categoryIdComboBox.setOnAction((t) -> {
-            categoryIdComboBox.getValue();
-        });
 
     }
 
@@ -111,7 +96,6 @@ public class UpdateCategoryController implements Initializable {
         categoryTableView.setItems(oList);
     }
 
-    @FXML
     private void searchReleased(KeyEvent event) throws SQLException {
         getListCategoryAfterSearch(searchTF.getText());
     }
@@ -140,46 +124,26 @@ public class UpdateCategoryController implements Initializable {
     }
 
     @FXML
-    private void updateCategoryClicked(MouseEvent event) throws SQLException {
-        Category item = categoryTableView.getSelectionModel().getSelectedItem();
-        if (item == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Notification");
-            alert.setHeaderText("Error");
-            alert.setContentText("Please click to a row into table.");
-            alert.showAndWait();
-            checkCategoryName();
-        } else {
+    private void createCategoryClicked(MouseEvent event) throws SQLException {
+        if (isCategoryRight()) {
             Category category = new Category();
-            category.setCategoryId(item.getCategoryId());
             category.setCategoryName(categoryNameTF.getText());
             category.setDescription(descriptionTF.getText());
-            if (new CategoryModifier().updateCategory(category)) {
+            if (new CategoryModifier().createCategory(category)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Notification");
                 alert.setHeaderText("Success");
-                alert.setContentText("Update category is successfully.");
+                alert.setContentText("Create category is successfully.");
                 alert.showAndWait();
                 getListCategory();
             }
-        }
-    }
-
-    @FXML
-    private void categoryClicked(MouseEvent event) {
-        Category item = categoryTableView.getSelectionModel().getSelectedItem();
-        if (item == null) {
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Notification");
             alert.setHeaderText("Error");
             alert.setContentText("Please click to a row into table.");
             alert.showAndWait();
             checkCategoryName();
-        } else {
-            hideErrorCategoryName(false);
-            categoryIdComboBox.setValue(item.getCategoryId());
-            categoryNameTF.setText(item.getCategoryName());
-            descriptionTF.setText(item.getDescription());
         }
     }
 

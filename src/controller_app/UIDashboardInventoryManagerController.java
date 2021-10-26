@@ -269,19 +269,23 @@ public class UIDashboardInventoryManagerController implements Initializable {
     }
 
     @FXML
-    private void viewCategoryClicked(MouseEvent event) {
+    private void viewCategoryClicked(MouseEvent event) throws IOException {
+        setCenterBox("ViewCategory");
     }
 
     @FXML
-    private void createCategoryClicked(MouseEvent event) {
+    private void createCategoryClicked(MouseEvent event) throws IOException {
+        setCenterBox("CreateCategory");
     }
 
     @FXML
-    private void updateCategoryClicked(MouseEvent event) {
+    private void updateCategoryClicked(MouseEvent event) throws IOException {
+        setCenterBox("UpdateCategory");
     }
 
     @FXML
-    private void deleteCategoryClicked(MouseEvent event) {
+    private void deleteCategoryClicked(MouseEvent event) throws IOException {
+        setCenterBox("DeleteCategory");
     }
 
     @FXML
