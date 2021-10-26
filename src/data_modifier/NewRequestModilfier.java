@@ -20,28 +20,53 @@ import javafx.collections.ObservableList;
  */
 public class NewRequestModilfier extends JDBCConnect {
 
-    
-    public ObservableList<VNewRequest> getNewRequestInfo() throws SQLException{
-    ObservableList<VNewRequest> oList = FXCollections.observableArrayList();
-    String sql = "Select * from VNewRequest"; //viewsql
-    PreparedStatement preStatement= connect().prepareStatement(sql);
-    preStatement.execute();
-    ResultSet result = preStatement.getResultSet();
+    public ObservableList<VNewRequest> getNewRequestInfo() throws SQLException {
+        ObservableList<VNewRequest> oList = FXCollections.observableArrayList();
+        String sql = "Select * from VNewRequest"; //viewsql
+        PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
         while (result.next()) {
-            oList.add(new VNewRequest(result.getString("newRequestId"),result.getString("userId"), 
-                    result.getString("startDate"), result.getString("statusVerify")
-                    , result.getString("newProductName"), result.getInt("quantity"))); //tencotsql
+            oList.add(new VNewRequest(result.getString("newRequestId"), result.getString("userId"),
+                    result.getString("startDate"), result.getString("statusVerify"),
+                    result.getString("newProductName"), result.getInt("quantity"))); //tencotsql
         }
         return oList;
-}
-    
-    public boolean getNewRequestUpdate(String newStatusVerify, String newProductName) throws SQLException{
-    String sql = "Update NewRequests set statusVerify = ? where productName = ? "; //viewsql
-    PreparedStatement preStatement= connect().prepareStatement(sql);
-    preStatement.setString(1, newStatusVerify);
-    preStatement.setString(2, newProductName);
-    preStatement.execute();
-    
+    }
+
+    // ---------------
+    //  get list newRequest
+    public ObservableList<String> getListNewRequestId(String userId) throws SQLException {
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select * from newRequests "
+                + "where userId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userId);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while (result.next()) {
+            oList.add(result.getString("newRequestId"));
+        }
+        return oList;
+    }
+
+    //    delete newRequest detail by newRequestId
+    public boolean deleteNewRequestDetail(String newRequestId) throws SQLException {
+        String sql = "delete from newRequestDetail "
+                + "where newRequestId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, newRequestId);
+        preS.execute();
+        return true;
+    }
+
+    //    delete newRequests by userId
+    public boolean deleteNewRequest(String userId) throws SQLException {
+        String sql = "delete from newRequests "
+                + "where userId =?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userId);
+        preS.execute();
         return true;
     }
 }

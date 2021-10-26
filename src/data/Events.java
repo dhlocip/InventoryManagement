@@ -66,7 +66,6 @@ public class Events {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
-
- 
+    
     
 }
