@@ -6,6 +6,8 @@
 package data_modifier;
 
 import data.VNewRequest;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,27 +30,6 @@ public class NewRequestModilfier extends JDBCConnect {
             oList.add(new VNewRequest(result.getString("newRequestId"), result.getString("userId"),
                     result.getString("startDate"), result.getString("statusVerify"),
                     result.getString("newProductName"), result.getInt("quantity"))); //tencotsql
-        }
-        return oList;
-    
-    public boolean getNewRequestUpdate(String newStatusVerify, String newRequestID) throws SQLException{
-    String sql = "Update NewRequests set statusVerify = ? where newRequestId = ? "; //viewsql
-    PreparedStatement preStatement= connect().prepareStatement(sql);
-    preStatement.setString(1, newStatusVerify);
-    preStatement.setString(2, newRequestID);
-    preStatement.executeUpdate();
-    
-        return true;
-    }
-    
-    public ObservableList<String> getNumberNewRequest() throws SQLException {
-        ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select count(DISTINCT newRequestId) as NumberNewRequest from NewRequests where statusVerify = ''";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
-        while (result.next()) {
-            oList.add(result.getString("NumberNewRequest"));
         }
         return oList;
     }

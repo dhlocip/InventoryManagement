@@ -13,18 +13,16 @@ public class BillDetail {
     private String productId;
     private String billId;
     private int quantity;
-    private float price;
     private String mfgDate;
     private String expDate;
 
     public BillDetail() {
     }
 
-    public BillDetail(String productId, String billId, int quantity, float price, String mfgDate, String expDate) {
+    public BillDetail(String productId, String billId, int quantity, String mfgDate, String expDate) {
         this.productId = productId;
         this.billId = billId;
         this.quantity = quantity;
-        this.price = price;
         this.mfgDate = mfgDate;
         this.expDate = expDate;
     }
@@ -53,14 +51,6 @@ public class BillDetail {
         this.quantity = quantity;
     }
 
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
     public String getMfgDate() {
         return mfgDate;
     }
@@ -77,7 +67,5 @@ public class BillDetail {
         this.expDate = expDate;
     }
     
-
-     
     
 }
