@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 /**
  * FXML Controller class
  *
@@ -25,10 +26,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class RequestController implements Initializable {
 
-    @FXML
-    private TableView<VRequest> RequestTable;
-    
-    
     @FXML
     private TableColumn<VRequest, String> requestId;
     @FXML
@@ -41,6 +38,8 @@ public class RequestController implements Initializable {
     private TableColumn<VRequest, String> startDate;
     @FXML
     private TableColumn<VRequest, String> statusVerify;
+    @FXML
+    private TableView<VRequest> requestTable;
 
     
     
@@ -68,8 +67,12 @@ public class RequestController implements Initializable {
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
         statusVerify.setCellValueFactory(new PropertyValueFactory<>("statusVerify")); //tenbiendata
         
-        RequestTable.setItems(oList);
+        requestTable.setItems(oList);
         
+    }
+
+    @FXML
+    private void requestClicker(MouseEvent event) {
     }
     
 }

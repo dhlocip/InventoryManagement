@@ -14,13 +14,13 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -34,8 +34,6 @@ public class NewRequestController implements Initializable {
     @FXML
     private TableColumn<VNewRequest, String> newRequestId;
     @FXML
-    private TableColumn<VNewRequest, String> newproductName;
-    @FXML
     private TableColumn<VNewRequest, Integer> quantity;
     @FXML
     private TableColumn<VNewRequest, String> userId;
@@ -43,6 +41,8 @@ public class NewRequestController implements Initializable {
     private TableColumn<VNewRequest, String> startDate;
     @FXML
     private TableColumn<VNewRequest, String> statusVerify;
+    @FXML
+    private TableColumn<VNewRequest, String> newProductName;
       
     /**
      * Initializes the controller class.
@@ -62,7 +62,7 @@ public class NewRequestController implements Initializable {
         
         ObservableList<VNewRequest> oList = new NewRequestModilfier().getNewRequestInfo();
         newRequestId.setCellValueFactory(new PropertyValueFactory<>("newRequestId")); //tenbiendata
-        newproductName.setCellValueFactory(new PropertyValueFactory<>("newProductName")); //tenbiendata
+        newProductName.setCellValueFactory(new PropertyValueFactory<>("newProductName")); //tenbiendata
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity")); //tenbiendata
         userId.setCellValueFactory(new PropertyValueFactory<>("userId")); //tenbiendata
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
@@ -70,6 +70,10 @@ public class NewRequestController implements Initializable {
         
         newRequestTable.setItems(oList);
         
+    }
+
+    @FXML
+    private void newRequestClick(MouseEvent event) {
     }
     
     

@@ -11,10 +11,10 @@ import java.util.Date;
  *
  * @author ADMIN
  */
-public class VBills {
+public class BillStatistic {
     private String billId;
     private String userId;
-    private Date transactionDate;
+    private String transactionDate;
     private String statusCancel;
     private String paymentName;
     private String productId;
@@ -22,22 +22,12 @@ public class VBills {
     private String mfgDate;
     private String expDate;
     private float price;
-    private float total = quantity*price;
-//    private float revenue;
-//    private  int numberBills;
-//    private float totalCancel;
+    private float total;
 
-   
-    
-//        this.revenue = revenue;
-//        this.numberBills = numberBills;
-//        this.totalCancel = totalCancel;
- 
-
-    public VBills() {
+    public BillStatistic() {
     }
 
-    public VBills(String billId, String userId, Date transactionDate, String statusCancel, String paymentName, String productId, int quantity, String mfgDate, String expDate, float price, float total) {
+    public BillStatistic(String billId, String userId, String transactionDate, String statusCancel, String paymentName, String productId, int quantity, String mfgDate, String expDate, float price, float total) {
         this.billId = billId;
         this.userId = userId;
         this.transactionDate = transactionDate;
@@ -50,8 +40,6 @@ public class VBills {
         this.price = price;
         this.total = total;
     }
-
-    
 
     public String getBillId() {
         return billId;
@@ -69,11 +57,11 @@ public class VBills {
         this.userId = userId;
     }
 
-    public Date getTransactionDate() {
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
 
@@ -141,31 +129,5 @@ public class VBills {
         this.total = total;
     }
     
-    
-
-
-//    public float getRevenue() {
-//        return revenue;
-//    }
-//
-//    public void setRevenue(float revenue) {
-//        this.revenue = revenue;
-//    }
-//
-//    public int getNumberBills() {
-//        return numberBills;
-//    }
-//
-//    public void setNumberBills(int numberBills) {
-//        this.numberBills = numberBills;
-//    }
-//
-//    public float getTotalCancel() {
-//        return totalCancel;
-//    }
-//
-//    public void setTotalCancel(float totalCancel) {
-//        this.totalCancel = totalCancel;
-//    }
     
 }

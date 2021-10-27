@@ -6,6 +6,8 @@ package controller_sale_manager;
 
 import data.EventDetail;
 import data.Events;
+import data.User;
+import data_modifier.UserModifier;
 import data_modifier.VEventModifier;
 import java.net.URL;
 import java.sql.SQLException;
@@ -36,8 +38,8 @@ public class CreateEventController implements Initializable {
 
     String proID;
     String evtID;
-    String eventID,eventDetailID,productID,Name,disc,startd,endd; 
-    
+    String eventID, eventDetailID, productID, Name, disc, startd, endd;
+
     @FXML
     private ComboBox<String> productIdcombobox;
     @FXML
@@ -46,11 +48,7 @@ public class CreateEventController implements Initializable {
     private TextField txtEventName;
     @FXML
     private TextField txtDiscount;
-    @FXML
-    private DatePicker txtStartDate;
-    @FXML
-    private DatePicker txtEndDate;
-    
+
     @FXML
     private TableColumn<Events, String> eventName;
     @FXML
@@ -77,6 +75,20 @@ public class CreateEventController implements Initializable {
     private TableColumn<EventDetail, String> eventIdEventDetail;
     @FXML
     private ComboBox<String> eventIDCombobox;
+    @FXML
+    private DatePicker startDatePicker;
+    @FXML
+    private DatePicker endDatePicker;
+    @FXML
+    private DatePicker mfgDatePicker;
+    @FXML
+    private DatePicker expDatePicker;
+    @FXML
+    private TableColumn<Events, String> userId;
+    @FXML
+    private TableColumn<EventDetail, String> mfgDate;
+    @FXML
+    private TableColumn<EventDetail, String> expDate;
 
     /**
      * Initializes the controller class.
@@ -95,24 +107,24 @@ public class CreateEventController implements Initializable {
 
     }
 
-
     private void getShowEvent() throws SQLException {
-        ObservableList<Events> oList = new VEventModifier().getVEventsInfo();
+        ObservableList<Events> oList = new VEventModifier().getEventsInfo();
         eventIdEvent.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata
+        userId.setCellValueFactory(new PropertyValueFactory<>("userId"));
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
         endDate.setCellValueFactory(new PropertyValueFactory<>("endDate")); //tenbiendata
         createEventTable.setItems(oList);
     }
-    
-    private void getShowEventDetail() throws SQLException{
+
+    private void getShowEventDetail() throws SQLException {
         ObservableList<EventDetail> oList = new VEventModifier().getEventDetailInfo();
         eventIdEventDetail.setCellValueFactory(new PropertyValueFactory<>("eventId"));
         productId.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata
         discount.setCellValueFactory(new PropertyValueFactory<>("discount")); //tenbiendata
         createEventDetailTable.setItems(oList);
-                
-        }
+
+    }
 
     private void setValueProductIdComboBox() throws SQLException {
         ObservableList<String> oList = new VEventModifier().getListProductId();
@@ -126,8 +138,8 @@ public class CreateEventController implements Initializable {
         });
 
     }
-    
-     private void setValueEventIdComboBox() throws SQLException {
+
+    private void setValueEventIdComboBox() throws SQLException {
         ObservableList<String> oList = new VEventModifier().getListEventId();
         eventIDCombobox.setItems(oList);
         eventIDCombobox.setValue(oList.get(0));
@@ -139,113 +151,55 @@ public class CreateEventController implements Initializable {
         });
 
     }
-    
-   
 
-    
+    @FXML
+    private void CreateEventClick(MouseEvent event) {
+
+    }
 
     @FXML
     private void createEventDetailClick(MouseEvent event) {
-    }
 
-
-    @FXML
-    private void getMouseClickEvent(MouseEvent event) throws SQLException {
-//        ObservableList<Events> oList = new VEventModifier().getVEventsInfo();
-//        createEventTable.setItems(oList);
-//        
-//        
-//        if (txtEventName.getText().isEmpty() ||  
-//                (txtEndDate.getValue()== null) || (txtStartDate.getValue() == null)){
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText(null);
-//            alert.setContentText("Please Fill All Data");
-//            alert.showAndWait();
-//            
-//        } else{
-//            
-//            Events events = new Events();
-//            events.setEventName(txtEventName.getText());
-//            events.setStartDate(String.valueOf(txtStartDate.getValue()));
-//            events.setStartDate(String.valueOf(txtEndDate.getValue()));
-//        
-//        }
-    
-    }
-
-    private void getMouseClickEventEvent(MouseEvent event) throws SQLException {
-//        ObservableList<Events> oList = new VEventModifier().getVEventsInfo();
-//        createEventTable.setItems(oList);
-//        
-//        
-//        
-//        if ((eventIDCombobox.getValue()== null)|| txtDiscount.getText().isEmpty()){
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText(null);
-//            alert.setContentText("Please Fill All Data");
-//            alert.showAndWait();
-//        } else{
-//            EventDetail eventDetail = new EventDetail();
-//            eventDetail.setProductId(productIdcombobox.getValue());
-//            eventDetail.setDiscount(txtDiscount.getText());
-//           
-//        }
     }
 
     @FXML
     private void createEventClick(MouseEvent event) throws SQLException {
-        
-        ObservableList<Events> oList = new VEventModifier().getVEventsInfo();
+        ObservableList<Events> oList = new VEventModifier().getEventsInfo();
         createEventTable.setItems(oList);
-        
-        
-        if (txtEventName.getText().isEmpty() ||  
-                (txtEndDate.getValue()== null) || (txtStartDate.getValue() == null)){
+
+        if (txtEventName.getText().isEmpty()
+                || (endDatePicker.getValue() == null) || (startDatePicker.getValue() == null)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Please Fill All Data");
             alert.showAndWait();
-            
-        } else{
+
+        } else {
             
             Events events = new Events();
             events.setEventName(txtEventName.getText());
-            events.setStartDate(String.valueOf(txtStartDate.getValue()));
-            events.setStartDate(String.valueOf(txtEndDate.getValue()));
-        
+            events.setStartDate(String.valueOf(startDatePicker.getValue()));
+            events.setStartDate(String.valueOf(endDatePicker.getValue()));
+
         }
-    
-        
     }
 
     @FXML
     private void createEvenDetailClick(MouseEvent event) throws SQLException {
         ObservableList<EventDetail> oList = new VEventModifier().getEventDetailInfo();
         createEventDetailTable.setItems(oList);
-        
-        
-        
-        if ((eventIDCombobox.getValue()== null)|| txtDiscount.getText().isEmpty()){
+
+        if ((eventIDCombobox.getValue() == null) || txtDiscount.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Please Fill All Data");
             alert.showAndWait();
-        } else{
+        } else {
             EventDetail eventDetail = new EventDetail();
             eventDetail.setProductId(productIdcombobox.getValue());
             eventDetail.setDiscount(txtDiscount.getText());
-           
+
         }
-        
-        
-        
-        
     }
-
-    @FXML
-    private void getMouseClickEventDetail(MouseEvent event) {
-    }
-
-   
 
 }

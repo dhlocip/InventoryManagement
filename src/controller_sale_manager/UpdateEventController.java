@@ -44,7 +44,6 @@ public class UpdateEventController implements Initializable {
     private TextField txtEventName;
     @FXML
     private TextField txtDiscount;
-    @FXML
     private DatePicker txtStartDate;
     @FXML
     private TableView<VEvent> updateEventTable;
@@ -62,14 +61,36 @@ public class UpdateEventController implements Initializable {
 
     @FXML
     private TableColumn<VEvent, String> endDate;
-    @FXML
     private DatePicker txtEndDate;
-    @FXML
     private ComboBox<String> productICombobox;
     @FXML
     private HBox upDateEvent;
     @FXML
     private HBox upDateEventDetail;
+    @FXML
+    private ComboBox<?> eventIDCombobox;
+    @FXML
+    private ComboBox<?> productIdCombobox;
+    @FXML
+    private DatePicker mfgDatePicker;
+    @FXML
+    private DatePicker expDatePicker;
+    @FXML
+    private DatePicker startDatePicker;
+    @FXML
+    private DatePicker endDatePicker;
+    @FXML
+    private TableColumn<?, ?> eventName1;
+    @FXML
+    private TableColumn<?, ?> userId1;
+    @FXML
+    private TableColumn<?, ?> startDate1;
+    @FXML
+    private TableColumn<?, ?> endDate1;
+    @FXML
+    private TableView<?> updateEventTable1;
+    @FXML
+    private TableColumn<?, ?> eventName11;
 
     /**
      * Initializes the controller class.
@@ -111,7 +132,6 @@ public class UpdateEventController implements Initializable {
 
     }
 
-    @FXML
     private void updateEventMouseClicked(MouseEvent event) {
         VEvent item = updateEventTable.getSelectionModel().getSelectedItem();
         
@@ -129,16 +149,22 @@ public class UpdateEventController implements Initializable {
     }
 
    
-    @FXML
-    private void updateEventDetailClicked(MouseEvent event) throws SQLException {
-        
-
-
-    }
 
     @FXML
     private void updateEventClick(MouseEvent event) {
 
+    }
+
+    @FXML
+    private void updateEventDetailClick(MouseEvent event) {
+    }
+
+    @FXML
+    private void updateEventDetailClickTable(MouseEvent event) {
+    }
+
+    @FXML
+    private void updateEventClickTable(MouseEvent event) {
     }
 
 }

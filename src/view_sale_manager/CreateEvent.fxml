@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_sale_manager.CreateEventController">
+<BorderPane prefHeight="393.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_sale_manager.CreateEventController">
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
@@ -23,12 +23,12 @@
                   <Label prefHeight="30.0" text="Event Name:" />
                   <TextField fx:id="txtEventName" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Start Date:" />
-                  <DatePicker fx:id="txtStartDate" prefHeight="30.0" />
+                  <DatePicker fx:id="startDatePicker" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="End Date:" />
-                  <DatePicker fx:id="txtEndDate" prefHeight="30.0" />
+                  <DatePicker fx:id="endDatePicker" prefHeight="30.0" />
                   <HBox prefHeight="40.0" prefWidth="300.0">
                      <children>
-                        <HBox fx:id="createEvent" alignment="CENTER" onMouseReleased="#createEventClick" prefHeight="28.0" prefWidth="184.0" stylesheets="@../css/app.css">
+                        <HBox fx:id="createEvent" alignment="CENTER" onMouseClicked="#CreateEventClick" onMouseReleased="#createEventClick" prefHeight="28.0" prefWidth="184.0" stylesheets="@../css/app.css">
                            <children>
                               <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                                  <graphic>
@@ -71,9 +71,20 @@
                   <ComboBox fx:id="productIdcombobox" prefHeight="30.0" />
                   <Label prefHeight="30.0" text="Discount:" />
                   <TextField fx:id="txtDiscount" prefHeight="30.0" />
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="248.0" prefWidth="381.0">
+               <children>
+                  <Label prefHeight="30.0" text="Mfg Date:" />
+                  <DatePicker fx:id="mfgDatePicker" prefHeight="30.0" />
+                  <Label prefHeight="30.0" text="Exp Date:" />
+                  <DatePicker fx:id="expDatePicker" prefHeight="30.0" />
                   <HBox alignment="CENTER_LEFT" onMouseReleased="#createEvenDetailClick">
                      <children>
-                        <HBox fx:id="createEventDetail" alignment="CENTER" onMouseReleased="#createEventDetailClick" stylesheets="@../css/app.css">
+                        <HBox fx:id="createEventDetail" alignment="CENTER" onMouseClicked="#createEventDetailClick" stylesheets="@../css/app.css">
                            <children>
                               <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="24.0" prefWidth="24.0" text="Label">
                                  <graphic>
@@ -107,9 +118,6 @@
                      </VBox.margin>
                   </HBox>
                </children>
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
             </VBox>
          </children>
       </HBox>
@@ -118,12 +126,13 @@
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="874.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="createEventTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseReleased="#getMouseClickEvent" prefHeight="200.0" prefWidth="398.0">
+            <TableView fx:id="createEventTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="589.0">
                <columns>
                   <TableColumn fx:id="eventIdEvent" prefWidth="75.0" text="Event ID" />
                   <TableColumn fx:id="eventName" prefWidth="75.0" text="Event Name" />
+                  <TableColumn fx:id="userId" prefWidth="75.0" text="User ID" />
                   <TableColumn fx:id="startDate" prefWidth="75.0" text="Start Date" />
                   <TableColumn fx:id="endDate" prefWidth="75.0" text="End Date" />
                </columns>
@@ -131,11 +140,13 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <TableView fx:id="createEventDetailTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseReleased="#getMouseClickEventDetail" prefHeight="200.0" prefWidth="211.0">
+            <TableView fx:id="createEventDetailTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="625.0">
               <columns>
                   <TableColumn fx:id="eventIdEventDetail" prefWidth="109.0" text="Event ID" />
                   <TableColumn fx:id="productId" prefWidth="100.0" text="Product ID" />
                   <TableColumn fx:id="discount" prefWidth="109.0" text="Discount" />
+                  <TableColumn fx:id="mfgDate" prefWidth="100.0" text="Mfg Date" />
+                  <TableColumn fx:id="expDate" prefWidth="100.0" text="Exp Date" />
               </columns>
             </TableView>
          </children>

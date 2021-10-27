@@ -5,14 +5,10 @@
  */
 package data_modifier;
 
-import controller_app.UIDashboardSaleManagerController;
-import data.BillDetail;
 import data.EventDetail;
 import data.Events;
 import data.VEvent;
 import static data_modifier.JDBCConnect.connect;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +21,7 @@ import javafx.collections.ObservableList;
  */
 public class VEventModifier extends JDBCConnect {
 
-    public ObservableList<VEvent> getEventInfo() throws SQLException {
+    public ObservableList<VEvent> getVEventInfo() throws SQLException {
         ObservableList<VEvent> oList = FXCollections.observableArrayList();
         String sql = "Select * from VEvent"; //viewsql
         PreparedStatement preStatement = connect().prepareStatement(sql);
@@ -40,7 +36,7 @@ public class VEventModifier extends JDBCConnect {
         return oList;
     }
 
-    public ObservableList<Events> getVEventsInfo() throws SQLException {
+    public ObservableList<Events> getEventsInfo() throws SQLException {
         ObservableList<Events> oList = FXCollections.observableArrayList();
         String sql = "Select * from Events"; //viewsql
         PreparedStatement preStatement = connect().prepareStatement(sql);

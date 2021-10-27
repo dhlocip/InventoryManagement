@@ -34,13 +34,15 @@ public class RequestModifier extends JDBCConnect {
         return oList;
     }
     
+    
+    
     // ---------------
     
     //  get list request
     public ObservableList<String> getListRequestId(String userId) throws SQLException{
         ObservableList<String> oList = FXCollections.observableArrayList();
         String sql = "select * from requests "
-                + "where userId =?";
+                + "where userId =? ";
         PreparedStatement preS = connect().prepareStatement(sql);
         preS.setString(1, userId);
         preS.execute();
