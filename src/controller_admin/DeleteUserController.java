@@ -131,15 +131,16 @@ public class DeleteUserController implements Initializable {
     @FXML
     private void userTableViewClicked(MouseEvent event) throws SQLException {
         User item = userTableView.getSelectionModel().getSelectedItem();
-        lUserId = item.getPersonId();
-        lPosition = item.getPosition();
+        
         if (item == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Notification");
             alert.setHeaderText("Error");
-            alert.setContentText("Please click on the line different null.");
+            alert.setContentText("Please click on a non-empty line.");
             alert.showAndWait();
         } else {
+            lUserId = item.getPersonId();
+            lPosition = item.getPosition();
             if (lPosition.equalsIgnoreCase("admin")) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Notification");
@@ -167,7 +168,7 @@ public class DeleteUserController implements Initializable {
                     }
                 }
             } else if (lPosition.equalsIgnoreCase("inventory manager")) {
-                List<String> listImportStockId = new ImportStockModifier().getListImportStockId(lUserId);
+                List<String> listImportStockId = new ImportStockModifier().getListImportStockId();
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Notification");
@@ -202,11 +203,11 @@ public class DeleteUserController implements Initializable {
                     for (String listId : listBillId) {
                         new BillModifier().deleteBillDetail(listId);
                     }
-                    
+
                     for (String listId : listRequestId) {
                         new RequestModifier().deleteRequestDetail(listId);
                     }
-                    
+
                     for (String listId : listNewRequestId) {
                         new NewRequestModilfier().deleteNewRequestDetail(listId);
                     }
@@ -219,8 +220,9 @@ public class DeleteUserController implements Initializable {
                     }
                 }
             }
-
         }
-
     }
+    
+    
+    
 }

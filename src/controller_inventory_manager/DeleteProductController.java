@@ -100,7 +100,7 @@ public class DeleteProductController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Notification");
             alert.setHeaderText("Error");
-            alert.setContentText("Please click on the line different null.");
+            alert.setContentText("Please click on a non-empty line.");
             alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

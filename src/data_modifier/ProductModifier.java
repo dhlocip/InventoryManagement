@@ -45,7 +45,7 @@ public class ProductModifier extends JDBCConnect {
         return oList;
     }
     
-    // get list product info
+    // get list productId
     public ObservableList<String> getListProductId() throws SQLException{
         ObservableList<String> oList = FXCollections.observableArrayList();
         String sql = "select * from products";

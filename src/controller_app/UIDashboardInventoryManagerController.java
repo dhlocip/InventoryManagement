@@ -30,7 +30,7 @@ public class UIDashboardInventoryManagerController implements Initializable {
     public static String gUserId;
     public static String gFullName;
     public static String gPosition;
-    
+
     @FXML
     private BorderPane homePane;
     @FXML
@@ -85,19 +85,19 @@ public class UIDashboardInventoryManagerController implements Initializable {
         hideChildImportBox(false);
         hideChildPersonalBox(false);
         hideChildSettingBox(false);
-        
+
     }
-    
-    public void setValueForVariableStatic(String userId, String fullName, String position){
+
+    public void setValueForVariableStatic(String userId, String fullName, String position) {
         gUserId = userId;
         userIdLabel.setText(gUserId);
         gFullName = fullName;
         fullNameLabel.setText(gFullName);
         gPosition = position;
         positionLabel.setText(gPosition);
-        
+
     }
-    
+
     private void hideChildCategoryBox(boolean value) {
         childCategoryBox.setVisible(value);
         childCategoryBox.managedProperty().bind(childCategoryBox.visibleProperty());
@@ -107,32 +107,32 @@ public class UIDashboardInventoryManagerController implements Initializable {
         childProductBox.setVisible(value);
         childProductBox.managedProperty().bind(childProductBox.visibleProperty());
     }
-    
+
     private void hideChildRequestBox(boolean value) {
         childRequestBox.setVisible(value);
         childRequestBox.managedProperty().bind(childRequestBox.visibleProperty());
     }
-    
+
     private void hideChildImportBox(boolean value) {
         childImportBox.setVisible(value);
         childImportBox.managedProperty().bind(childImportBox.visibleProperty());
     }
-    
+
     private void hideChildPersonalBox(boolean value) {
         childPersonalBox.setVisible(value);
         childPersonalBox.managedProperty().bind(childPersonalBox.visibleProperty());
     }
-    
+
     private void hideChildReportBox(boolean value) {
         childReportBox.setVisible(value);
         childReportBox.managedProperty().bind(childReportBox.visibleProperty());
     }
-    
+
     private void hideChildSettingBox(boolean value) {
         childSettingBox.setVisible(value);
         childSettingBox.managedProperty().bind(childSettingBox.visibleProperty());
     }
-    
+
     private void hideMenu(boolean value) {
         menuBox.setVisible(value);
         menuBox.managedProperty().bind(menuBox.visibleProperty());
@@ -152,7 +152,7 @@ public class UIDashboardInventoryManagerController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view_admin/" + value + ".fxml"));
         homePane.setCenter(root);
     }
-    
+
     private void setCenterBoxFromViewSaleManager(String value) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view_sale_manager/" + value + ".fxml"));
         homePane.setCenter(root);
@@ -173,71 +173,90 @@ public class UIDashboardInventoryManagerController implements Initializable {
     @FXML
     private void viewProductClicked(MouseEvent event) throws IOException {
         setCenterBox("ViewProduct");
-
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void createProductClicked(MouseEvent event) throws IOException {
         setCenterBox("CreateProduct");
-
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void updateProductClicked(MouseEvent event) throws IOException {
         setCenterBox("UpdateProduct");
-
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void deleteProductClicked(MouseEvent event) throws IOException {
         setCenterBox("DeleteProduct");
-
+        hideSupMenu(true);
+        hideMenu(false);
     }
-    
 
     @FXML
     private void viewImportClicked(MouseEvent event) throws IOException {
         setCenterBox("ViewImport");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
     @FXML
     private void createImportClicked(MouseEvent event) throws IOException {
         setCenterBox("CreateImport");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
     @FXML
     private void updateImportClicked(MouseEvent event) throws IOException {
         setCenterBox("UpdateImport");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
     @FXML
     private void deleteImportClicked(MouseEvent event) throws IOException {
         setCenterBox("DeleteImport");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
     @FXML
     private void editProfileClicked(MouseEvent event) throws IOException {
         setCenterBoxFromViewAdmin("EditProfile");
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void changePasswordClicked(MouseEvent event) throws IOException {
         setCenterBoxFromViewAdmin("ChangePassword");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
     @FXML
     private void inventoryByDateClicked(MouseEvent event) throws IOException {
         setCenterBox("InventoryByDate");
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void inventoryByCategoryClicked(MouseEvent event) throws IOException {
         setCenterBox("InventoryByCategory");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
@@ -252,7 +271,7 @@ public class UIDashboardInventoryManagerController implements Initializable {
         gPosition = null;
         Parent root = FXMLLoader.load(getClass().getResource("/view_admin/UILogIn.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Sign In");
         stage.show();
@@ -261,31 +280,44 @@ public class UIDashboardInventoryManagerController implements Initializable {
     @FXML
     private void viewRequestClicked(MouseEvent event) throws IOException {
         setCenterBoxFromViewSaleManager("Request");
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void viewNewRequestClicked(MouseEvent event) throws IOException {
         setCenterBoxFromViewSaleManager("NewRequest");
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void viewCategoryClicked(MouseEvent event) throws IOException {
         setCenterBox("ViewCategory");
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void createCategoryClicked(MouseEvent event) throws IOException {
         setCenterBox("CreateCategory");
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void updateCategoryClicked(MouseEvent event) throws IOException {
         setCenterBox("UpdateCategory");
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void deleteCategoryClicked(MouseEvent event) throws IOException {
         setCenterBox("DeleteCategory");
+        hideSupMenu(true);
+        hideMenu(false);
+        
     }
 
     @FXML
@@ -364,7 +396,5 @@ public class UIDashboardInventoryManagerController implements Initializable {
         hideChildPersonalBox(false);
         hideChildSettingBox(false);
     }
-
-    
 
 }

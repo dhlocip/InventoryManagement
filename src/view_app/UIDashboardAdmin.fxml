@@ -80,7 +80,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childUserBox">
                      <children>
                         <HBox fx:id="viewUserHB" alignment="CENTER_LEFT" onMouseClicked="#viewUserClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -93,7 +93,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="View user info">
+                              <Label fx:id="viewUserLB" prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="View user info">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
@@ -173,7 +173,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#manageSupplierClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage suppliers">
                            <HBox.margin>
@@ -185,7 +185,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childSupplierBox">
                      <children>
                         <HBox fx:id="viewSupHB" alignment="CENTER_LEFT" onMouseClicked="#viewSupplierClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -278,7 +278,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#managePersonalInfoClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage personal info">
                            <HBox.margin>
@@ -290,7 +290,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childPersonalInfoBox">
                      <children>
                         <HBox fx:id="editProfileHB" alignment="CENTER_LEFT" onMouseClicked="#editProfileClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -341,7 +341,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#settingClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Setting">
                            <HBox.margin>
@@ -353,7 +353,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox fx:id="languageHB" alignment="CENTER_LEFT" prefHeight="35.0" styleClass="app-hover" stylesheets="@../css/app.css">
+                  <HBox fx:id="childSettingBox" alignment="CENTER_LEFT" prefHeight="35.0" styleClass="app-hover" stylesheets="@../css/app.css">
                      <children>
                         <Label prefHeight="24.0" prefWidth="24.0">
                            <graphic>
@@ -442,7 +442,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" styleClass="app-hover" stylesheets="@../css/app.css">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#positionClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                      <children>
                         <Label prefHeight="24.0" prefWidth="24.0">
                            <graphic>
@@ -453,11 +453,32 @@
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Label fx:id="positionLabel" prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="position">
+                        <Label fx:id="positionLB" prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="position">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>
                         </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="childSettingBox1" alignment="CENTER_LEFT" layoutX="20.0" layoutY="608.0" prefHeight="35.0" styleClass="app-hover" stylesheets="@../css/app.css">
+                     <children>
+                        <Label prefHeight="24.0" prefWidth="24.0">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/view-list-ordered-symbolic.symbolic.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <ComboBox prefHeight="30.0" promptText="English">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ComboBox>
                      </children>
                      <padding>
                         <Insets left="10.0" right="10.0" />

@@ -6,9 +6,12 @@ package controller_inventory_manager;
 
 import data.Category;
 import data_modifier.CategoryModifier;
+import data_modifier.ImportStockModifier;
+import data_modifier.ProductModifier;
 import data_modifier.SupplierModifier;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -91,7 +94,7 @@ public class DeleteCategoryController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Notification");
             alert.setHeaderText("Error");
-            alert.setContentText("Please click to a row into table.");
+            alert.setContentText("Please click on a non-empty line.");
             alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -99,7 +102,15 @@ public class DeleteCategoryController implements Initializable {
             alert.setHeaderText("Confirm");
             alert.setContentText("Are you sure?\nClick OK to delete the line.");
             Optional<ButtonType> result = alert.showAndWait();
+
             if (result.isPresent() && result.get() == ButtonType.OK) {
+                List<String> listProductId = new ProductModifier().getListProductId();
+//                List<String> listImportStockId = new ImportStockModifier().getListImportStockId(userId);
+//                List<String> listProductId = new ProductModifier().getListProductId();
+                
+                for (String productId : listProductId) {
+                    new ProductModifier().deleteProduct(productId);
+                }
                 new CategoryModifier().deleteCategory(item.getCategoryId());
                 getListCategory();
             }

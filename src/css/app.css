@@ -8,7 +8,7 @@
     -fx-cursor: hand;
 }
 
-.app-controls:hover, .app-hover:hover {
+.app-controls:hover, .app-hover:hover, .app-label {
     -fx-background-color: #d7ffb8;
     -fx-cursor: hand;
     /*-fx-text-fill: #58cc02;*/
@@ -39,3 +39,4 @@
     -fx-background-color: grey;
 
 }
+

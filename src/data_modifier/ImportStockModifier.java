@@ -17,12 +17,11 @@ import javafx.collections.ObservableList;
 public class ImportStockModifier extends JDBCConnect {
 
     //  get list importStockId from importStocks
-    public ObservableList<String> getListImportStockId(String userId) throws SQLException {
+    public ObservableList<String> getListImportStockId() throws SQLException {
         ObservableList<String> oList = FXCollections.observableArrayList();
         String sql = "select * from ImportStocks "
                 + "where userId =?";
         PreparedStatement preS = connect().prepareStatement(sql);
-        preS.setString(1, userId);
         preS.execute();
         ResultSet result = preS.getResultSet();
         while (result.next()) {

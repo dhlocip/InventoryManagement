@@ -141,7 +141,7 @@ public class CreateCategoryController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Notification");
             alert.setHeaderText("Error");
-            alert.setContentText("Please click to a row into table.");
+            alert.setContentText("Text fields are not empty.");
             alert.showAndWait();
             checkCategoryName();
         }

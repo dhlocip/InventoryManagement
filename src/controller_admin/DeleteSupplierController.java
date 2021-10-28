@@ -104,7 +104,7 @@ public class DeleteSupplierController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Notification");
             alert.setHeaderText("Error");
-            alert.setContentText("Please click to a row into table.");
+            alert.setContentText("Please click on a non-empty line.");
             alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
