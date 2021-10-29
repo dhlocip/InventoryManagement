@@ -98,7 +98,6 @@ public class UIDashboardSaleManagerController implements Initializable {
     @FXML
     private void viewEventClicked(MouseEvent event) throws IOException {
         setCenterBox("ViewEvent");
-//        System.out.println(gPosition);
     }
 
     @FXML
