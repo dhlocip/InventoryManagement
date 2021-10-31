@@ -229,7 +229,6 @@ public class CreateImportController implements Initializable {
             impDetail.setImportStockId(new ImportStockModifier().getMaxImportStockId());
             impDetail.setProductId(productIdComboBox.getValue());
             impDetail.setQuantity(quantitySpinner.getValue());
-            System.out.println(quantitySpinner.getValue());
             impDetail.setPrice(Double.parseDouble(priceTF.getText()));
             impDetail.setMfgDate((mfgDatePicker.getValue()).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
             impDetail.setExpDate((expDatePicker.getValue()).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));

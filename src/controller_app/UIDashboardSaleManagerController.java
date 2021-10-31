@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -42,6 +43,16 @@ public class UIDashboardSaleManagerController implements Initializable {
     private Label positionLabel;
     @FXML
     private Label fullNameLabel;
+    @FXML
+    private VBox childEventBox;
+    @FXML
+    private VBox childRequestBox;
+    @FXML
+    private VBox childPersonalBox;
+    @FXML
+    private VBox childStatisticBox;
+    @FXML
+    private HBox childSettingBox;
 
     /**
      * Initializes the controller class.
@@ -51,6 +62,37 @@ public class UIDashboardSaleManagerController implements Initializable {
         // TODO
         hideSupMenu(false);
 
+        hideChildEventBox(false);
+        hideChildRequestBox(false);
+        hideChildPersonalBox(false);
+        hideChildStatisticBox(false);
+        hideChildSettingBox(false);
+
+    }
+
+    private void hideChildEventBox(boolean value) {
+        childEventBox.setVisible(value);
+        childEventBox.managedProperty().bind(childEventBox.visibleProperty());
+    }
+
+    private void hideChildRequestBox(boolean value) {
+        childRequestBox.setVisible(value);
+        childRequestBox.managedProperty().bind(childRequestBox.visibleProperty());
+    }
+
+    private void hideChildPersonalBox(boolean value) {
+        childPersonalBox.setVisible(value);
+        childPersonalBox.managedProperty().bind(childPersonalBox.visibleProperty());
+    }
+
+    private void hideChildStatisticBox(boolean value) {
+        childStatisticBox.setVisible(value);
+        childStatisticBox.managedProperty().bind(childStatisticBox.visibleProperty());
+    }
+
+    private void hideChildSettingBox(boolean value) {
+        childSettingBox.setVisible(value);
+        childSettingBox.managedProperty().bind(childSettingBox.visibleProperty());
     }
 
     public void setValueForVariableStatic(String userId, String fullName, String position) {
@@ -98,57 +140,75 @@ public class UIDashboardSaleManagerController implements Initializable {
     @FXML
     private void viewEventClicked(MouseEvent event) throws IOException {
         setCenterBox("ViewEvent");
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void createEventClicked(MouseEvent event) throws IOException {
         setCenterBox("CreateEvent");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
     @FXML
     private void updateEventClicked(MouseEvent event) throws IOException {
         setCenterBox("UpdateEvent");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
     @FXML
     private void deleteEventClicked(MouseEvent event) throws IOException {
         setCenterBox("DeleteEvent");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
     @FXML
     private void requestClicked(MouseEvent event) throws IOException {
         setCenterBox("Request");
-
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void newRequestClicked(MouseEvent event) throws IOException {
         setCenterBox("NewRequest");
-
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void editProfileClicked(MouseEvent event) throws IOException {
         setCenterBoxFromViewAdmin("EditProfile");
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void changePasswordClicked(MouseEvent event) throws IOException {
         setCenterBoxFromViewAdmin("ChangePassword");
+        hideSupMenu(true);
+        hideMenu(false);
     }
 
     @FXML
     private void byDateClicked(MouseEvent event) throws IOException {
         setCenterBox("StatisticByDate");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
     @FXML
     private void byCanceledBillClicked(MouseEvent event) throws IOException {
         setCenterBox("StatisticByCancel");
+        hideSupMenu(true);
+        hideMenu(false);
 
     }
 
@@ -159,10 +219,55 @@ public class UIDashboardSaleManagerController implements Initializable {
         gPosition = null;
         Parent root = FXMLLoader.load(getClass().getResource("/view_admin/UILogIn.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Sign In");
         stage.show();
+    }
+
+    @FXML
+    private void manageEventClicked(MouseEvent event) {
+        hideChildEventBox(true);
+        hideChildRequestBox(false);
+        hideChildPersonalBox(false);
+        hideChildStatisticBox(false);
+        hideChildSettingBox(false);
+    }
+
+    @FXML
+    private void managerPersonalClicked(MouseEvent event) {
+        hideChildEventBox(false);
+        hideChildRequestBox(false);
+        hideChildPersonalBox(true);
+        hideChildStatisticBox(false);
+        hideChildSettingBox(false);
+    }
+
+    @FXML
+    private void statisticClicked(MouseEvent event) {
+        hideChildEventBox(false);
+        hideChildRequestBox(false);
+        hideChildPersonalBox(false);
+        hideChildStatisticBox(true);
+        hideChildSettingBox(false);
+    }
+
+    @FXML
+    private void settingClicked(MouseEvent event) {
+        hideChildEventBox(false);
+        hideChildRequestBox(false);
+        hideChildPersonalBox(false);
+        hideChildStatisticBox(false);
+        hideChildSettingBox(true);
+    }
+
+    @FXML
+    private void manageRequestClicked(MouseEvent event) {
+        hideChildEventBox(false);
+        hideChildRequestBox(true);
+        hideChildPersonalBox(false);
+        hideChildStatisticBox(false);
+        hideChildSettingBox(false);
     }
 
 }

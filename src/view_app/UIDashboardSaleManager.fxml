@@ -66,7 +66,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#manageEventClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage events">
                            <HBox.margin>
@@ -78,7 +78,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childEventBox">
                      <children>
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#viewEventClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -171,9 +171,9 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#manageRequestClicked">
                      <children>
-                        <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Requests">
+                        <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage requests">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>
@@ -183,7 +183,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childRequestBox">
                      <children>
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#requestClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -250,7 +250,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#managerPersonalClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Manage personal info">
                            <HBox.margin>
@@ -262,7 +262,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childPersonalBox">
                      <children>
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#editProfileClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -313,7 +313,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#statisticClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Statistic and Report">
                            <HBox.margin>
@@ -325,7 +325,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="childStatisticBox">
                      <children>
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#byDateClicked" styleClass="app-hover" stylesheets="@../css/app.css">
                            <children>
@@ -376,7 +376,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Line>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#settingClicked">
                      <children>
                         <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Setting">
                            <HBox.margin>
@@ -388,7 +388,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" styleClass="app-hover" stylesheets="@../css/app.css">
+                  <HBox fx:id="childSettingBox" alignment="CENTER_LEFT" prefHeight="35.0" styleClass="app-hover" stylesheets="@../css/app.css">
                      <children>
                         <Label prefHeight="24.0" prefWidth="24.0">
                            <graphic>

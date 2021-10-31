@@ -163,13 +163,9 @@ public class EditProfileController implements Initializable {
         userIdTF.setText(user.getPersonId());
         fullNameTF.setText(user.getFullName());
 
-        String formatBirthDay = user.getBirthday().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        LocalDate localBirthDay = LocalDate.parse(formatBirthDay);
-        birthDayDatePicker.setValue(localBirthDay);
+        birthDayDatePicker.setValue(LocalDate.parse(user.getBirthday()));
 
-        String formatHireDate = user.getHireDate().formatted(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        LocalDate hireDate = LocalDate.parse(formatHireDate);
-        hireDatePicker.setValue(hireDate);
+        hireDatePicker.setValue(LocalDate.parse(user.getHireDate()));
 
         addressTF.setText(user.getAddress());
         phoneTF.setText(user.getPhone());

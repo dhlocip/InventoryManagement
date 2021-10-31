@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -123,17 +124,6 @@ public class InventoryByCategoryController implements Initializable {
     private void setCategoryId() throws SQLException {
         ObservableList<String> oList = new CategoryModifier().getListCategoryId();
         categoryIdComboBox.setItems(oList);
-
-        categoryIdComboBox.setOnAction((t) -> {
-            try {
-                categoryIdComboBox.getValue();
-                getListInventoryAfterSearch(categoryIdComboBox.getValue());
-                getInventoryBarChartByCategoryId(categoryIdComboBox.getValue());
-            } catch (SQLException ex) {
-                Logger.getLogger(InventoryByCategoryController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-
     }
 
     private void getListInventory() throws SQLException {
@@ -171,13 +161,20 @@ public class InventoryByCategoryController implements Initializable {
             alert.setHeaderText("Success");
             alert.setContentText("Exported excel file successfully.");
             alert.showAndWait();
-        }else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Notification");
             alert.setHeaderText("Error");
             alert.setContentText("Please click to \'Category ID\'.");
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void categoryIdAction(ActionEvent event) throws SQLException {
+        String categoryId = categoryIdComboBox.getValue();
+        getListInventoryAfterSearch(categoryId);
+        getInventoryBarChartByCategoryId(categoryId);
     }
 
 }
