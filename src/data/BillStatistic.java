@@ -11,41 +11,29 @@ import java.util.Date;
  *
  * @author ADMIN
  */
-public class VBills {
-
+public class BillStatistic {
+    
     private String billId;
     private String userId;
     private Date transactionDate;
-    private String statusCancel;
     private String paymentName;
+    private String statusCancel;
     private String productId;
     private int quantity;
     private String mfgDate;
     private String expDate;
     private float price;
-    private float total = quantity * price;
+    private float total;
 
-    public VBills() {
+    public BillStatistic() {
     }
 
-    public VBills(String billId, String userId, Date transactionDate, String statusCancel, String paymentName, String productId, int quantity, String mfgDate, String expDate) {
+    public BillStatistic(String billId, String userId, Date transactionDate, String paymentName, String statusCancel, String productId, int quantity, String mfgDate, String expDate, float price, float total) {
         this.billId = billId;
         this.userId = userId;
         this.transactionDate = transactionDate;
-        this.statusCancel = statusCancel;
         this.paymentName = paymentName;
-        this.productId = productId;
-        this.quantity = quantity;
-        this.mfgDate = mfgDate;
-        this.expDate = expDate;
-    }
-
-    public VBills(String billId, String userId, Date transactionDate, String statusCancel, String paymentName, String productId, int quantity, String mfgDate, String expDate, float price, float total) {
-        this.billId = billId;
-        this.userId = userId;
-        this.transactionDate = transactionDate;
         this.statusCancel = statusCancel;
-        this.paymentName = paymentName;
         this.productId = productId;
         this.quantity = quantity;
         this.mfgDate = mfgDate;
@@ -78,20 +66,20 @@ public class VBills {
         this.transactionDate = transactionDate;
     }
 
-    public String getStatusCancel() {
-        return statusCancel;
-    }
-
-    public void setStatusCancel(String statusCancel) {
-        this.statusCancel = statusCancel;
-    }
-
     public String getPaymentName() {
         return paymentName;
     }
 
     public void setPaymentName(String paymentName) {
         this.paymentName = paymentName;
+    }
+
+    public String getStatusCancel() {
+        return statusCancel;
+    }
+
+    public void setStatusCancel(String statusCancel) {
+        this.statusCancel = statusCancel;
     }
 
     public String getProductId() {
@@ -142,4 +130,7 @@ public class VBills {
         this.total = total;
     }
 
+   
+    
+    
 }

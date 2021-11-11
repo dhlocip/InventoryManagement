@@ -46,11 +46,17 @@ public class DeleteEventController implements Initializable {
     @FXML
     private TableColumn<VEvent, String> eventId;
     @FXML
-    private TableView<VEvent> deleteEvent;
-    @FXML
     private HBox search;
     @FXML
     private ComboBox<String> eventIdCombobox;
+    @FXML
+    private TableColumn<VEvent, String> mfgDate;
+    @FXML
+    private TableColumn<VEvent, String> expDate;
+    @FXML
+    private TableView<VEvent> deleteEventTable;
+    @FXML
+    private TableColumn<VEvent, String> userId;
 
     /**
      * Initializes the controller class.
@@ -69,14 +75,17 @@ public class DeleteEventController implements Initializable {
 
     private void getShow() throws SQLException {
 
-        ObservableList<VEvent> oList = new VEventModifier().getEventInfo();
+        ObservableList<VEvent> oList = new VEventModifier().getVEventInfo();
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
         productId.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata
         discount.setCellValueFactory(new PropertyValueFactory<>("discount")); //tenbiendata
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
         endDate.setCellValueFactory(new PropertyValueFactory<>("endDate")); //tenbiendata
-        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata    
-        deleteEvent.setItems(oList);
+        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata  
+        mfgDate.setCellValueFactory(new PropertyValueFactory<>("mfgDate"));
+        expDate.setCellValueFactory(new PropertyValueFactory<>("expDate"));
+        userId.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        deleteEventTable.setItems(oList);
     }
 
     private void setValueEventIdComboBox() throws SQLException {
@@ -96,7 +105,7 @@ public class DeleteEventController implements Initializable {
     private void getDelete(MouseEvent event) throws SQLException {
 
 
-        VEvent item = deleteEvent.getSelectionModel().getSelectedItem();
+        VEvent item = deleteEventTable.getSelectionModel().getSelectedItem();
         if (item != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Notification");
@@ -130,16 +139,20 @@ public class DeleteEventController implements Initializable {
         discount.setCellValueFactory(new PropertyValueFactory<>("discount")); //tenbiendata
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
         endDate.setCellValueFactory(new PropertyValueFactory<>("endDate")); //tenbiendata
-        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata    
-        deleteEvent.setItems(oList);
+        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata  
+        mfgDate.setCellValueFactory(new PropertyValueFactory<>("mfgDate"));
+        expDate.setCellValueFactory(new PropertyValueFactory<>("expDate"));
+        userId.setCellValueFactory(new PropertyValueFactory<>("userId"));    
+        deleteEventTable.setItems(oList);
     }
 
+   
+
     @FXML
-    private void getFind(MouseEvent event) throws SQLException {
-        
+    private void getSearch(MouseEvent event) throws SQLException {
         getEventByEventId(eventIdCombobox.getValue());
-        
     }
+
 
 
     

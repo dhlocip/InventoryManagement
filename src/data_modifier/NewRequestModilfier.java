@@ -33,6 +33,16 @@ public class NewRequestModilfier extends JDBCConnect {
         }
         return oList;
     }
+    
+    public boolean getNewRequestUpdate(String newStatusVerify, String newNewRequestId) throws SQLException{
+    String sql = "Update NewRequests set statusVerify = ? where newRequestId = ? "; //viewsql
+    PreparedStatement preStatement= connect().prepareStatement(sql);
+    preStatement.setString(1, newStatusVerify);
+    preStatement.setString(2, newNewRequestId);
+    preStatement.execute();
+
+        return true;
+    }
 
     // ---------------
     //  get list newRequest
