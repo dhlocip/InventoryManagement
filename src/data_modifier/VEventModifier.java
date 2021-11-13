@@ -13,6 +13,7 @@ import static data_modifier.JDBCConnect.connect;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -93,7 +94,7 @@ public class VEventModifier extends JDBCConnect {
 
     public ObservableList<String> getProductIdEvent() throws SQLException {
         ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select productId from Products EXCEPT select productId from EventDetail;";
+        String sql = "select productId from Products EXCEPT select productId from EventDetail";
         PreparedStatement preStatement = connect().prepareStatement(sql);
         preStatement.execute();
         ResultSet result = preStatement.getResultSet();
@@ -119,20 +120,20 @@ public class VEventModifier extends JDBCConnect {
         }
         return oList;
     }
-    
-    
-     public boolean getCreateEvents(Events events) throws SQLException {
+
+    public boolean getCreateEvents(Events events) throws SQLException {
         String sql = "insert into Events (userId, eventName, startDate, endDate) VALUES(?,?,?,?)"; //viewsql
         PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.setString(1,events.getUserId());
+        preStatement.setString(1, events.getUserId());
         preStatement.setString(2, events.getEventName());
         preStatement.setString(3, events.getStartDate());
         preStatement.setString(4, events.getEndDate());
         preStatement.execute();
         return true;
-    
+
     }
-        public boolean getCreateEventDetail(EventDetail eventDetail) throws SQLException {
+
+    public boolean getCreateEventDetail(EventDetail eventDetail) throws SQLException {
         String sql = "insert into EventDetail (eventId, productId, discount, mfgDate, expDate) VALUES(?,?,?,?,?)"; //viewsql
         PreparedStatement preStatement = connect().prepareStatement(sql);
         preStatement.setString(1, eventDetail.getEventId());
@@ -142,11 +143,8 @@ public class VEventModifier extends JDBCConnect {
         preStatement.setString(5, eventDetail.getExpDate());
         preStatement.execute();
         return true;
-        
-        
-    }
 
-    
+    }
 
     public boolean getUpdateEventDetail(EventDetail eventDetail) throws SQLException {
 
@@ -172,8 +170,8 @@ public class VEventModifier extends JDBCConnect {
         preStatement.executeUpdate();
         return true;
     }
-    
-    public ObservableList<String> getListEventsName() throws SQLException{
+
+    public ObservableList<String> getListEventsName() throws SQLException {
         ObservableList<String> oList = FXCollections.observableArrayList();
         String sql = "select eventName from Events";
         PreparedStatement preStatement = connect().prepareStatement(sql);
@@ -184,9 +182,5 @@ public class VEventModifier extends JDBCConnect {
         }
         return oList;
 
-
-        }
-
+    }
 }
-    
-

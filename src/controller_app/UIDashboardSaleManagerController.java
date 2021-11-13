@@ -145,7 +145,7 @@ public class UIDashboardSaleManagerController implements Initializable {
     }
 
     @FXML
-    private void createEventClicked(MouseEvent event) throws IOException {
+    private void createEventClicked(MouseEvent event) throws IOException  {
         setCenterBox("CreateEvent");
         hideSupMenu(true);
         hideMenu(false);

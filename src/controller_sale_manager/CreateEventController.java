@@ -15,6 +15,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -97,15 +98,14 @@ public class CreateEventController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         try {
             getShow();
-            setValueProductIdComboBox();
             setValueEventIdComboBox();
+            setValueProductIdComboBox();
         } catch (SQLException ex) {
-            Logger.getLogger(CreateEventController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(CreateEventController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
 
     private void getShow() throws SQLException {
@@ -122,35 +122,43 @@ public class CreateEventController implements Initializable {
         createEventTable.setItems(oList);
     }
 
+//    private void setValueProductIdComboBox() throws SQLException {
+//        ObservableList<String> oList = new VEventModifier().getProductIdEvent();
+//        if (oList.get(0) != null) {
+//            productIdCombobox.setItems(oList);
+//            productIdCombobox.setValue(oList.get(0));
+//            proID = productIdCombobox.getValue();
+//            productIdCombobox.setOnAction((t) -> {
+//                proID = productIdCombobox.getValue();
+//            });
+//        } else {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText(null);
+//            alert.setContentText("Out of stock for event creation.");
+//            alert.showAndWait();
+//
+//        }
+//    }
     private void setValueProductIdComboBox() throws SQLException {
-        ObservableList<String> oList = new VEventModifier().getProductIdEvent();
-        if (oList.get(0) != null) {
-            productIdCombobox.setItems(oList);
-            productIdCombobox.setValue(oList.get(0));
+        ObservableList<String> oList = new VEventModifier().getListProductId();
+        productIdCombobox.setItems(oList);
+        productIdCombobox.setValue(oList.get(0));
+
+        proID = productIdCombobox.getValue();
+
+        productIdCombobox.setOnAction((t) -> {
             proID = productIdCombobox.getValue();
-            productIdCombobox.setOnAction((t) -> {
-                proID = productIdCombobox.getValue();
-            });
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Out of stock for event creation.");
-            alert.showAndWait();
-
-        }
+        });
     }
-
+    
     private void setValueEventIdComboBox() throws SQLException {
         ObservableList<String> oList = new VEventModifier().getListEventId();
         eventIdCombobox.setItems(oList);
         eventIdCombobox.setValue(oList.get(0));
-
         evtID = eventIdCombobox.getValue();
-
         eventIdCombobox.setOnAction((t) -> {
             evtID = eventIdCombobox.getValue();
         });
-
     }
 
     @FXML
@@ -164,7 +172,6 @@ public class CreateEventController implements Initializable {
         LocalDate end = startDatePicker.getValue();
         endd = String.valueOf(end);
     }
-
 
     @FXML
     private void eventId(ActionEvent event) {
@@ -206,29 +213,28 @@ public class CreateEventController implements Initializable {
             LocalDate now = LocalDate.now();
             LocalDate checkStart = startDatePicker.getValue();
             LocalDate checkEnd = endDatePicker.getValue();
-            if( checkStart.compareTo(now) <0 || checkEnd.compareTo(checkStart) <=0 ){
-            
-             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Nhap lai ngay");
-            alert.showAndWait();
-            
-            } else{
-                
+            if (checkStart.compareTo(now) < 0 || checkEnd.compareTo(checkStart) <= 0) {
 
-            Events events = new Events();
-            events.setUserId(userIdTF);
-            events.setEventName(Name);
-            events.setStartDate(startd);
-            events.setEndDate(endd);
-
-            if (new VEventModifier().getCreateEvents(events)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Notification");
-                alert.setHeaderText("Success");
-                alert.setContentText("User is update successfully.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Nhap lai ngay");
                 alert.showAndWait();
-            }
+
+            } else {
+
+                Events events = new Events();
+                events.setUserId(userIdTF);
+                events.setEventName(Name);
+                events.setStartDate(startd);
+                events.setEndDate(endd);
+
+                if (new VEventModifier().getCreateEvents(events)) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Notification");
+                    alert.setHeaderText("Success");
+                    alert.setContentText("User is update successfully.");
+                    alert.showAndWait();
+                }
             }
         }
         getShow();
@@ -247,40 +253,35 @@ public class CreateEventController implements Initializable {
             LocalDate now = LocalDate.now();
             LocalDate checkStart = mfgDatePicker.getValue();
             LocalDate checkEnd = expDatePicker.getValue();
-            if(checkEnd.compareTo(checkStart) <=0 || checkEnd.compareTo(now)<0 ){
-            
-             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Nhap lai ngay");
-            alert.showAndWait();
-            
-            } else{
-            
-            
-            disc = txtDiscount.getText();
-            EventDetail eventDetail = new EventDetail();
-            eventDetail.setEventId(evtID);
-            eventDetail.setProductId(proID);
-            eventDetail.setDiscount(disc);
-            eventDetail.setMfgDate(mfgd);
-            eventDetail.setExpDate(expd);
+            if (checkEnd.compareTo(checkStart) <= 0 || checkEnd.compareTo(now) < 0) {
 
-            if (new VEventModifier().getCreateEventDetail(eventDetail)) {
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Notification");
-                alert.setHeaderText("Success");
-                alert.setContentText("User is update successfully.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Nhap lai ngay");
                 alert.showAndWait();
-            }
+
+            } else {
+
+                disc = txtDiscount.getText();
+                EventDetail eventDetail = new EventDetail();
+                eventDetail.setEventId(evtID);
+                eventDetail.setProductId(proID);
+                eventDetail.setDiscount(disc);
+                eventDetail.setMfgDate(mfgd);
+                eventDetail.setExpDate(expd);
+
+                if (new VEventModifier().getCreateEventDetail(eventDetail)) {
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Notification");
+                    alert.setHeaderText("Success");
+                    alert.setContentText("User is update successfully.");
+                    alert.showAndWait();
+                }
             }
         }
         getShow();
-        
-        
-    }
 
-   
-    
+    }
 
 }

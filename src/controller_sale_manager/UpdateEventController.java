@@ -131,7 +131,6 @@ public class UpdateEventController implements Initializable {
         productIdCombobox.setOnAction((t) -> {
             proID = productIdCombobox.getValue();
         });
-
     }
 
     private void setValueEventIdComboBox() throws SQLException {
