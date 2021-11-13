@@ -54,6 +54,12 @@ public class ViewEventController implements Initializable {
     private ComboBox<String> eventIdCombobox;
     @FXML
     private HBox search;
+    @FXML
+    private TableColumn<VEvent, String> userId;
+    @FXML
+    private TableColumn<VEvent, String> mfgDate;
+    @FXML
+    private TableColumn<VEvent, String> expDate;
 
     /**
      * Initializes the controller class.
@@ -64,7 +70,7 @@ public class ViewEventController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
                    
         try {
-            getVEvent();
+            getShow();
             setValueEventIdComboBox();
         } catch (SQLException ex) {
             Logger.getLogger(ViewEventController.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,16 +78,18 @@ public class ViewEventController implements Initializable {
         
     }   
     
-    private void getVEvent() throws SQLException{
+    private void getShow() throws SQLException{
         
-        ObservableList<VEvent> oList = new VEventModifier().getEventInfo();
-        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata
+        ObservableList<VEvent> oList = new VEventModifier().getVEventInfo();
         eventName.setCellValueFactory(new PropertyValueFactory<>("eventName")); //tenbiendata
         productId.setCellValueFactory(new PropertyValueFactory<>("productId")); //tenbiendata
         discount.setCellValueFactory(new PropertyValueFactory<>("discount")); //tenbiendata
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
         endDate.setCellValueFactory(new PropertyValueFactory<>("endDate")); //tenbiendata
-        
+        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata  
+        mfgDate.setCellValueFactory(new PropertyValueFactory<>("mfgDate"));
+        expDate.setCellValueFactory(new PropertyValueFactory<>("expDate"));
+        userId.setCellValueFactory(new PropertyValueFactory<>("userId"));
         viewEventTable.setItems(oList);
         
     }
@@ -107,15 +115,18 @@ public class ViewEventController implements Initializable {
         discount.setCellValueFactory(new PropertyValueFactory<>("discount")); //tenbiendata
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate")); //tenbiendata
         endDate.setCellValueFactory(new PropertyValueFactory<>("endDate")); //tenbiendata
-        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata    
+        eventId.setCellValueFactory(new PropertyValueFactory<>("eventId")); //tenbiendata  
+        mfgDate.setCellValueFactory(new PropertyValueFactory<>("mfgDate"));
+        expDate.setCellValueFactory(new PropertyValueFactory<>("expDate"));
+        userId.setCellValueFactory(new PropertyValueFactory<>("userId"));   
         viewEventTable.setItems(oList);
     }
 
-    
+  
+
     @FXML
-    private void getFind(MouseEvent event) throws SQLException {
+    private void getSearch(MouseEvent event) throws SQLException {
         getEventByEventId(eventIdCombobox.getValue());
-        
     }
     
 }

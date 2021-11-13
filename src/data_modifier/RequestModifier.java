@@ -6,12 +6,9 @@
 package data_modifier;
 
 import data.VRequest;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 /**
@@ -50,7 +47,17 @@ public class RequestModifier extends JDBCConnect {
         }
         return oList;
     }
+
     
+    public boolean getRequestUpdate(String newStatusVerify, String newRequestId) throws SQLException{
+    String sql = "Update Requests set statusVerify = ? where requestId = ? "; //viewsql
+    PreparedStatement preStatement= connect().prepareStatement(sql);
+    preStatement.setString(1, newStatusVerify);
+    preStatement.setString(2, newRequestId);
+    preStatement.execute();
+
+        return true;
+    }
     //    delete request detail by requestId
     public boolean deleteRequestDetail(String requestIdOrProductId) throws SQLException{
         String sql = "delete from requestDetail "
