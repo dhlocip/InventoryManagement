@@ -264,7 +264,7 @@ public class InventoryModifier extends JDBCConnect {
             i++;
         }
 
-        FileOutputStream out = new FileOutputStream(new File("/home/sa/Desktop/InventoryByDate.xlsx"));
+        FileOutputStream out = new FileOutputStream(new File("/home/ip/Desktop/InventoryByDate.xlsx"));
         workbook.write(out);
         out.close();
         return true;
@@ -447,7 +447,7 @@ public class InventoryModifier extends JDBCConnect {
             i++;
         }
 
-        FileOutputStream out = new FileOutputStream(new File("/home/sa/Desktop/InventoryByCategory.xlsx"));
+        FileOutputStream out = new FileOutputStream(new File("/home/ip/Desktop/InventoryByCategory.xlsx"));
         workbook.write(out);
         out.close();
         return true;

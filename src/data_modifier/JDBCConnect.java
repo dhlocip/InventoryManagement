@@ -13,7 +13,7 @@ import java.sql.*;
 public abstract class JDBCConnect {
 
     public static Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SIMS", "sa", "123456");
+        return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SIMS", "sa", "");
     }
     
 }
