@@ -463,27 +463,6 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </HBox>
-                  <HBox fx:id="childSettingBox1" alignment="CENTER_LEFT" layoutX="20.0" layoutY="608.0" prefHeight="35.0" styleClass="app-hover" stylesheets="@../css/app.css">
-                     <children>
-                        <Label prefHeight="24.0" prefWidth="24.0">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/view-list-ordered-symbolic.symbolic.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <ComboBox prefHeight="30.0" promptText="English">
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </ComboBox>
-                     </children>
-                     <padding>
-                        <Insets left="10.0" right="10.0" />
-                     </padding>
-                  </HBox>
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" top="10.0" />
