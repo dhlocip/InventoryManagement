@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="homeBox" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_admin.InsertCodeController">
+   <center>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-border-color: green; -fx-border-radius: 10px;" stylesheets="@../css/app.css" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="46.0">
+               <children>
+                  <Label prefHeight="35.0" style="-fx-font-weight: bold; -fx-font-size: 24px;" text="SIMS" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="35.0" style="-fx-font-size: 20px;" text="Enter the security code">
+                           <VBox.margin>
+                              <Insets left="22.0" />
+                           </VBox.margin></Label>
+                        <Label prefHeight="35.0" style="-fx-font-size: 16px;" text="Please check the code in your email. This code consists of 8 numbers.">
+                           <VBox.margin>
+                              <Insets left="22.0" right="22.0" />
+                           </VBox.margin></Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER_RIGHT" stylesheets="@../css/app.css">
+               <children>
+                  <TextField fx:id="insertCodeTF" maxHeight="-Infinity" onKeyReleased="#insertCodeReleased" prefHeight="35.0" promptText="Insert code">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin></TextField>
+                  <Button mnemonicParsing="false" onAction="#continueAction" prefHeight="35.0" style="-fx-border-radius: 20px;" stylesheets="@../css/app.css" text="Continue">
+                     <styleClass>
+                        <String fx:value="app-controls" />
+                        <String fx:value="app-font-size-default" />
+                        <String fx:value="app-button" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="22.0" left="22.0" right="22.0" top="5.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>
