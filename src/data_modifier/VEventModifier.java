@@ -67,6 +67,44 @@ public class VEventModifier extends JDBCConnect {
         }
         return oList;
     }
+    public ObservableList<String> getListStartEvent() throws SQLException {
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select startDate from Events";
+        PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(result.getString("startDate"));
+        }
+        return oList;
+    }
+    
+    public ObservableList<String> getListEventName() throws SQLException {
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select DISTINCT eventName from VEvent";
+        PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(result.getString("eventName"));
+        }
+        return oList;
+    }
+    
+    public ObservableList<String> getListEventIdDate(String endEvent) throws SQLException {
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select eventId from Events where endDate >= ?";
+        PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.setString(1, endEvent);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(result.getString("eventId"));
+        }
+        return oList;
+    }
+    
+    
 
     public ObservableList<String> getListProductId() throws SQLException {
         ObservableList<String> oList = FXCollections.observableArrayList();
@@ -92,10 +130,13 @@ public class VEventModifier extends JDBCConnect {
         return oList;
     }
 
-    public ObservableList<String> getProductIdEvent() throws SQLException {
+    
+    
+    public ObservableList<String> getProductIdEvent(String endEvent) throws SQLException {
         ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select productId from Products EXCEPT select productId from EventDetail";
+        String sql = "select productId from Products EXCEPT select productId from VEvent where endDate >= ?";
         PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.setString(1, endEvent);
         preStatement.execute();
         ResultSet result = preStatement.getResultSet();
         while (result.next()) {
@@ -171,16 +212,5 @@ public class VEventModifier extends JDBCConnect {
         return true;
     }
 
-    public ObservableList<String> getListEventsName() throws SQLException {
-        ObservableList<String> oList = FXCollections.observableArrayList();
-        String sql = "select eventName from Events";
-        PreparedStatement preStatement = connect().prepareStatement(sql);
-        preStatement.execute();
-        ResultSet result = preStatement.getResultSet();
-        while (result.next()) {
-            oList.add(result.getString("eventName"));
-        }
-        return oList;
-
-    }
+  
 }

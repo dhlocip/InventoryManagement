@@ -117,7 +117,7 @@ public class DeleteEventController implements Initializable {
                 if (new VEventModifier().deleteEventDetailByEventId(item.getEventId())
                         && new VEventModifier().deleteEventByEventId(item.getEventId())) {
                     new VEventModifier().deleteEventDetailByEventId(item.getEventId());
-                    getShow();
+//                    getShow();
                 }
 
             }
@@ -128,7 +128,7 @@ public class DeleteEventController implements Initializable {
             alert.setHeaderText("Error");
             alert.setContentText("Please click on the line different null");
         }
-
+getShow();
     }
 
     public void getEventByEventId(String eventID) throws SQLException {

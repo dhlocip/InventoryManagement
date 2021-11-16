@@ -14,6 +14,7 @@ import data_modifier.VEventModifier;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +45,8 @@ public class CreateEventController implements Initializable {
     String evtID;
     String lUserId;
     String userIdTF;
-    String eventID, productID, Name, disc, startd, endd, mfgd, expd;
+    String eventID, productID, Name, disc, startd, endd, mfgd, expd, endEvent, start, nameEvent;
+    int count = 0, countName = 0;
 
     @FXML
     private Label createlabel;
@@ -100,12 +102,12 @@ public class CreateEventController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             getShow();
-            setValueEventIdComboBox();
-            setValueProductIdComboBox();
+            setValueEventIdComboBox(endEvent);
+            setValueProductIdComboBox(endEvent);
         } catch (SQLException ex) {
             Logger.getLogger(CreateEventController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     private void getShow() throws SQLException {
@@ -122,39 +124,44 @@ public class CreateEventController implements Initializable {
         createEventTable.setItems(oList);
     }
 
-//    private void setValueProductIdComboBox() throws SQLException {
-//        ObservableList<String> oList = new VEventModifier().getProductIdEvent();
-//        if (oList.get(0) != null) {
-//            productIdCombobox.setItems(oList);
-//            productIdCombobox.setValue(oList.get(0));
-//            proID = productIdCombobox.getValue();
-//            productIdCombobox.setOnAction((t) -> {
-//                proID = productIdCombobox.getValue();
-//            });
-//        } else {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText(null);
-//            alert.setContentText("Out of stock for event creation.");
-//            alert.showAndWait();
-//
-//        }
-//    }
-    private void setValueProductIdComboBox() throws SQLException {
-        ObservableList<String> oList = new VEventModifier().getListProductId();
-        productIdCombobox.setItems(oList);
-        productIdCombobox.setValue(oList.get(0));
-
-        proID = productIdCombobox.getValue();
-
-        productIdCombobox.setOnAction((t) -> {
+    // Hien productId chua co su kien hoac su kien het han
+    private void setValueProductIdComboBox(String endEvent) throws SQLException {
+        endEvent = String.valueOf(LocalDate.now());
+        ObservableList<String> oList = new VEventModifier().getProductIdEvent(endEvent);
+        if (oList.get(0) != null) {
+            productIdCombobox.setItems(oList);
+            productIdCombobox.setValue(oList.get(0));
             proID = productIdCombobox.getValue();
-        });
+            productIdCombobox.setOnAction((t) -> {
+                proID = productIdCombobox.getValue();
+            });
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Out of stock for event creation.");
+            alert.showAndWait();
+
+        }
     }
-    
-    private void setValueEventIdComboBox() throws SQLException {
-        ObservableList<String> oList = new VEventModifier().getListEventId();
+//    private void setValueProductIdComboBox() throws SQLException {
+//        ObservableList<String> oList = new VEventModifier().getListProductId();
+//        productIdCombobox.setItems(oList);
+//        productIdCombobox.setValue(oList.get(0));
+//
+//        proID = productIdCombobox.getValue();
+//
+//        productIdCombobox.setOnAction((t) -> {
+//            proID = productIdCombobox.getValue();
+//        });
+//    }
+
+    // chi hien su kien chua het han
+    private void setValueEventIdComboBox(String endEvent) throws SQLException {
+        endEvent = String.valueOf(LocalDate.now());
+
+        ObservableList<String> oList = new VEventModifier().getListEventIdDate(endEvent);
         eventIdCombobox.setItems(oList);
-        eventIdCombobox.setValue(oList.get(0));
+//        eventIdCombobox.setValue(oList.get(0));
         evtID = eventIdCombobox.getValue();
         eventIdCombobox.setOnAction((t) -> {
             evtID = eventIdCombobox.getValue();
@@ -195,6 +202,23 @@ public class CreateEventController implements Initializable {
         expd = String.valueOf(exp);
     }
 
+    boolean checkName(String Name) throws SQLException {
+        ObservableList olistName = new VEventModifier().getListEventName();
+
+        for (int i = 0; i < olistName.size(); i++) {
+
+            if (Name.equals(olistName.get(i)) == true) {
+                countName++;
+                break;
+            }
+        }
+        if (countName != 0) {
+            countName = 0;
+            return false;
+        }
+        return true;
+    }
+
     @FXML
     private void createEventClick(MouseEvent event) throws SQLException {
 
@@ -203,42 +227,69 @@ public class CreateEventController implements Initializable {
         user = new UserModifier().getUser(lUserId);
         userIdTF = user.getPersonId();
         Name = txtEventName.getText();
-        if (txtEventName.getText().isEmpty()
-                || (endDatePicker.getValue() == null) || (startDatePicker.getValue() == null)) {
+        if (txtEventName.getText().isEmpty() || checkName(Name) == false) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Please Fill All Data");
+            alert.setContentText("Event da ton tai");
             alert.showAndWait();
         } else {
-            LocalDate now = LocalDate.now();
-            LocalDate checkStart = startDatePicker.getValue();
-            LocalDate checkEnd = endDatePicker.getValue();
-            if (checkStart.compareTo(now) < 0 || checkEnd.compareTo(checkStart) <= 0) {
-
+            if ((endDatePicker.getValue() == null) || (startDatePicker.getValue() == null)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
-                alert.setContentText("Nhap lai ngay");
+                alert.setContentText("Please Fill All Data");
                 alert.showAndWait();
 
             } else {
 
-                Events events = new Events();
-                events.setUserId(userIdTF);
-                events.setEventName(Name);
-                events.setStartDate(startd);
-                events.setEndDate(endd);
+                LocalDate now = LocalDate.now();
+                LocalDate checkStart = startDatePicker.getValue();
+                LocalDate checkEnd = endDatePicker.getValue();
 
-                if (new VEventModifier().getCreateEvents(events)) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Notification");
-                    alert.setHeaderText("Success");
-                    alert.setContentText("User is update successfully.");
+                // kiem tra co event trung ngay bat dau khong 
+                ObservableList olist = new VEventModifier().getListStartEvent();
+
+                for (int i = 0; i < olist.size(); i++) {
+                    start = String.valueOf(olist.get(i));
+                    LocalDate startEvent = LocalDate.parse(start);
+
+                    if (checkStart.compareTo(startEvent) == 0) {
+                        count++;
+                        break;
+                    }
+                }
+
+                if (checkStart.compareTo(now) < 0 || checkEnd.compareTo(checkStart) <= 0 || count != 0) {
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Nhap lai ngay");
                     alert.showAndWait();
+                    count = 0;
+
+                } else {
+
+                    Events events = new Events();
+                    events.setUserId(userIdTF);
+                    events.setEventName(Name);
+                    events.setStartDate(startd);
+                    events.setEndDate(endd);
+
+                    if (new VEventModifier().getCreateEvents(events)) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Notification");
+                        alert.setHeaderText("Success");
+                        alert.setContentText("User is update successfully.");
+                        alert.showAndWait();
+
+                    }
                 }
             }
         }
+        txtEventName.setText(null); //tenbiendata
+        startDatePicker.setValue(null);
+        endDatePicker.setValue(null);
         getShow();
-        setValueEventIdComboBox();
+        setValueEventIdComboBox(endEvent);
     }
 
     @FXML
@@ -280,6 +331,12 @@ public class CreateEventController implements Initializable {
                 }
             }
         }
+
+        eventIdCombobox.setValue(null);
+        productIdCombobox.setValue(null);
+        txtDiscount.setText(null);
+        mfgDatePicker.setValue(null);
+        expDatePicker.setValue(null);
         getShow();
 
     }
