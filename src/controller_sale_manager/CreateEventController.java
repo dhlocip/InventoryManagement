@@ -128,7 +128,8 @@ public class CreateEventController implements Initializable {
     private void setValueProductIdComboBox(String endEvent) throws SQLException {
         endEvent = String.valueOf(LocalDate.now());
         ObservableList<String> oList = new VEventModifier().getProductIdEvent(endEvent);
-        if (oList.get(0) != null) {
+        
+        if (!oList.isEmpty()) {
             productIdCombobox.setItems(oList);
             productIdCombobox.setValue(oList.get(0));
             proID = productIdCombobox.getValue();
@@ -161,7 +162,7 @@ public class CreateEventController implements Initializable {
 
         ObservableList<String> oList = new VEventModifier().getListEventIdDate(endEvent);
         eventIdCombobox.setItems(oList);
-//        eventIdCombobox.setValue(oList.get(0));
+        eventIdCombobox.setValue(oList.get(0));
         evtID = eventIdCombobox.getValue();
         eventIdCombobox.setOnAction((t) -> {
             evtID = eventIdCombobox.getValue();
@@ -182,6 +183,7 @@ public class CreateEventController implements Initializable {
 
     @FXML
     private void eventId(ActionEvent event) {
+//        eventIdCombobox.setValue(Name);
         eventID = eventIdCombobox.getValue();
     }
 
@@ -294,6 +296,8 @@ public class CreateEventController implements Initializable {
 
     @FXML
     private void createEventDetailClick(MouseEvent event) throws SQLException {
+        
+        
         if (txtDiscount.getText().isEmpty() || (mfgDatePicker.getValue() == null) || (expDatePicker.getValue() == null)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -312,7 +316,7 @@ public class CreateEventController implements Initializable {
                 alert.showAndWait();
 
             } else {
-
+                
                 disc = txtDiscount.getText();
                 EventDetail eventDetail = new EventDetail();
                 eventDetail.setEventId(evtID);
@@ -338,6 +342,8 @@ public class CreateEventController implements Initializable {
         mfgDatePicker.setValue(null);
         expDatePicker.setValue(null);
         getShow();
+        setValueProductIdComboBox(endEvent);
+        
 
     }
 

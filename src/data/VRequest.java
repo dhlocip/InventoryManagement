@@ -10,7 +10,7 @@ package data;
  * @author ADMIN
  */
 public class VRequest {
-    
+//    requestId  userId startDate statusVerify productId quantity
     private String requestId;
     private String userId;        
     private String startDate;

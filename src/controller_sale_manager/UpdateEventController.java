@@ -354,6 +354,8 @@ public class UpdateEventController implements Initializable {
         mfgDatePicker.setValue(null);
         expDatePicker.setValue(null);
         getShow();
+        setValueProductIdComboBox(endEvent);
+        setValueEventIdComboBox();
 
     }
 
