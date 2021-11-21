@@ -5,9 +5,8 @@
  */
 package data_modifier;
 
+
 import data.VNewRequest;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,6 +41,18 @@ public class NewRequestModilfier extends JDBCConnect {
     preStatement.execute();
 
         return true;
+    }
+    // so newrequest chua duyet
+     public ObservableList<String> getNumberNewRequest() throws SQLException {
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select count(newRequestId) as NumberNewRequest from NewRequests where statusVerify = ''";
+        PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(result.getString("NumberNewRequest"));
+        }
+        return oList;
     }
 
     // ---------------

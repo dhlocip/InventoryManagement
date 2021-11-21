@@ -47,10 +47,21 @@ public class RequestModifier extends JDBCConnect {
         }
         return oList;
     }
-
-    
+    // so Request Chua Duyet
+    public ObservableList<String> getNumberRequest() throws SQLException {
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select count(requestId) as NumberRequest from Requests where statusVerify = ''";
+        PreparedStatement preStatement = connect().prepareStatement(sql);
+        preStatement.execute();
+        ResultSet result = preStatement.getResultSet();
+        while (result.next()) {
+            oList.add(result.getString("NumberRequest"));
+        }
+        return oList;
+    }
+  
     public boolean getRequestUpdate(String newStatusVerify, String newRequestId) throws SQLException{
-    String sql = "Update Requests set statusVerify = ? where requestId = ? "; //viewsql
+    String sql = "Update VRequest set statusVerify = ? where requestId = ? "; //viewsql
     PreparedStatement preStatement= connect().prepareStatement(sql);
     preStatement.setString(1, newStatusVerify);
     preStatement.setString(2, newRequestId);

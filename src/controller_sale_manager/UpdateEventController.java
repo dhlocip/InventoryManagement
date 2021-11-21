@@ -46,6 +46,9 @@ public class UpdateEventController implements Initializable {
     String updateProductId, updateEventIdDetail;
     String lUserId;
     String userIdTF;
+    String endEvent;
+    int countName = 0;
+    String nameEvent;
 
     @FXML
     private TextField txtEventName;
@@ -98,7 +101,7 @@ public class UpdateEventController implements Initializable {
         try {
             // TODO
             getShow();
-            setValueProductIdComboBox();
+            setValueProductIdComboBox(endEvent);
             setValueEventIdComboBox();
         } catch (SQLException ex) {
             Logger.getLogger(UpdateEventController.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,16 +124,34 @@ public class UpdateEventController implements Initializable {
         updateEventTable.setItems(oList);
     }
 
-    private void setValueProductIdComboBox() throws SQLException {
-        ObservableList<String> oList = new VEventModifier().getListProductId();
-        productIdCombobox.setItems(oList);
-        productIdCombobox.setValue(oList.get(0));
-
-        proID = productIdCombobox.getValue();
-
-        productIdCombobox.setOnAction((t) -> {
+//    private void setValueProductIdComboBox() throws SQLException {
+//        ObservableList<String> oList = new VEventModifier().getListProductId();
+//        productIdCombobox.setItems(oList);
+//        productIdCombobox.setValue(oList.get(0));
+//
+//        proID = productIdCombobox.getValue();
+//
+//        productIdCombobox.setOnAction((t) -> {
+//            proID = productIdCombobox.getValue();
+//        });
+//    }
+    private void setValueProductIdComboBox(String endEvent) throws SQLException {
+        endEvent = String.valueOf(LocalDate.now());
+        ObservableList<String> oList = new VEventModifier().getProductIdEvent(endEvent);
+        if (oList.get(0) != null) {
+            productIdCombobox.setItems(oList);
+            productIdCombobox.setValue(oList.get(0));
             proID = productIdCombobox.getValue();
-        });
+            productIdCombobox.setOnAction((t) -> {
+                proID = productIdCombobox.getValue();
+            });
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Out of stock for event creation.");
+            alert.showAndWait();
+
+        }
     }
 
     private void setValueEventIdComboBox() throws SQLException {
@@ -156,10 +177,28 @@ public class UpdateEventController implements Initializable {
         updateEndDate = String.valueOf(end);
     }
 
+    boolean checkName(String nameEvent) throws SQLException {
+        ObservableList olistName = new VEventModifier().getListEventName();
+
+        for (int i = 0; i < olistName.size(); i++) {
+
+            if (nameEvent.equals(olistName.get(i)) ) {
+                countName++;
+                break;
+            }
+        }
+        if (countName != 0) {
+            countName = 0;
+            return false;
+        }
+        return true;
+    }
+
     @FXML
     private void updateEventsClick(MouseEvent event) throws SQLException {
 
         VEvent item = updateEventTable.getSelectionModel().getSelectedItem();
+        nameEvent = txtEventName.getText();
 
         if (item == null || txtEventName.getText().isEmpty()
                 || (endDatePicker.getValue() == null) || (startDatePicker.getValue() == null)) {
@@ -169,29 +208,75 @@ public class UpdateEventController implements Initializable {
             alert.showAndWait();
 
         } else {
-            lUserId = UIDashboardSaleManagerController.gUserId;
-            User user = new User();
-            user = new UserModifier().getUser(lUserId);
-            userIdTF = user.getPersonId();
-            updateEventName = txtEventName.getText();
-            Events events = new Events();
-            events.setEventName(updateEventName);
-            events.setStartDate(updateStartDate);
-            events.setEndDate(updateEndDate);
-            events.setEventId(item.getEventId());
-            if (new VEventModifier().getUpdateEvent(events)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Notification");
-                alert.setHeaderText("Success");
-                alert.setContentText("User is update successfully.");
+
+            if ((nameEvent.equals(item.getEventName())) == false && checkName(nameEvent) == false) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Event da ton tai");
                 alert.showAndWait();
 
-                txtEventName.setText(null); //tenbiendata
-                startDatePicker.setValue(null);
-                endDatePicker.setValue(null);
+            } else {
 
+                ObservableList olist = new VEventModifier().getListEventName();
+
+                for (int i = 0; i < olist.size(); i++) {
+
+                    if (olist.get(i) == nameEvent) {
+                        countName++;
+                        break;
+                    }
+                }
+
+                if (countName != 0) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Event already exists");
+                    alert.showAndWait();
+
+                } else {
+
+                    LocalDate now = LocalDate.now();
+                    LocalDate checkStart = startDatePicker.getValue();
+                    LocalDate checkEnd = endDatePicker.getValue();
+                    if (checkStart.compareTo(now) < 0 || checkEnd.compareTo(checkStart) <= 0) {
+
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText(null);
+                        alert.setContentText("Nhap lai ngay");
+                        alert.showAndWait();
+
+                    } else {
+
+                        lUserId = UIDashboardSaleManagerController.gUserId;
+                        User user = new User();
+                        user = new UserModifier().getUser(lUserId);
+                        userIdTF = user.getPersonId();
+                        updateEventName = txtEventName.getText();
+                        Events events = new Events();
+                        events.setEventName(updateEventName);
+                        events.setStartDate(updateStartDate);
+                        events.setEndDate(updateEndDate);
+                        events.setEventId(item.getEventId());
+                        if (new VEventModifier().getUpdateEvent(events)) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Notification");
+                            alert.setHeaderText("Success");
+                            alert.setContentText("User is update successfully.");
+                            alert.showAndWait();
+
+                        }
+                    }
+                }
             }
         }
+        txtEventName.setText(null); //tenbiendata
+        startDatePicker.setValue(null);
+        endDatePicker.setValue(null);
+        eventIdCombobox.setValue(null);
+        productIdCombobox.setValue(null);
+        txtDiscount.setText(null);
+        mfgDatePicker.setValue(null);
+        expDatePicker.setValue(null);
         getShow();
         setValueEventIdComboBox();
     }
@@ -229,30 +314,48 @@ public class UpdateEventController implements Initializable {
             alert.showAndWait();
 
         } else {
+            LocalDate now = LocalDate.now();
+            LocalDate checkStart = mfgDatePicker.getValue();
+            LocalDate checkEnd = expDatePicker.getValue();
+            if (checkEnd.compareTo(checkStart) <= 0 || checkEnd.compareTo(now) < 0) {
 
-            updateDiscount = txtDiscount.getText();
-            EventDetail eventDetail = new EventDetail();
-            eventDetail.setProductId(item.getProductId());
-            eventDetail.setDiscount(updateDiscount);
-            eventDetail.setMfgDate(updateMfgDate);
-            eventDetail.setExpDate(updateExpDate);
-            eventDetail.setEventId(evtID);
-
-            if (new VEventModifier().getUpdateEventDetail(eventDetail)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Notification");
-                alert.setHeaderText("Success");
-                alert.setContentText("User is update successfully.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Nhap lai ngay");
                 alert.showAndWait();
 
-                eventIdCombobox.setValue(null);
-                productIdCombobox.setValue(null);
-                txtDiscount.setText(null);
-                mfgDatePicker.setValue(null);
-                expDatePicker.setValue(null);
+            } else {
+
+                updateDiscount = txtDiscount.getText();
+                EventDetail eventDetail = new EventDetail();
+                eventDetail.setProductId(item.getProductId());
+                eventDetail.setDiscount(updateDiscount);
+                eventDetail.setMfgDate(updateMfgDate);
+                eventDetail.setExpDate(updateExpDate);
+                eventDetail.setEventId(evtID);
+
+                if (new VEventModifier().getUpdateEventDetail(eventDetail)) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Notification");
+                    alert.setHeaderText("Success");
+                    alert.setContentText("User is update successfully.");
+                    alert.showAndWait();
+
+                }
             }
         }
+        txtEventName.setText(null); //tenbiendata
+        startDatePicker.setValue(null);
+        endDatePicker.setValue(null);
+        eventIdCombobox.setValue(null);
+        eventIdCombobox.setValue(null);
+        productIdCombobox.setValue(null);
+        txtDiscount.setText(null);
+        mfgDatePicker.setValue(null);
+        expDatePicker.setValue(null);
         getShow();
+        setValueProductIdComboBox(endEvent);
+        setValueEventIdComboBox();
 
     }
 
