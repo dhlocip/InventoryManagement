@@ -77,6 +77,8 @@ public class StatisticByCancelController implements Initializable {
     private TextField txtOrderCanceled;
     @FXML
     private TextField txtxOrderSuccessful;
+    @FXML
+    private TextField txtTenDoThi;
 
     /**
      * Initializes the controller class.
@@ -140,7 +142,7 @@ public class StatisticByCancelController implements Initializable {
             txtOrderCanceled.setText(oList.get(0));
 
             int numbillCancel = Integer.valueOf(oList.get(0));
-
+            txtTenDoThi.setText("Pie chart for the period from "+ startDate +" to "+ endDate);
             ObservableList<String> oListTotal = new BillModifier().getTotalCancel(startDate, endDate);
             totalCancel.setText(oListTotal.get(0));
             getShowCancel(startDate, endDate);
