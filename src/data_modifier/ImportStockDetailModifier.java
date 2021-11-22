@@ -70,9 +70,4 @@ public class ImportStockDetailModifier extends JDBCConnect {
         return true;
     }
     
-//    public static void main(String[] args) throws SQLException {
-//        ImportStockDetail imp = new ImportStockDetail("i0009", "p0004", 201, 100000, "01/01/2021", "01/01/2023");
-//        new ImportStockDetailModifier().updateImportStock(imp);
-//        
-//    }
 }

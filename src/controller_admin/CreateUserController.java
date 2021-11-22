@@ -421,12 +421,13 @@ public class CreateUserController implements Initializable {
         checkPassword();
     }
 
-    private boolean isEmailRight() {
+    private boolean isEmailRight() throws SQLException {
         String tmp = emailTF.getText();
-        return tmp.matches("^[^\\W\\d]{1}[\\w]+[.]?[\\w]+[@]{1}[^\\W\\d]{4,7}[.]{1}[^\\W\\d]{3}[.]{0,1}[^\\W\\d]{0,3}[.]{0,1}[^\\W\\d]{0,2}");
+        return tmp.matches("^[^\\W\\d]{1}[\\w]+[.]?[\\w]+[@]{1}[^\\W\\d]{4,7}[.]{1}[^\\W\\d]{3}[.]{0,1}[^\\W\\d]{0,3}[.]{0,1}[^\\W\\d]{0,2}")
+                && !new UserModifier().emailIsExists(tmp);
     }
 
-    private void checkEmail() {
+    private void checkEmail() throws SQLException {
         if (isEmailRight()) {
             hideErrorOfEmail(false);
         } else {
@@ -436,7 +437,7 @@ public class CreateUserController implements Initializable {
     }
 
     @FXML
-    private void emailReleased(KeyEvent event) {
+    private void emailReleased(KeyEvent event) throws SQLException {
         checkEmail();
     }
 

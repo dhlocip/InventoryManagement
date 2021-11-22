@@ -48,7 +48,7 @@
                   <TextField fx:id="userNameTF" maxWidth="-Infinity" onKeyReleased="#userNameReleased" prefHeight="35.0" prefWidth="330.0" />
                   <Label prefHeight="35.0" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Password" />
                   <PasswordField fx:id="passwordTF" maxWidth="-Infinity" onKeyReleased="#passwordReleased" prefHeight="35.0" prefWidth="330.0" />
-                  <Label onMouseClicked="#forgotPasswordClicked" prefHeight="35.0" style="-fx-text-fill: blue;" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Forgot password?" />
+                  <Label onMouseClicked="#forgotPasswordClicked" prefHeight="35.0" style="-fx-text-fill: blue; -fx-cursor: hand;" styleClass="app-font-size-default" stylesheets="@../css/app.css" text="Forgot password?" />
                   <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#signInAction" prefHeight="35.0" prefWidth="330.0" style="-fx-border-radius: 20px;" stylesheets="@../css/app.css" text="Sign in">
                      <styleClass>
                         <String fx:value="app-controls" />

@@ -192,16 +192,7 @@ public class CreateSupplierController implements Initializable {
 
     @FXML
     private void createSupplierClicked(MouseEvent event) throws SQLException {
-        if (!isAddressRight() && !isCompanyNameRight() && !isPhoneRight()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Notification");
-            alert.setHeaderText("Error");
-            alert.setContentText("Text fields are not empty.");
-            alert.showAndWait();
-            checkAddress();
-            checkCompanyName();
-            checkPhone();
-        } else {
+        if (isAddressRight() && isCompanyNameRight() && isPhoneRight()) {
             Suppliers supplier = new Suppliers();
             supplier.setCompanyName(companyNameTF.getText());
             supplier.setAddress(addressTF.getText());
@@ -217,6 +208,15 @@ public class CreateSupplierController implements Initializable {
                 alert.showAndWait();
                 getListSupplier();
             }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Notification");
+            alert.setHeaderText("Error");
+            alert.setContentText("Text fields are not empty.");
+            alert.showAndWait();
+            checkAddress();
+            checkCompanyName();
+            checkPhone();
         }
     }
 

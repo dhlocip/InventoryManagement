@@ -17,11 +17,13 @@ import javafx.collections.ObservableList;
 public class ImportStockModifier extends JDBCConnect {
 
     //  get list importStockId from importStocks
-    public ObservableList<String> getListImportStockId() throws SQLException {
+    public ObservableList<String> getListImportStockId(String userIdOrSupplierId) throws SQLException {
         ObservableList<String> oList = FXCollections.observableArrayList();
         String sql = "select * from ImportStocks "
-                + "where userId =?";
+                + "where userId =? or supplierId=?";
         PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, userIdOrSupplierId);
+        preS.setString(2, userIdOrSupplierId);
         preS.execute();
         ResultSet result = preS.getResultSet();
         while (result.next()) {
@@ -57,12 +59,13 @@ public class ImportStockModifier extends JDBCConnect {
     }
 
     //    delete importStocks by userId or importStockId
-    public boolean deleteImportStock(String userIdOrImportStockId) throws SQLException {
+    public boolean deleteImportStock(String userIdOrImportStockIdOrSupplierId) throws SQLException {
         String sql = "delete from importStocks "
-                + "where userId =? or importStockId =?";
+                + "where userId =? or importStockId =? or supplierId=?";
         PreparedStatement preS = connect().prepareStatement(sql);
-        preS.setString(1, userIdOrImportStockId);
-        preS.setString(2, userIdOrImportStockId);
+        preS.setString(1, userIdOrImportStockIdOrSupplierId);
+        preS.setString(2, userIdOrImportStockIdOrSupplierId);
+        preS.setString(3, userIdOrImportStockIdOrSupplierId);
         preS.execute();
         return true;
     }

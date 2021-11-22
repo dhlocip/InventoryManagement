@@ -7,9 +7,12 @@ package controller_admin;
 import data.Category;
 import data.Suppliers;
 import data_modifier.CategoryModifier;
+import data_modifier.ImportStockDetailModifier;
+import data_modifier.ImportStockModifier;
 import data_modifier.SupplierModifier;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -112,8 +115,16 @@ public class DeleteSupplierController implements Initializable {
             alert.setHeaderText("Confirm");
             alert.setContentText("Are you sure?\nClick OK to delete the line.");
             Optional<ButtonType> result = alert.showAndWait();
+            
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                new SupplierModifier().deleteSupplier(item.getSupplierId());
+                List<String> listImportStock = new ImportStockModifier().getListImportStockId(item.getSupplierId());
+                for (String string : listImportStock) {
+                    new ImportStockDetailModifier().deleteImportStockDetail(string);
+                }
+                
+                if (new ImportStockModifier().deleteImportStock(item.getSupplierId())) {
+                    new SupplierModifier().deleteSupplier(item.getSupplierId());
+                }
                 getListSupplier();
             }
         }

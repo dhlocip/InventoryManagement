@@ -196,21 +196,32 @@ public class UpdateSupplierController implements Initializable {
             alert.setContentText("Please click to a row into table.");
             alert.showAndWait();
         } else {
-            Suppliers supplier = new Suppliers();
-            supplier.setSupplierId(item.getSupplierId());
-            supplier.setCompanyName(companyNameTF.getText());
-            supplier.setAddress(addressTF.getText());
-            supplier.setPhone(phoneTF.getText());
-            supplier.setHomePage(homePageTF.getText());
-            supplier.setPersonRepresentative(personTF.getText());
+            if (isAddressRight() && isCompanyNameRight() && isPhoneRight()) {
+                Suppliers supplier = new Suppliers();
+                supplier.setSupplierId(item.getSupplierId());
+                supplier.setCompanyName(companyNameTF.getText());
+                supplier.setAddress(addressTF.getText());
+                supplier.setPhone(phoneTF.getText());
+                supplier.setHomePage(homePageTF.getText());
+                supplier.setPersonRepresentative(personTF.getText());
 
-            if (new SupplierModifier().updateSupplier(supplier)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                if (new SupplierModifier().updateSupplier(supplier)) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Notification");
+                    alert.setHeaderText("Success");
+                    alert.setContentText("Update supplier is successfully.");
+                    alert.showAndWait();
+                    getListSupplier();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Notification");
-                alert.setHeaderText("Success");
-                alert.setContentText("Update supplier is successfully.");
+                alert.setHeaderText("Error");
+                alert.setContentText("Text fields are not empty.");
                 alert.showAndWait();
-                getListSupplier();
+                checkAddress();
+                checkCompanyName();
+                checkPhone();
             }
         }
     }

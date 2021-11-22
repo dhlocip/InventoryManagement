@@ -85,7 +85,13 @@ public class UILogInController implements Initializable {
     }
 
     @FXML
-    private void forgotPasswordClicked(MouseEvent event) {
+    private void forgotPasswordClicked(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view_admin/ForgotPassword.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Forgot password");
+        stage.show();
     }
 
     private void nextToDashboard(String permission, ActionEvent event) throws IOException {

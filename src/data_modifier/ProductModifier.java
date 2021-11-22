@@ -58,6 +58,20 @@ public class ProductModifier extends JDBCConnect {
         return oList;
     }
     
+    // get list productId with category
+    public ObservableList<String> getListProductId(String category) throws SQLException{
+        ObservableList<String> oList = FXCollections.observableArrayList();
+        String sql = "select * from products where categoryId=?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, category);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while(result.next()){
+            oList.add(result.getString("productId"));
+        }
+        return oList;
+    }
+    
 //    create product
     public boolean createProduct(Product product) throws SQLException{
         String sql = "insert into products (productName, categoryId, price) "

@@ -69,16 +69,6 @@ public class RequestModifier extends JDBCConnect {
 
         return true;
     }
-    //    delete request detail by requestId
-    public boolean deleteRequestDetail(String requestIdOrProductId) throws SQLException{
-        String sql = "delete from requestDetail "
-                + "where requestId =? or productId =?";
-        PreparedStatement preS = connect().prepareStatement(sql);
-        preS.setString(1, requestIdOrProductId);
-        preS.setString(2, requestIdOrProductId);
-        preS.execute();
-        return true;
-    }
     
     //    delete requests by userId
     public boolean deleteRequest(String userId) throws SQLException{

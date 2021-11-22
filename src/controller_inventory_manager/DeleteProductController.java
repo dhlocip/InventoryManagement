@@ -5,11 +5,14 @@
 package controller_inventory_manager;
 
 import data.Product;
+import data_modifier.BillDetailModifier;
 import data_modifier.BillModifier;
+import data_modifier.EventDetailModifier;
 import data_modifier.EventModifier;
 import data_modifier.ImportStockDetailModifier;
 import data_modifier.ImportStockModifier;
 import data_modifier.ProductModifier;
+import data_modifier.RequestDetailModifier;
 import data_modifier.RequestModifier;
 import java.net.URL;
 import java.sql.SQLException;
@@ -110,9 +113,9 @@ public class DeleteProductController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 if (new ImportStockDetailModifier().deleteImportStockDetail(item.getProductId())
-                        && new EventModifier().deleteEventDetail(item.getProductId())
-                        && new BillModifier().deleteBillDetail(item.getProductId())
-                        && new RequestModifier().deleteRequestDetail(item.getProductId())) {
+                        && new EventDetailModifier().deleteEventDetail(item.getProductId())
+                        && new BillDetailModifier().deleteBillDetail(item.getProductId())
+                        && new RequestDetailModifier().deleteRequestDetail(item.getProductId())) {
                     new ProductModifier().deleteProduct(item.getProductId());
                     getListProduct();
                 }

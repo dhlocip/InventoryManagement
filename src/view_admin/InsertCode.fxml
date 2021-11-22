@@ -43,6 +43,7 @@
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin></TextField>
+                  <Label fx:id="errorInsertCode" style="-fx-text-fill: red;" text="Label" />
                   <Button mnemonicParsing="false" onAction="#continueAction" prefHeight="35.0" style="-fx-border-radius: 20px;" stylesheets="@../css/app.css" text="Continue">
                      <styleClass>
                         <String fx:value="app-controls" />

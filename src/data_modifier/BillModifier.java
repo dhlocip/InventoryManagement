@@ -202,17 +202,6 @@ public class BillModifier extends JDBCConnect {
         return oList;
     }
 
-    //    delete bill detail by billId
-    public boolean deleteBillDetail(String billIdOrProductId) throws SQLException {
-        String sql = "delete from billDetail "
-                + "where billId =? or productId =?";
-        PreparedStatement preS = connect().prepareStatement(sql);
-        preS.setString(1, billIdOrProductId);
-        preS.setString(2, billIdOrProductId);
-        preS.execute();
-        return true;
-    }
-
     //    delete bill by userId
     public boolean deleteBill(String userId) throws SQLException {
         String sql = "delete from bills "

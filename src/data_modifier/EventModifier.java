@@ -30,17 +30,6 @@ public class EventModifier extends JDBCConnect {
         return oList;
     }
     
-    //    delete event detail by eventId
-    public boolean deleteEventDetail(String eventIdOrProductId) throws SQLException{
-        String sql = "delete from eventDetail "
-                + "where eventId =? or productId =?";
-        PreparedStatement preS = connect().prepareStatement(sql);
-        preS.setString(1, eventIdOrProductId);
-        preS.setString(2, eventIdOrProductId);
-        preS.execute();
-        return true;
-    }
-    
     //    delete event by userId
     public boolean deleteEvent(String userId) throws SQLException{
         String sql = "delete from events "

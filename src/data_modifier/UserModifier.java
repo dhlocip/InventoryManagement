@@ -33,7 +33,7 @@ public class UserModifier extends JDBCConnect {
     }
 
 //    change password
-    public boolean changePassword(String userId, String password) throws SQLException{
+    public boolean changePassword(String userId, String password) throws SQLException {
         String sql = "update Users "
                 + "set password = ? "
                 + "where userId = ?";
@@ -43,7 +43,7 @@ public class UserModifier extends JDBCConnect {
         preS.executeUpdate();
         return true;
     }
-    
+
 //    find user with userID or fullName
     public ObservableList<User> findUser(String idOrFullName) throws SQLException {
         ObservableList<User> oList = FXCollections.observableArrayList();
@@ -53,28 +53,41 @@ public class UserModifier extends JDBCConnect {
         preS.execute();
         ResultSet result = preS.getResultSet();
         while (result.next()) {
-            oList.add(new User(result.getString("userId"), result.getString("fullName"), 
-                    result.getString("birthday"), result.getString("hireDate"), result.getString("address"), 
-                    result.getString("phone"), result.getString("gender"), result.getString("shiff"), 
-                    result.getString("userName"), result.getString("password"), result.getString("position"), 
+            oList.add(new User(result.getString("userId"), result.getString("fullName"),
+                    result.getString("birthday"), result.getString("hireDate"), result.getString("address"),
+                    result.getString("phone"), result.getString("gender"), result.getString("shiff"),
+                    result.getString("userName"), result.getString("password"), result.getString("position"),
                     result.getString("email"), result.getString("token")));
         }
         return oList;
     }
-    
-//    check user name is exists
-    public boolean userNameIsExists(String userName) throws SQLException{
+
+    //    check user name is exists
+    public boolean userNameIsExists(String userName) throws SQLException {
         String sql = "select * from users where userName = ?";
         PreparedStatement preS = connect().prepareStatement(sql);
         preS.setString(1, userName);
         preS.execute();
         ResultSet result = preS.getResultSet();
-        while(result.next()){
+        while (result.next()) {
             return true;
         }
         return false;
     }
-    
+
+    //    check email is exists
+    public boolean emailIsExists(String email) throws SQLException {
+        String sql = "select * from users where email = ?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, email);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while (result.next()) {
+            return true;
+        }
+        return false;
+    }
+
 //    get user info with userID
     public User getUser(String userId) throws SQLException {
         User user = new User();
@@ -99,7 +112,7 @@ public class UserModifier extends JDBCConnect {
         }
         return user;
     }
-    
+
     //    get list user info with userID
     public ObservableList<User> getListUser() throws SQLException {
         ObservableList<User> oList = FXCollections.observableArrayList();
@@ -108,16 +121,16 @@ public class UserModifier extends JDBCConnect {
         preS.execute();
         ResultSet result = preS.getResultSet();
         while (result.next()) {
-            oList.add(new User(result.getString("userId"), result.getString("fullName"), 
-                    result.getString("birthday"), result.getString("hireDate"), result.getString("address"), 
-                    result.getString("phone"), result.getString("gender"), result.getString("shiff"), 
-                    result.getString("userName"), result.getString("password"), result.getString("position"), 
+            oList.add(new User(result.getString("userId"), result.getString("fullName"),
+                    result.getString("birthday"), result.getString("hireDate"), result.getString("address"),
+                    result.getString("phone"), result.getString("gender"), result.getString("shiff"),
+                    result.getString("userName"), result.getString("password"), result.getString("position"),
                     result.getString("email"), result.getString("token")));
         }
         return oList;
     }
 
-//    update user info with userId, personal user
+    //    update user info with userId, personal user
     public boolean updateUser(User user) throws SQLException {
         String sql = "update Users "
                 + "set fullName = ?, birthDay = ?, hireDate = ?, address = ?, "
@@ -135,6 +148,45 @@ public class UserModifier extends JDBCConnect {
         preS.setString(9, user.getPersonId());
         preS.executeUpdate();
         return true;
+    }
+    
+    //    update token with email
+    public boolean updateToken(String token, String email) throws SQLException {
+        String sql = "update Users "
+                + "set token = ? "
+                + "where email = ?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, token);
+        preS.setString(2, email);
+        preS.executeUpdate();
+        return true;
+    }
+    
+    //    update password with email
+    public boolean updatePassword(String password, String email) throws SQLException {
+        String sql = "update Users "
+                + "set password = ? "
+                + "where email = ?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, password);
+        preS.setString(2, email);
+        preS.executeUpdate();
+        return true;
+    }
+    
+    //    check token and email of user is right
+    public boolean checkToken(String token, String email) throws SQLException {
+        String sql = "select * from Users "
+                + "where token = ? and email = ?";
+        PreparedStatement preS = connect().prepareStatement(sql);
+        preS.setString(1, token);
+        preS.setString(2, email);
+        preS.execute();
+        ResultSet result = preS.getResultSet();
+        while(result.next()){
+            return true;
+        }
+        return false;
     }
 
     //    craete user info with personal user
@@ -158,9 +210,9 @@ public class UserModifier extends JDBCConnect {
         preS.execute();
         return true;
     }
-    
+
 //    delete user
-    public boolean deleteUser(String userId) throws SQLException{
+    public boolean deleteUser(String userId) throws SQLException {
         String sql = "delete from users "
                 + "where userId =?";
         PreparedStatement preS = connect().prepareStatement(sql);

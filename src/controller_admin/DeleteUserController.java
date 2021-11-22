@@ -8,11 +8,14 @@ import controller_app.UIDashboardAdminController;
 import controller_app.UIDashboardInventoryManagerController;
 import controller_app.UIDashboardSaleManagerController;
 import data.User;
+import data_modifier.BillDetailModifier;
 import data_modifier.BillModifier;
+import data_modifier.EventDetailModifier;
 import data_modifier.EventModifier;
 import data_modifier.ImportStockDetailModifier;
 import data_modifier.ImportStockModifier;
 import data_modifier.NewRequestModilfier;
+import data_modifier.RequestDetailModifier;
 import data_modifier.RequestModifier;
 import data_modifier.UserModifier;
 import java.net.URL;
@@ -131,7 +134,7 @@ public class DeleteUserController implements Initializable {
     @FXML
     private void userTableViewClicked(MouseEvent event) throws SQLException {
         User item = userTableView.getSelectionModel().getSelectedItem();
-        
+
         if (item == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Notification");
@@ -159,7 +162,7 @@ public class DeleteUserController implements Initializable {
                 if (result.isPresent() && result.get() == ButtonType.OK) {
 
                     for (String listId : listEventId) {
-                        new EventModifier().deleteEventDetail(listId);
+                        new EventDetailModifier().deleteEventDetail(listId);
                     }
 
                     if (new EventModifier().deleteEvent(lUserId)) {
@@ -168,7 +171,7 @@ public class DeleteUserController implements Initializable {
                     }
                 }
             } else if (lPosition.equalsIgnoreCase("inventory manager")) {
-                List<String> listImportStockId = new ImportStockModifier().getListImportStockId();
+                List<String> listImportStockId = new ImportStockModifier().getListImportStockId(item.getPersonId());
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Notification");
@@ -201,11 +204,11 @@ public class DeleteUserController implements Initializable {
                 if (result.isPresent() && result.get() == ButtonType.OK) {
 
                     for (String listId : listBillId) {
-                        new BillModifier().deleteBillDetail(listId);
+                        new BillDetailModifier().deleteBillDetail(listId);
                     }
 
                     for (String listId : listRequestId) {
-                        new RequestModifier().deleteRequestDetail(listId);
+                        new RequestDetailModifier().deleteRequestDetail(listId);
                     }
 
                     for (String listId : listNewRequestId) {
@@ -222,7 +225,5 @@ public class DeleteUserController implements Initializable {
             }
         }
     }
-    
-    
-    
+
 }
