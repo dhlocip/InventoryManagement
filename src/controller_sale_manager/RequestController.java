@@ -81,8 +81,9 @@ public class RequestController implements Initializable {
     @FXML
     private void getRequest(MouseEvent event) throws SQLException {
     VRequest item = RequestTable.getSelectionModel().getSelectedItem();
-         newRequestId = item.getRequestId();
+         
         if (item != null ) {
+            newRequestId = item.getRequestId();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Notification");
             alert.setHeaderText("Confirm");
@@ -104,6 +105,11 @@ public class RequestController implements Initializable {
                 
             }
 
+        } else {        
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Please select the request to review!");
+                alert.showAndWait();
         }
         getShow();
         

@@ -104,7 +104,6 @@ public class DeleteEventController implements Initializable {
     @FXML
     private void getDelete(MouseEvent event) throws SQLException {
 
-
         VEvent item = deleteEventTable.getSelectionModel().getSelectedItem();
         if (item != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -117,7 +116,6 @@ public class DeleteEventController implements Initializable {
                 if (new VEventModifier().deleteEventDetailByEventId(item.getEventId())
                         && new VEventModifier().deleteEventByEventId(item.getEventId())) {
                     new VEventModifier().deleteEventDetailByEventId(item.getEventId());
-//                    getShow();
                 }
 
             }

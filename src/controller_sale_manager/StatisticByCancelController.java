@@ -131,7 +131,7 @@ public class StatisticByCancelController implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("chon ngay");
+            alert.setContentText("Please select the time to statistics !");
             alert.showAndWait();
         } else {
 
@@ -152,7 +152,7 @@ public class StatisticByCancelController implements Initializable {
             if (numbillCancel == 0) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
-                alert.setContentText("Khong co hoa don bi huy trong thoi gian nay.");
+                alert.setContentText("No canceled invoices during this time!");
                 alert.showAndWait();
             }
 

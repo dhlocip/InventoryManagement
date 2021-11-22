@@ -139,7 +139,7 @@ public class StatisticByDateController implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("chon ngay");
+            alert.setContentText("Please select the time to statistics !");
             alert.showAndWait();
         } else {
 
@@ -154,7 +154,7 @@ public class StatisticByDateController implements Initializable {
             if (numbill == 0) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
-                alert.setContentText("Khong co hoa don duoc ban trong thoi gian nay.");
+                alert.setContentText("No invoices have been successfully sold during this time !");
                 alert.showAndWait();
             }
             startDatePicker.setValue(null);

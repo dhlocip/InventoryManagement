@@ -124,17 +124,6 @@ public class UpdateEventController implements Initializable {
         updateEventTable.setItems(oList);
     }
 
-//    private void setValueProductIdComboBox() throws SQLException {
-//        ObservableList<String> oList = new VEventModifier().getListProductId();
-//        productIdCombobox.setItems(oList);
-//        productIdCombobox.setValue(oList.get(0));
-//
-//        proID = productIdCombobox.getValue();
-//
-//        productIdCombobox.setOnAction((t) -> {
-//            proID = productIdCombobox.getValue();
-//        });
-//    }
     private void setValueProductIdComboBox(String endEvent) throws SQLException {
         endEvent = String.valueOf(LocalDate.now());
         ObservableList<String> oList = new VEventModifier().getProductIdEvent(endEvent);
@@ -148,7 +137,7 @@ public class UpdateEventController implements Initializable {
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Out of stock for event creation.");
+            alert.setContentText("All events have expired!");
             alert.showAndWait();
 
         }
@@ -212,7 +201,7 @@ public class UpdateEventController implements Initializable {
             if ((nameEvent.equals(item.getEventName())) == false && checkName(nameEvent) == false) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
-                alert.setContentText("Event da ton tai");
+                alert.setContentText("Event exists!");
                 alert.showAndWait();
 
             } else {
@@ -242,7 +231,7 @@ public class UpdateEventController implements Initializable {
 
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setHeaderText(null);
-                        alert.setContentText("Nhap lai ngay");
+                        alert.setContentText("Please re-enter the date!");
                         alert.showAndWait();
 
                     } else {
@@ -261,7 +250,7 @@ public class UpdateEventController implements Initializable {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Notification");
                             alert.setHeaderText("Success");
-                            alert.setContentText("User is update successfully.");
+                            alert.setContentText("Event successfully updated!");
                             alert.showAndWait();
 
                         }
@@ -321,7 +310,7 @@ public class UpdateEventController implements Initializable {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
-                alert.setContentText("Nhap lai ngay");
+                alert.setContentText("Please re-enter the date!");
                 alert.showAndWait();
 
             } else {
@@ -338,7 +327,7 @@ public class UpdateEventController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Notification");
                     alert.setHeaderText("Success");
-                    alert.setContentText("User is update successfully.");
+                    alert.setContentText("Event details have been successfully updated!");
                     alert.showAndWait();
 
                 }
