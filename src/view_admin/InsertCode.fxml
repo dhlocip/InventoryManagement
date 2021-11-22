@@ -29,7 +29,7 @@
                            <VBox.margin>
                               <Insets left="22.0" />
                            </VBox.margin></Label>
-                        <Label prefHeight="35.0" style="-fx-font-size: 16px;" text="Please check the code in your email. This code consists of 8 numbers.">
+                        <Label prefHeight="35.0" style="-fx-font-size: 16px;" text="Please check the code in your email. This code consists of 6 numbers.">
                            <VBox.margin>
                               <Insets left="22.0" right="22.0" />
                            </VBox.margin></Label>

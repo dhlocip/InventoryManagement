@@ -77,7 +77,7 @@ public class UIDashboardSaleManagerController implements Initializable {
         hideChildPersonalBox(false);
         hideChildStatisticBox(false);
         hideChildSettingBox(false);
-        
+
         try {
             numberRequest();
             numberNewRequest();
@@ -190,7 +190,7 @@ public class UIDashboardSaleManagerController implements Initializable {
         setCenterBox("Request");
         hideSupMenu(true);
         hideMenu(false);
-        
+
         try {
             numberRequest();
         } catch (SQLException ex) {
@@ -201,9 +201,6 @@ public class UIDashboardSaleManagerController implements Initializable {
     public void numberRequest() throws SQLException {
         ObservableList<String> oList = new RequestModifier().getNumberRequest();
         RequestNumber.setText(oList.get(0));
-        
-      
-        
     }
 
     @FXML
@@ -211,19 +208,17 @@ public class UIDashboardSaleManagerController implements Initializable {
         setCenterBox("NewRequest");
         hideSupMenu(true);
         hideMenu(false);
-        
+
         try {
             numberNewRequest();
         } catch (SQLException ex) {
             Logger.getLogger(UIDashboardSaleManagerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
-    
-    public void numberNewRequest() throws SQLException{
-    ObservableList<String> oList = new NewRequestModilfier().getNumberNewRequest();
-    newRequestNumber.setText(oList.get(0));
-    
+
+    public void numberNewRequest() throws SQLException {
+        ObservableList<String> oList = new NewRequestModilfier().getNumberNewRequest();
+        newRequestNumber.setText(oList.get(0));
     }
 
     @FXML

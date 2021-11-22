@@ -4,9 +4,15 @@
  */
 package controller_app;
 
+import data_modifier.NewRequestModilfier;
+import data_modifier.RequestModifier;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -69,6 +75,10 @@ public class UIDashboardInventoryManagerController implements Initializable {
     private HBox childSettingBox;
     @FXML
     private VBox childReportBox;
+    @FXML
+    private Label RequestNumber;
+    @FXML
+    private Label newRequestNumber;
 
     /**
      * Initializes the controller class.
@@ -85,6 +95,13 @@ public class UIDashboardInventoryManagerController implements Initializable {
         hideChildImportBox(false);
         hideChildPersonalBox(false);
         hideChildSettingBox(false);
+
+        try {
+            numberRequest();
+            numberNewRequest();
+        } catch (SQLException ex) {
+            Logger.getLogger(UIDashboardInventoryManagerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -277,18 +294,32 @@ public class UIDashboardInventoryManagerController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    private void viewRequestClicked(MouseEvent event) throws IOException {
-        setCenterBoxFromViewSaleManager("Request");
-        hideSupMenu(true);
-        hideMenu(false);
+    private void numberRequest() throws SQLException {
+        ObservableList<String> oList = new RequestModifier().getNumberRequest();
+        RequestNumber.setText(oList.get(0));
     }
 
     @FXML
-    private void viewNewRequestClicked(MouseEvent event) throws IOException {
+    private void viewRequestClicked(MouseEvent event) throws IOException, SQLException {
+        setCenterBoxFromViewSaleManager("Request");
+        hideSupMenu(true);
+        hideMenu(false);
+
+        numberRequest();
+    }
+
+    private void numberNewRequest() throws SQLException {
+        ObservableList<String> oList = new NewRequestModilfier().getNumberNewRequest();
+        newRequestNumber.setText(oList.get(0));
+    }
+
+    @FXML
+    private void viewNewRequestClicked(MouseEvent event) throws IOException, SQLException {
         setCenterBoxFromViewSaleManager("NewRequest");
         hideSupMenu(true);
         hideMenu(false);
+
+        numberNewRequest();
     }
 
     @FXML
@@ -317,7 +348,7 @@ public class UIDashboardInventoryManagerController implements Initializable {
         setCenterBox("DeleteCategory");
         hideSupMenu(true);
         hideMenu(false);
-        
+
     }
 
     @FXML
