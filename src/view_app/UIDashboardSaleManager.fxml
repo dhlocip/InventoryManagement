@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane fx:id="homePane" prefHeight="806.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardSaleManagerController">
+<BorderPane fx:id="homePane" prefHeight="806.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller_app.UIDashboardSaleManagerController">
 
    <left>
       <HBox BorderPane.alignment="CENTER">
@@ -399,7 +399,7 @@
                               </ImageView>
                            </graphic>
                         </Label>
-                        <ComboBox prefHeight="30.0" promptText="English">
+                        <ComboBox fx:id="languageComboBox" prefHeight="30.0" promptText="English">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>

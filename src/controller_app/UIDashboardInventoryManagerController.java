@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -79,6 +81,8 @@ public class UIDashboardInventoryManagerController implements Initializable {
     private Label RequestNumber;
     @FXML
     private Label newRequestNumber;
+    @FXML
+    private ComboBox<String> languageComboBox;
 
     /**
      * Initializes the controller class.
@@ -103,6 +107,16 @@ public class UIDashboardInventoryManagerController implements Initializable {
             Logger.getLogger(UIDashboardInventoryManagerController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        setLanguageItem();
+    }
+
+    private void setLanguageItem() {
+        ObservableList<String> sList = FXCollections.observableArrayList();
+        sList.add("English");
+        sList.add("Vietnamese");
+
+        languageComboBox.setItems(sList);
+        languageComboBox.setValue(sList.get(0));
     }
 
     public void setValueForVariableStatic(String userId, String fullName, String position) {

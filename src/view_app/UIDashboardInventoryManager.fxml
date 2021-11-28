@@ -609,7 +609,7 @@
                               </ImageView>
                            </graphic>
                         </Label>
-                        <ComboBox prefHeight="30.0" promptText="English">
+                        <ComboBox fx:id="languageComboBox" prefHeight="30.0" promptText="English">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>

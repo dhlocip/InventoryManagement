@@ -7,12 +7,14 @@ package controller_app;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -76,6 +78,8 @@ public class UIDashboardAdminController implements Initializable {
     private Label viewUserLB;
     @FXML
     private Label positionLB;
+    @FXML
+    private ComboBox<String> languageComboBox;
 
     /**
      * Initializes the controller class.
@@ -88,7 +92,17 @@ public class UIDashboardAdminController implements Initializable {
         hideChildSupplierBox(false);
         hideChildPersonalInfoBox(false);
         hideChildSettingBox(false);
+        
+        setLanguageItem();
+    }
 
+    private void setLanguageItem() {
+        ObservableList<String> sList = FXCollections.observableArrayList();
+        sList.add("English");
+        sList.add("Vietnamese");
+
+        languageComboBox.setItems(sList);
+        languageComboBox.setValue(sList.get(0));
     }
 
     private void setCSS(String cssDefault, String cssChange) {
